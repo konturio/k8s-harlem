@@ -1,0 +1,117 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.*
+!frontend/.env.sample
+api/src/tests/local/.env
+__pycache__/
+
+# Serverless
+.dynamodb
+.serverless
+
+# Testing
+frontend/coverage
+.pytest_cache
+
+# Editors & OS
+.idea/
+.vscode/
+.DS_Store
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Builds
+build
+.build
+.webpack
+dist
+
+# Logs
+lerna-debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/.changelog
+
+# Package managers
+.npm/
+
+# Virtual environments
+.venv/
+
+# Misc
+.DS_Store
+*.tgz
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.*
+!.env.sample
+
+# Testing
+coverage
+
+# Editors & OS
+.idea/
+.vscode/
+.DS_Store
+
+# Builds
+build
+
+# Logs
+lerna-debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/.changelog
+
+# Package managers
+.npm/
+
+# Misc
+.DS_Store
+*.tgz
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# Plan files
+plan.out
+
+# Lock files
+.terraform.lock.hcl
+
+# Ignore override files as they are usually used to override resources locally and so
+# are not checked in
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Include override files you do wish to add to version control using negated pattern
+#
+# !example_override.tf
+
+# Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
+# example: *tfplan*
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+# Certificates
+*.pem
