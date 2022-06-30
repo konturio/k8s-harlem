@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: reloader
-  namespace: ingress
+  namespace: reloader
 spec:
   interval: 5m
   chart:
@@ -12,5 +12,5 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: stakater
-        namespace: infra
+        namespace: reloader
       interval: 1m
