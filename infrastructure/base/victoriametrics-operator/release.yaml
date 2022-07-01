@@ -1,0 +1,24 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: vmoperator
+  namespace: monitoring
+spec:
+  releaseName: vmoperator
+  chart:
+    spec:
+      chart: vmoperator
+      sourceRef:
+        kind: HelmRepository
+        name: victoriametrics
+        namespace: monitoring
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  # Default values
+  # https://github.com/VictoriaMetrics/helm-charts/blob/master/charts/victoria-metrics-operator/values.yaml
+  values:
+    replicaCount: 1
+    operator:
+      disable_prometheus_converter: true

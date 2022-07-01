@@ -4,6 +4,7 @@ metadata:
   name: apps
   namespace: flux-system
 spec:
+  force: false
   interval: 3m0s
   dependsOn:
     - name: infrastructure

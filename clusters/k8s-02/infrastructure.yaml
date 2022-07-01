@@ -4,9 +4,12 @@ metadata:
   name: infrastructure
   namespace: flux-system
 spec:
+  force: false
   interval: 3m0s
   sourceRef:
     kind: GitRepository
     name: flux-system
   path: ./infrastructure/clusters/k8s-02
   prune: true
+  wait: true
+  timeout: 5m0s
