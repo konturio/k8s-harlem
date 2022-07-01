@@ -1,7 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  # Define namespaces first
+  # Define sources first
+  - ./sources
+  # Define namespaces then
   - ./namespaces
   # Define deployed applications
   - ../../base/victoriametrics-operator
