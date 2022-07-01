@@ -10,8 +10,8 @@ spec:
       chart: vmoperator
       sourceRef:
         kind: HelmRepository
-        name: victoriametrics
-        namespace: monitoring
+        name: flux-system
+        namespace: flux
   interval: 5m
   install:
     remediation:
