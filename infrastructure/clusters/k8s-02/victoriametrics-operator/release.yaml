@@ -4,9 +4,6 @@ metadata:
   name: vmoperator
   namespace: monitoring
 spec:
-  chart:
-    spec:
-      version: v0.10.2
   values:
     resources:
       limits:
