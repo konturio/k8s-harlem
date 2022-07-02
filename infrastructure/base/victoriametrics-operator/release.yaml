@@ -8,6 +8,7 @@ spec:
   chart:
     spec:
       chart: victoria-metrics-operator
+      version: v0.10.2
       sourceRef:
         kind: HelmRepository
         name: victoriametrics
@@ -22,3 +23,4 @@ spec:
     replicaCount: 1
     operator:
       disable_prometheus_converter: true
+      psp_auto_creation_enabled: false
