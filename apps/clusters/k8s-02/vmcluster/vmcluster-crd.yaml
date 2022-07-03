@@ -10,6 +10,7 @@ spec:
     storage:
       volumeClaimTemplate:
         spec:
+          storageClassName: my-victoria
           resources:
             requests:
               storage: 5Gi
