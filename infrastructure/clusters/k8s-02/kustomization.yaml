@@ -7,5 +7,7 @@ resources:
   - ./namespaces
   # Define deployed applications
   - ../../base/victoriametrics-operator
+  - ../../base/local-path-provisioner
 patchesStrategicMerge:
   - victoriametrics-operator/release.yaml
+  - local-path-provisioner/deployment.yaml
