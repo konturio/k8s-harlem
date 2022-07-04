@@ -10,7 +10,7 @@ spec:
     storage:
       volumeClaimTemplate:
         spec:
-          #storageClassName: my-victoria
+          storageClassName: local-path
           resources:
             requests:
               storage: 5Gi
@@ -26,6 +26,7 @@ spec:
     storage:
       volumeClaimTemplate:
         spec:
+          storageClassName: local-path
           resources:
             requests:
               storage: 2Gi
