@@ -5,7 +5,7 @@ metadata:
   namespace: monitoring
 spec:
   retentionPeriod: "3"
-  replicationFactor: 2       
+  replicationFactor: 1   
   vmstorage:
     replicaCount: 2
     storage:
@@ -17,13 +17,13 @@ spec:
               storage: 5Gi
     resources:
       requests:
-        cpu: "100m"
+        cpu: "50m"
         memory: "100Mi"
       limits:
         cpu: "1"
         memory: 1024Mi
   vmselect:
-    replicaCount: 2
+    replicaCount: 1
     storage:
       volumeClaimTemplate:
         spec:
@@ -33,7 +33,7 @@ spec:
               storage: 2Gi
     resources:
       requests:
-        cpu: "100m"
+        cpu: "50m"
         memory: "100Mi"
       limits:
         cpu: "1"
@@ -42,7 +42,7 @@ spec:
     replicaCount: 1
     resources:
       requests:
-        cpu: "100m"
+        cpu: "50m"
         memory: "100Mi"
       limits:
         cpu: "1"
