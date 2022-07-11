@@ -10,4 +10,5 @@ resources:
   - ../../base/local-path-provisioner
 patchesStrategicMerge:
   - victoriametrics-operator/release.yaml
-  - local-path-provisioner/
+  - local-path-provisioner/configmap.yaml
+  - local-path-provisioner/deployment.yaml
