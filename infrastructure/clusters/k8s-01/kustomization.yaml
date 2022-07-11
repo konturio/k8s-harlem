@@ -8,6 +8,9 @@ resources:
   # Define deployed applications
   - ../../base/victoriametrics-operator
   - ../../base/kube-prometheus-operator
+  - ../../base/local-path-provisioner
 patchesStrategicMerge:
   - victoriametrics-operator/release.yaml
   - kube-prometheus-operator/prometheus-operator-deployment.yaml
+  - local-path-provisioner/configmap.yaml
+  - local-path-provisioner/deployment.yaml
