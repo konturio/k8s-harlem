@@ -11,7 +11,7 @@ metadata:
   namespace: monitoring
 spec:
   remoteWrite:
-    - url: http://vminsert-vmcluster-persistent.monitoring.svc.cluster.local:8480/api/v1/write
+    - url: http://vminsert-vmcluster-persistent.monitoring.svc.cluster.local::8480/insert/0/prometheus/api/v1/write
   alerting:
     alertmanagers:
     - apiVersion: v2
