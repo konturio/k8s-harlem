@@ -10,8 +10,8 @@ metadata:
   name: k8s
   namespace: monitoring
 spec:
-  # remoteWrite:
-  #   - url: https://prometheus-us-central1.grafana.net/api/prom/push
+  remoteWrite:
+    - url: https://vminsert-vmcluster-persistent.monitoring.svc.cluster.local:8480/api/v1/write
   alerting:
     alertmanagers:
     - apiVersion: v2
