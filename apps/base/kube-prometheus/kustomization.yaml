@@ -74,3 +74,5 @@ resources:
   - prometheus-adapter/prometheus-adapter-serviceAccount.yaml
   - prometheus-adapter/prometheus-adapter-serviceMonitor.yaml
   - victoriametrics/vminsert-serviceMonitor.yaml
+  - victoriametrics/vmselect-serviceMonitor.yaml
+  - victoriametrics/vmstorage-serviceMonitor.yaml
