@@ -8,6 +8,9 @@ spec:
   replicationFactor: 2   
   vmstorage:
     replicaCount: 3
+    # https://github.com/VictoriaMetrics/VictoriaMetrics/issues/86
+    extraArgs:
+      dedup.minScrapeInterval: 5s
     affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -34,6 +37,9 @@ spec:
         memory: 2048Mi
   vmselect:
     replicaCount: 2
+    # https://github.com/VictoriaMetrics/VictoriaMetrics/issues/86
+    extraArgs:
+      dedup.minScrapeInterval: 1ms
     affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
