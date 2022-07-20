@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
   - ../../base/vmcluster
   - ../../base/kube-prometheus
+  - ../../base/postgres-exporter
 patchesStrategicMerge:
   - vmcluster/vmcluster-crd.yaml
