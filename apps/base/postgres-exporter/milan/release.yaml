@@ -12,7 +12,7 @@ spec:
         kind: HelmRepository
         name: prometheus-community
         namespace: flux-system
-      version: 3.0.3 #TODO test
+      version: 3.0.3
   interval: 1h
   install:
     remediation:
@@ -42,7 +42,8 @@ spec:
       datasource:
         host: milan.k8s-01.kontur.io.
         user: postgres_exporter
-#        password: stored in monitoring/milan-postgres-exporter secret, TODO check
+        database: postgres
+#        password: set in monitoring/milan-postgres-exporter-prometheus-postgres-exporter secret (created by helm chart)
         sslmode: require
       logLevel: "info"
       logFormat: "logfmt"
