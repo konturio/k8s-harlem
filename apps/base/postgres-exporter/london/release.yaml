@@ -1,10 +1,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: milan-postgres-exporter
+  name: london-postgres-exporter
   namespace: monitoring
 spec:
-  releaseName: milan-postgres-exporter
+  releaseName: london-postgres-exporter
   chart:
     spec:
       chart: prometheus-postgres-exporter
@@ -40,11 +40,11 @@ spec:
       create: false
     config:
       datasource:
-        host: milan.k8s-01.kontur.io.
+        host: london.k8s-01.kontur.io.
         user: postgres_exporter
         database: postgres
         passwordSecret:
-          name: milan-postgres-exporter
+          name: london-postgres-exporter
           key: data_source_password
         sslmode: require
       logLevel: "info"
