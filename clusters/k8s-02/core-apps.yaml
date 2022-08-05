@@ -1,0 +1,16 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: infrastructure
+  namespace: core-apps
+spec:
+  force: true # recreate resources on immutable fields changes
+  interval: 10m0s # detect drift and undo kubectl edits every hour
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./infrastructure/clusters/k8s-02
+  prune: true # remove stale resources from cluster
+  wait: true # wait for all applied resources to become ready
+  timeout: 3m0s # give up waiting after three minutes
+  retryInterval: 2m0s # retry every two minutes on apply or waiting failures
