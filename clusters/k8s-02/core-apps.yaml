@@ -2,7 +2,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: infrastructure
-  namespace: core-apps
+  namespace: flux-system
 spec:
   force: true # recreate resources on immutable fields changes
   interval: 10m0s # detect drift and undo kubectl edits every hour

@@ -10,6 +10,6 @@ spec:
     kind: GitRepository
     name: flux-system
   path: ./infrastructure/clusters/k8s-01
-  prune: true
+  prune: false
   wait: true
   timeout: 5m0s
