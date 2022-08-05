@@ -12,6 +12,6 @@ spec:
     kind: GitRepository
     name: flux-system
   path: ./apps/clusters/k8s-02
-  prune: true
+  prune: false
   wait: true
   timeout: 5m0s
