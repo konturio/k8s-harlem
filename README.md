@@ -8,6 +8,9 @@ Flux GitOps repository
   * [Kustomization](#kustomization)
 - [Repository Structure](#repository-structure)
 - [Installation](#installation)
+- [FAQ](#faq)
+  * [How can I safely move resources from one dir to another?](#How can I safely move resources from one dir to another?)
+  * [Useful commands](Useful commands)
 
 This repository stores Kubernetes manifests, which are synced and applied to the clusters every N minutes, via Flux - https://fluxcd.io/
 
@@ -111,3 +114,27 @@ The `clusters` configuration is structured into:
 
 ## Installation
 Flux itself is bootstrapped via [terraform](https://gitlab.com/kontur-private/operations/terraform/-/tree/main/kubernetes/flux).
+
+## FAQ
+### How can I safely move resources from one dir to another?
+- https://fluxcd.io/docs/faq/#how-can-i-safely-move-resources-from-one-dir-to-another
+
+### Useful commands
+- https://fluxcd.io/docs/cmd/
+
+```bash
+flux get all -A
+
+flux get kustomization --all-namespaces
+kubectl get kustomizations -A
+
+flux get sources helm -A
+kubectl get helmrepository -A
+
+flux get sources chart -A
+kubectl get helmchart -A
+
+flux get helmreleases -A
+kubectl get helmreleases -A
+helm ls -A
+```
