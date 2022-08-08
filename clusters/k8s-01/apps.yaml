@@ -4,14 +4,15 @@ metadata:
   name: apps
   namespace: flux-system
 spec:
-  force: false
-  interval: 3m0s
+  force: true # recreate resources on immutable fields changes
+  interval: 10m0s # detect drift and undo kubectl edits every hour
   dependsOn:
-    - name: infrastructure
+    - name: core-apps
   sourceRef:
     kind: GitRepository
     name: flux-system
   path: ./apps/clusters/k8s-01
-  prune: false
-  wait: true
-  timeout: 5m0s
+  prune: true # remove stale resources from cluster
+  wait: true # wait for all applied resources to become ready
+  timeout: 3m0s # give up waiting after three minutes
+  retryInterval: 2m0s # retry every two minutes on apply or waiting failures
