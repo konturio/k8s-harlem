@@ -8,20 +8,6 @@ metadata:
   namespace: monitoring
 spec:
   groups:
-    - name: ClusterNodeConditions
-      rules:
-        - alert: NodeConditionNotReady
-          annotations:
-            message: '{{ $labels.node }} condition is {{ $labels.condition }}'
-            summary: Node condition is not Ready which means it's one of MemoryPressure, DiskPressure, PIDPressure, NetworkUnavailable
-          expr: |
-            max_over_time(kube_node_status_condition{condition!="Ready", status="true"}[5m])
-            >= 1
-          for: 1m
-          labels:
-            severity: critical
-            target: OnCall
-
     - name: ClusterNodeResourceUsage
       rules:
         - alert: AllocatableAmountOfNodeResourcesIsLessThanThreshold
