@@ -76,3 +76,4 @@ resources:
   - victoriametrics/vminsert-serviceMonitor.yaml
   - victoriametrics/vmselect-serviceMonitor.yaml
   - victoriametrics/vmstorage-serviceMonitor.yaml
+  - _custom_rules/custom-prometheusRule.yaml
