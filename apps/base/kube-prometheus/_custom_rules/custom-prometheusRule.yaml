@@ -1,0 +1,23 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    prometheus: k8s
+    role: alert-rules
+  name: cluster-node-condition-rules
+  namespace: monitoring
+spec:
+  groups:
+    - name: ClusterNodeResourceUsage
+      rules:
+        - alert: AllocatableAmountOfNodeResourcesIsLessThanThreshold
+          annotations:
+            message: '{{ $labels.node }} {{ $labels.resource }} allocatable percentage is {{ $value }}'
+            summary: Allocatable amount of resources on a node is lower than threshold
+          expr: |
+            min_over_time(kube_node_status_allocatable{resource=~"cpu|ephemeral_storage|memory"}[5m]) / kube_node_status_capacity{resource=~"cpu|ephemeral_storage|memory"}
+            <= 0.5
+          for: 1m
+          labels:
+            severity: warning
+            target: OnCall

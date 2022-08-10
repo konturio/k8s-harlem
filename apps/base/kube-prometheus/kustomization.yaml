@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - alertmanager/alertmanager-alertmanager.yaml
+  - alertmanager/alertmanager-ingress.yaml
   - alertmanager/alertmanager-podDisruptionBudget.yaml
   - alertmanager/alertmanager-prometheusRule.yaml
   - alertmanager/alertmanager-secret.yaml
@@ -76,3 +77,4 @@ resources:
   - victoriametrics/vminsert-serviceMonitor.yaml
   - victoriametrics/vmselect-serviceMonitor.yaml
   - victoriametrics/vmstorage-serviceMonitor.yaml
+  - _custom_rules/custom-prometheusRule.yaml
