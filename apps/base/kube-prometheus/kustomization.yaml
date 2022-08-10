@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - alertmanager/alertmanager-alertmanager.yaml
+  - alertmanager/alertmanager-ingress.yaml
   - alertmanager/alertmanager-podDisruptionBudget.yaml
   - alertmanager/alertmanager-prometheusRule.yaml
   - alertmanager/alertmanager-secret.yaml
