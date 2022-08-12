@@ -5436,7 +5436,7 @@ items:
         "editable": true,
         "fiscalYearStartMonth": 0,
         "graphTooltip": 0,
-        "iteration": 1660289845889,
+        "iteration": 1660301931476,
         "links": [],
         "liveNow": false,
         "panels": [
@@ -5569,6 +5569,7 @@ items:
             "fieldConfig": {
                 "defaults": {
                 "custom": {
+                    "align": "auto",
                     "displayMode": "auto"
                 },
                 "mappings": [],
@@ -5744,7 +5745,8 @@ items:
                     "uid": "P1809F7CD0C75ACF3"
                 },
                 "exemplar": true,
-                "expr": "sum(irate(grafana_http_request_duration_seconds_count{job=~\"$job\", instance=~\"$instance\"}[$__rate_interval])) ",
+                "expr": "sum(rate(grafana_http_request_duration_seconds_count{job=~\"$job\", instance=~\"$instance\"}[$__rate_interval])) ",
+                "hide": false,
                 "interval": "",
                 "legendFormat": "Requests rate",
                 "refId": "A"
@@ -5755,6 +5757,7 @@ items:
             },
             {
             "datasource": {
+                "type": "prometheus",
                 "uid": "$datasource"
             },
             "fieldConfig": {
@@ -5829,7 +5832,12 @@ items:
             "pluginVersion": "8.4.4",
             "targets": [
                 {
-                "expr": "sum by (status_code) (irate(grafana_http_request_duration_seconds_count{job=~\"$job\", instance=~\"$instance\"}[1m])) ",
+                "datasource": {
+                    "type": "prometheus",
+                    "uid": "PABDA7AB1AD2A1489"
+                },
+                "exemplar": true,
+                "expr": "sum by (status_code) (rate(grafana_http_request_duration_seconds_count{job=~\"$job\", instance=~\"$instance\"}[$__rate_interval])) ",
                 "interval": "",
                 "legendFormat": "{{status_code}}",
                 "refId": "A"
@@ -5920,7 +5928,7 @@ items:
                     "uid": "P1809F7CD0C75ACF3"
                 },
                 "exemplar": true,
-                "expr": "histogram_quantile(0.99, sum(irate(grafana_http_request_duration_seconds_bucket{instance=~\"$instance\", job=~\"$job\"}[$__rate_interval])) by (le)) * 1",
+                "expr": "histogram_quantile(0.99, sum(rate(grafana_http_request_duration_seconds_bucket{instance=~\"$instance\", job=~\"$job\"}[$__rate_interval])) by (le))",
                 "interval": "",
                 "legendFormat": "99th Percentile",
                 "refId": "A"
@@ -5931,7 +5939,7 @@ items:
                     "uid": "P1809F7CD0C75ACF3"
                 },
                 "exemplar": true,
-                "expr": "histogram_quantile(0.50, sum(irate(grafana_http_request_duration_seconds_bucket{instance=~\"$instance\", job=~\"$job\"}[$__rate_interval])) by (le)) * 1",
+                "expr": "histogram_quantile(0.50, sum(rate(grafana_http_request_duration_seconds_bucket{instance=~\"$instance\", job=~\"$job\"}[$__rate_interval])) by (le)) * 1",
                 "hide": false,
                 "interval": "",
                 "legendFormat": "50th Percentile",
@@ -5943,7 +5951,7 @@ items:
                     "uid": "P1809F7CD0C75ACF3"
                 },
                 "exemplar": true,
-                "expr": "sum(irate(grafana_http_request_duration_seconds_sum{instance=~\"$instance\", job=~\"$job\"}[$__rate_interval])) * 1 / sum(irate(grafana_http_request_duration_seconds_count{instance=~\"$instance\", job=~\"$job\"}[$__rate_interval]))",
+                "expr": "sum(rate(grafana_http_request_duration_seconds_sum{instance=~\"$instance\", job=~\"$job\"}[$__rate_interval])) * 1 / sum(rate(grafana_http_request_duration_seconds_count{instance=~\"$instance\", job=~\"$job\"}[$__rate_interval]))",
                 "hide": false,
                 "interval": "",
                 "legendFormat": "Average",
@@ -6035,7 +6043,7 @@ items:
                     "uid": "P1809F7CD0C75ACF3"
                 },
                 "exemplar": true,
-                "expr": "(sum(rate(grafana_http_request_duration_seconds_count{status_code!=\"200\",status_code!=\"201\",status_code!=\"202\",status_code!=\"204\", status_code!=\"302\", status_code!=\"303\", status_code!=\"308\", job=~\"$job\", instance=~\"$instance\"}[5m])) / sum(rate(grafana_http_request_duration_seconds_count{job=~\"$job\", instance=~\"$instance\"}[5m]))) * 100",
+                "expr": "(sum(rate(grafana_http_request_duration_seconds_count{status_code!=\"200\",status_code!=\"201\",status_code!=\"202\",status_code!=\"204\", status_code!=\"302\", status_code!=\"303\", status_code!=\"308\", job=~\"$job\", instance=~\"$instance\"}[$__rate_interval])) / sum(rate(grafana_http_request_duration_seconds_count{job=~\"$job\", instance=~\"$instance\"}[$__rate_interval]))) * 100",
                 "hide": false,
                 "interval": "",
                 "legendFormat": "Error rate",
@@ -6138,7 +6146,7 @@ items:
             ]
         },
         "time": {
-            "from": "now-6h",
+            "from": "now-3h",
             "to": "now"
         },
         "timepicker": {
@@ -6157,7 +6165,7 @@ items:
         "timezone": "",
         "title": "Grafana Overview",
         "uid": "6be0s85Mk",
-        "version": 1,
+        "version": 2,
         "weekStart": ""
         }
   kind: ConfigMap

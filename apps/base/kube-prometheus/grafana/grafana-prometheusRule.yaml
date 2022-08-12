@@ -35,14 +35,14 @@ spec:
 
     - alert: GrafanaRequestsErrors
       annotations:
+        summary: Grafana Errors rate is too high
         description: |
-          Grafana requests error rate is too high
+          Grafana https://grafana02.kontur.io requests error rate {{ $value | humanize }}% is too high
 
           Recommended action:
           * Open the Grafana dashboard - https://grafana02.kontur.io/d/6be0s85Mk/grafana-overview
           * Follow runbook - https://TODO
         runbook_url: https://TODO
-        summary: Grafana Errors rate is too high
       expr: |
         (sum(rate(grafana_http_request_duration_seconds_count{status_code!="200",status_code!="201",status_code!="202",status_code!="204", status_code!="302", status_code!="303", status_code!="308"}[5m]))
         /
@@ -50,5 +50,23 @@ spec:
         > 50
       for: 5m
       labels:
-        severity: warning
+        severity: critical
+        target: OnCall
+
+    - alert: GrafanaRequestsDuration
+      annotations:
+        summary: Grafana requests duration is too high
+        description: |
+          Grafana https://grafana02.kontur.io requests duration {{ $value }}ms is too high
+
+          Recommended action:
+          * Open the Grafana dashboard - https://grafana02.kontur.io/d/6be0s85Mk/grafana-overview
+          * Follow runbook - https://TODO
+        runbook_url: https://TODO
+      expr: |
+        histogram_quantile(0.99, sum(rate(grafana_http_request_duration_seconds_bucket{}[5m])) by (le))
+        > 0.05
+      for: 5m
+      labels:
+        severity: critical
         target: OnCall
