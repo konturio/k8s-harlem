@@ -57,7 +57,7 @@ spec:
       annotations:
         summary: Grafana requests duration is too high
         description: |
-          Grafana https://grafana02.kontur.io requests duration {{ $value | printf.3g }}ms is too high
+          Grafana https://grafana02.kontur.io requests duration {{ printf "%.3g" $value }}ms is too high
 
           Recommended action:
           * Open the Grafana dashboard - https://grafana02.kontur.io/d/6be0s85Mk/grafana-overview
