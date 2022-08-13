@@ -30,7 +30,7 @@ spec:
         > 50
       for: 5m
       labels:
-        severity: warning
+        severity: critical
         target: OnCall
 
     - alert: GrafanaRequestsErrors
@@ -47,7 +47,7 @@ spec:
         (sum(rate(grafana_http_request_duration_seconds_count{status_code!="200",status_code!="201",status_code!="202",status_code!="204", status_code!="302", status_code!="303", status_code!="308"}[5m]))
         /
         sum(rate(grafana_http_request_duration_seconds_count{}[5m]))*100)
-        > 50
+        > 80
       for: 5m
       labels:
         severity: critical
@@ -57,7 +57,7 @@ spec:
       annotations:
         summary: Grafana requests duration is too high
         description: |
-          Grafana https://grafana02.kontur.io requests duration {{ $value }}ms is too high
+          Grafana https://grafana02.kontur.io requests duration {{ $value | printf.3g }}ms is too high
 
           Recommended action:
           * Open the Grafana dashboard - https://grafana02.kontur.io/d/6be0s85Mk/grafana-overview
@@ -65,7 +65,7 @@ spec:
         runbook_url: https://TODO
       expr: |
         histogram_quantile(0.99, sum(rate(grafana_http_request_duration_seconds_bucket{}[5m])) by (le))
-        > 0.05
+        > 0.1
       for: 5m
       labels:
         severity: critical
