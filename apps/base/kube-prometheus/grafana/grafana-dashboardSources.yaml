@@ -13,16 +13,16 @@ data:
     {
         "apiVersion": 1,
         "providers": [
-            {
-                "folder": "Default",
-                "folderUid": "",
-                "name": "0",
-                "options": {
-                    "path": "/grafana-dashboard-definitions/0"
-                },
-                "orgId": 1,
-                "type": "file"
-            },
+            # {
+            #     "folder": "Default",
+            #     "folderUid": "",
+            #     "name": "0",
+            #     "options": {
+            #         "path": "/grafana-dashboard-definitions/0"
+            #     },
+            #     "orgId": 1,
+            #     "type": "file"
+            # },
             {
                 "folder": "Monitoring",
                 "folderUid": "monitoring",
