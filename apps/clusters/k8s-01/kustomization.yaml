@@ -4,5 +4,6 @@ resources:
   - ../../base/vmcluster
   - ../../base/kube-prometheus
   - ../../base/postgres-exporter
+  - ../../base/fluentbit
 patchesStrategicMerge:
   - vmcluster/vmcluster-crd.yaml

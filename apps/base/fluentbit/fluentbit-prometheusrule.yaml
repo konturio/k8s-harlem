@@ -1,0 +1,23 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    prometheus: k8s
+    role: alert-rules
+  name: fluentbit-errors
+  namespace: monitoring
+spec:
+  groups:
+    - name: FluentBitOutputErrors
+      rules:
+        - alert: FluentBitOutputError
+          annotations:
+            message: 'Number of FluentBit output errors during last 3 minutes is {{ $value }}'
+            summary: Number of FluentBit output errors during last 3 minutes
+          expr: |
+            sum(sum_over_time(fluentbit_output_errors_total[3m]))
+            > 0
+          for: 5m
+          labels:
+            severity: warning
+            target: OnCall

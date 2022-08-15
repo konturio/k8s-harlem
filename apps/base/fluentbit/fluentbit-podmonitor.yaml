@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    app.kubernetes.io/name: fluentbit
+  name: fluentbit
+  namespace: monitoring
+spec:
+  namespaceSelector:
+    matchNames:
+      - logging
+  podMetricsEndpoints:
+    - path: /api/v1/metrics/prometheus
+      scheme: http
+      port: 'http'
+      interval: 60s
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: fluent-bit
