@@ -6,3 +6,6 @@ resources:
   - fluentbit-prometheusrule.yaml
   - fluentbit-daemonset.yaml
   - fluentbit-configmap.yaml
+  - fluentbit-serviceaccount.yaml
+  - fluentbit-clusterrole.yaml
+  - fluentbit-clusterrolebinding.yaml
