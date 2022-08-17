@@ -4,8 +4,7 @@ metadata:
   labels:
     prometheus: k8s
     role: alert-rules
-  name: fluentbit-errors
-  namespace: monitoring
+  name: fluentbit
 spec:
   groups:
     - name: FluentBitOutputErrors
@@ -21,3 +20,14 @@ spec:
           labels:
             severity: warning
             target: OnCall
+        - alert: NoOutputBytesProcessed
+          expr: rate(fluentbit_output_proc_bytes_total[5m]) == 0
+          annotations:
+            message: |
+              Fluent Bit instance {{ $labels.instance }}'s output plugin {{ $labels.name }} has not processed any
+              bytes for at least 15 minutes.
+            summary: No Output Bytes Processed
+          for: 15m
+          labels:
+            severity: warning
+            #TODO after checking set: target: OnCall

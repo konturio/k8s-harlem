@@ -4,7 +4,6 @@ metadata:
   labels:
     app.kubernetes.io/name: fluentbit
   name: fluentbit
-  namespace: monitoring
 spec:
   namespaceSelector:
     matchNames:
