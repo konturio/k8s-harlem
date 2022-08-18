@@ -6043,7 +6043,7 @@ items:
                     "uid": "P1809F7CD0C75ACF3"
                 },
                 "exemplar": true,
-                "expr": "(sum(rate(grafana_http_request_duration_seconds_count{status_code!=\"200\",status_code!=\"201\",status_code!=\"202\",status_code!=\"204\", status_code!=\"302\", status_code!=\"303\", status_code!=\"308\", job=~\"$job\", instance=~\"$instance\"}[$__rate_interval])) / sum(rate(grafana_http_request_duration_seconds_count{job=~\"$job\", instance=~\"$instance\"}[$__rate_interval]))) * 100",
+                "expr": "(sum(rate(grafana_http_request_duration_seconds_count{status_code=~\"[45]..\",job=~\"$job\", instance=~\"$instance\"}[$__rate_interval])) / sum(rate(grafana_http_request_duration_seconds_count{job=~\"$job\", instance=~\"$instance\"}[$__rate_interval]))) * 100",
                 "hide": false,
                 "interval": "",
                 "legendFormat": "Error rate",

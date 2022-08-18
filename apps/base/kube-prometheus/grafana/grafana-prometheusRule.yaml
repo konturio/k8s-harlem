@@ -44,7 +44,7 @@ spec:
           * Follow runbook - https://TODO
         runbook_url: https://TODO
       expr: |
-        (sum(rate(grafana_http_request_duration_seconds_count{status_code!="200",status_code!="201",status_code!="202",status_code!="204", status_code!="302", status_code!="303", status_code!="308"}[5m]))
+        (sum(rate(grafana_http_request_duration_seconds_count{status_code=~"[45].."}[5m]))
         /
         sum(rate(grafana_http_request_duration_seconds_count{}[5m]))*100)
         > 90
