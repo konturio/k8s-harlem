@@ -14,6 +14,8 @@ spec:
     - url: http://vminsert-vmcluster-persistent.monitoring.svc.cluster.local:8480/insert/0/prometheus/api/v1/write
   # https://github.com/VictoriaMetrics/VictoriaMetrics/issues/86
   replicaExternalLabelName: ""
+  externalLabels:
+    cluster: "k8s-01"
   alerting:
     alertmanagers:
     - apiVersion: v2
