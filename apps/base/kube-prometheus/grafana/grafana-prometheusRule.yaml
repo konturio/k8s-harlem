@@ -30,7 +30,7 @@ spec:
         > 50
       for: 5m
       labels:
-        severity: critical
+        severity: warning
         target: OnCall
 
     - alert: GrafanaRequestsErrors
@@ -50,7 +50,7 @@ spec:
         > 90
       for: 5m
       labels:
-        severity: critical
+        severity: warning
         target: OnCall
 
     - alert: GrafanaRequestsDuration
@@ -68,5 +68,5 @@ spec:
         > 100
       for: 5m
       labels:
-        severity: critical
+        severity: warning
         target: OnCall

@@ -10,7 +10,7 @@ metadata:
   namespace: monitoring
 spec:
   groups:
-  - name: kubernetes-apps
+  - name: kubernetes-apps #TODO disable this block for sandbox namespaces
     rules:
     - alert: KubePodCrashLooping
       annotations:
