@@ -31,7 +31,6 @@ spec:
       for: 5m
       labels:
         severity: warning
-        target: OnCall
 
     - alert: GrafanaRequestsErrors
       annotations:
@@ -51,7 +50,6 @@ spec:
       for: 5m
       labels:
         severity: warning
-        target: OnCall
 
     - alert: GrafanaRequestsDuration
       annotations:
@@ -69,4 +67,3 @@ spec:
       for: 5m
       labels:
         severity: warning
-        target: OnCall

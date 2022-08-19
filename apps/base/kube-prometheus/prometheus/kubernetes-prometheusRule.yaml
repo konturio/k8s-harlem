@@ -10,7 +10,7 @@ metadata:
   namespace: monitoring
 spec:
   groups:
-  - name: kubernetes-apps #TODO disable this block for sandbox namespaces
+  - name: kubernetes-apps
     rules:
     - alert: KubePodCrashLooping
       annotations:
@@ -18,7 +18,7 @@ spec:
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepodcrashlooping
         summary: Pod is crash looping.
       expr: |
-        max_over_time(kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff", job="kube-state-metrics"}[5m]) >= 1
+        max_over_time(kube_pod_container_status_waiting_reason{namespace!~"^sandbox.+$", reason="CrashLoopBackOff", job="kube-state-metrics"}[5m]) >= 1
       for: 15m
       labels:
         severity: warning
@@ -30,9 +30,9 @@ spec:
       expr: |
         sum by (namespace, pod) (
           max by(namespace, pod) (
-            kube_pod_status_phase{job="kube-state-metrics", phase=~"Pending|Unknown"}
+            kube_pod_status_phase{namespace!~"^sandbox.+$", job="kube-state-metrics", phase=~"Pending|Unknown"}
           ) * on(namespace, pod) group_left(owner_kind) topk by(namespace, pod) (
-            1, max by(namespace, pod, owner_kind) (kube_pod_owner{owner_kind!="Job"})
+            1, max by(namespace, pod, owner_kind) (kube_pod_owner{namespace!~"^sandbox.+$", owner_kind!="Job"})
           )
         ) > 0
       for: 15m
@@ -44,9 +44,9 @@ spec:
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedeploymentgenerationmismatch
         summary: Deployment generation mismatch due to possible roll-back
       expr: |
-        kube_deployment_status_observed_generation{job="kube-state-metrics"}
+        kube_deployment_status_observed_generation{namespace!~"^sandbox.+$", job="kube-state-metrics"}
           !=
-        kube_deployment_metadata_generation{job="kube-state-metrics"}
+        kube_deployment_metadata_generation{namespace!~"^sandbox.+$", job="kube-state-metrics"}
       for: 15m
       labels:
         severity: warning
@@ -57,11 +57,11 @@ spec:
         summary: Deployment has not matched the expected number of replicas.
       expr: |
         (
-          kube_deployment_spec_replicas{job="kube-state-metrics"}
+          kube_deployment_spec_replicas{namespace!~"^sandbox.+$", job="kube-state-metrics"}
             >
-          kube_deployment_status_replicas_available{job="kube-state-metrics"}
+          kube_deployment_status_replicas_available{namespace!~"^sandbox.+$", job="kube-state-metrics"}
         ) and (
-          changes(kube_deployment_status_replicas_updated{job="kube-state-metrics"}[10m])
+          changes(kube_deployment_status_replicas_updated{namespace!~"^sandbox.+$", job="kube-state-metrics"}[10m])
             ==
           0
         )
@@ -75,11 +75,11 @@ spec:
         summary: Deployment has not matched the expected number of replicas.
       expr: |
         (
-          kube_statefulset_status_replicas_ready{job="kube-state-metrics"}
+          kube_statefulset_status_replicas_ready{namespace!~"^sandbox.+$", job="kube-state-metrics"}
             !=
-          kube_statefulset_status_replicas{job="kube-state-metrics"}
+          kube_statefulset_status_replicas{namespace!~"^sandbox.+$", job="kube-state-metrics"}
         ) and (
-          changes(kube_statefulset_status_replicas_updated{job="kube-state-metrics"}[10m])
+          changes(kube_statefulset_status_replicas_updated{namespace!~"^sandbox.+$", job="kube-state-metrics"}[10m])
             ==
           0
         )
@@ -92,9 +92,9 @@ spec:
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubestatefulsetgenerationmismatch
         summary: StatefulSet generation mismatch due to possible roll-back
       expr: |
-        kube_statefulset_status_observed_generation{job="kube-state-metrics"}
+        kube_statefulset_status_observed_generation{namespace!~"^sandbox.+$", job="kube-state-metrics"}
           !=
-        kube_statefulset_metadata_generation{job="kube-state-metrics"}
+        kube_statefulset_metadata_generation{namespace!~"^sandbox.+$", job="kube-state-metrics"}
       for: 15m
       labels:
         severity: warning
@@ -106,18 +106,18 @@ spec:
       expr: |
         (
           max without (revision) (
-            kube_statefulset_status_current_revision{job="kube-state-metrics"}
+            kube_statefulset_status_current_revision{namespace!~"^sandbox.+$", job="kube-state-metrics"}
               unless
-            kube_statefulset_status_update_revision{job="kube-state-metrics"}
+            kube_statefulset_status_update_revision{namespace!~"^sandbox.+$", job="kube-state-metrics"}
           )
             *
           (
-            kube_statefulset_replicas{job="kube-state-metrics"}
+            kube_statefulset_replicas{namespace!~"^sandbox.+$", job="kube-state-metrics"}
               !=
-            kube_statefulset_status_replicas_updated{job="kube-state-metrics"}
+            kube_statefulset_status_replicas_updated{namespace!~"^sandbox.+$", job="kube-state-metrics"}
           )
         )  and (
-          changes(kube_statefulset_status_replicas_updated{job="kube-state-metrics"}[5m])
+          changes(kube_statefulset_status_replicas_updated{namespace!~"^sandbox.+$", job="kube-state-metrics"}[5m])
             ==
           0
         )
@@ -132,24 +132,24 @@ spec:
       expr: |
         (
           (
-            kube_daemonset_status_current_number_scheduled{job="kube-state-metrics"}
+            kube_daemonset_status_current_number_scheduled{namespace!~"^sandbox.+$", job="kube-state-metrics"}
              !=
-            kube_daemonset_status_desired_number_scheduled{job="kube-state-metrics"}
+            kube_daemonset_status_desired_number_scheduled{namespace!~"^sandbox.+$", job="kube-state-metrics"}
           ) or (
-            kube_daemonset_status_number_misscheduled{job="kube-state-metrics"}
+            kube_daemonset_status_number_misscheduled{namespace!~"^sandbox.+$", job="kube-state-metrics"}
              !=
             0
           ) or (
-            kube_daemonset_status_updated_number_scheduled{job="kube-state-metrics"}
+            kube_daemonset_status_updated_number_scheduled{namespace!~"^sandbox.+$", job="kube-state-metrics"}
              !=
-            kube_daemonset_status_desired_number_scheduled{job="kube-state-metrics"}
+            kube_daemonset_status_desired_number_scheduled{namespace!~"^sandbox.+$", job="kube-state-metrics"}
           ) or (
-            kube_daemonset_status_number_available{job="kube-state-metrics"}
+            kube_daemonset_status_number_available{namespace!~"^sandbox.+$", job="kube-state-metrics"}
              !=
-            kube_daemonset_status_desired_number_scheduled{job="kube-state-metrics"}
+            kube_daemonset_status_desired_number_scheduled{namespace!~"^sandbox.+$", job="kube-state-metrics"}
           )
         ) and (
-          changes(kube_daemonset_status_updated_number_scheduled{job="kube-state-metrics"}[5m])
+          changes(kube_daemonset_status_updated_number_scheduled{namespace!~"^sandbox.+$", job="kube-state-metrics"}[5m])
             ==
           0
         )
@@ -162,7 +162,7 @@ spec:
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecontainerwaiting
         summary: Pod container waiting longer than 1 hour
       expr: |
-        sum by (namespace, pod, container) (kube_pod_container_status_waiting_reason{job="kube-state-metrics"}) > 0
+        sum by (namespace, pod, container) (kube_pod_container_status_waiting_reason{namespace!~"^sandbox.+$", job="kube-state-metrics"}) > 0
       for: 1h
       labels:
         severity: warning
@@ -172,9 +172,9 @@ spec:
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedaemonsetnotscheduled
         summary: DaemonSet pods are not scheduled.
       expr: |
-        kube_daemonset_status_desired_number_scheduled{job="kube-state-metrics"}
+        kube_daemonset_status_desired_number_scheduled{namespace!~"^sandbox.+$", job="kube-state-metrics"}
           -
-        kube_daemonset_status_current_number_scheduled{job="kube-state-metrics"} > 0
+        kube_daemonset_status_current_number_scheduled{namespace!~"^sandbox.+$", job="kube-state-metrics"} > 0
       for: 10m
       labels:
         severity: warning
@@ -184,7 +184,7 @@ spec:
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedaemonsetmisscheduled
         summary: DaemonSet pods are misscheduled.
       expr: |
-        kube_daemonset_status_number_misscheduled{job="kube-state-metrics"} > 0
+        kube_daemonset_status_number_misscheduled{namespace!~"^sandbox.+$", job="kube-state-metrics"} > 0
       for: 15m
       labels:
         severity: warning
@@ -194,7 +194,7 @@ spec:
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubejobcompletion
         summary: Job did not complete in time
       expr: |
-        kube_job_spec_completions{job="kube-state-metrics"} - kube_job_status_succeeded{job="kube-state-metrics"}  > 0
+        kube_job_spec_completions{namespace!~"^sandbox.+$", job="kube-state-metrics"} - kube_job_status_succeeded{namespace!~"^sandbox.+$", job="kube-state-metrics"}  > 0
       for: 12h
       labels:
         severity: warning
@@ -204,7 +204,7 @@ spec:
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubejobfailed
         summary: Job failed to complete.
       expr: |
-        kube_job_failed{job="kube-state-metrics"}  > 0
+        kube_job_failed{namespace!~"^sandbox.+$", job="kube-state-metrics"}  > 0
       for: 15m
       labels:
         severity: warning
@@ -214,19 +214,19 @@ spec:
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubehpareplicasmismatch
         summary: HPA has not matched descired number of replicas.
       expr: |
-        (kube_horizontalpodautoscaler_status_desired_replicas{job="kube-state-metrics"}
+        (kube_horizontalpodautoscaler_status_desired_replicas{namespace!~"^sandbox.+$", job="kube-state-metrics"}
           !=
-        kube_horizontalpodautoscaler_status_current_replicas{job="kube-state-metrics"})
+        kube_horizontalpodautoscaler_status_current_replicas{namespace!~"^sandbox.+$", job="kube-state-metrics"})
           and
-        (kube_horizontalpodautoscaler_status_current_replicas{job="kube-state-metrics"}
+        (kube_horizontalpodautoscaler_status_current_replicas{namespace!~"^sandbox.+$", job="kube-state-metrics"}
           >
-        kube_horizontalpodautoscaler_spec_min_replicas{job="kube-state-metrics"})
+        kube_horizontalpodautoscaler_spec_min_replicas{namespace!~"^sandbox.+$", job="kube-state-metrics"})
           and
-        (kube_horizontalpodautoscaler_status_current_replicas{job="kube-state-metrics"}
+        (kube_horizontalpodautoscaler_status_current_replicas{namespace!~"^sandbox.+$", job="kube-state-metrics"}
           <
-        kube_horizontalpodautoscaler_spec_max_replicas{job="kube-state-metrics"})
+        kube_horizontalpodautoscaler_spec_max_replicas{namespace!~"^sandbox.+$", job="kube-state-metrics"})
           and
-        changes(kube_horizontalpodautoscaler_status_current_replicas{job="kube-state-metrics"}[15m]) == 0
+        changes(kube_horizontalpodautoscaler_status_current_replicas{namespace!~"^sandbox.+$", job="kube-state-metrics"}[15m]) == 0
       for: 15m
       labels:
         severity: warning
@@ -236,9 +236,9 @@ spec:
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubehpamaxedout
         summary: HPA is running at max replicas
       expr: |
-        kube_horizontalpodautoscaler_status_current_replicas{job="kube-state-metrics"}
+        kube_horizontalpodautoscaler_status_current_replicas{namespace!~"^sandbox.+$", job="kube-state-metrics"}
           ==
-        kube_horizontalpodautoscaler_spec_max_replicas{job="kube-state-metrics"}
+        kube_horizontalpodautoscaler_spec_max_replicas{namespace!~"^sandbox.+$", job="kube-state-metrics"}
       for: 15m
       labels:
         severity: warning
@@ -342,7 +342,7 @@ spec:
         sum(increase(container_cpu_cfs_throttled_periods_total{container!="", }[5m])) by (container, pod, namespace)
           /
         sum(increase(container_cpu_cfs_periods_total{}[5m])) by (container, pod, namespace)
-          > ( 25 / 100 )
+          > ( 75 / 100 )
       for: 15m
       labels:
         severity: info
@@ -554,7 +554,6 @@ spec:
       for: 5m
       labels:
         severity: critical
-        target: OnCall
     - alert: KubeNodeUnreachable
       annotations:
         description: '{{ $labels.node }} is unreachable and some workloads may be rescheduled.'
