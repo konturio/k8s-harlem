@@ -31,6 +31,10 @@ spec:
           hostPath:
             path: /etc/machine-id
             type: File
+        - name: systemdlog
+          hostPath:
+            path: /run/log/journal
+            type: ''
       containers:
         - name: fluent-bit
           image: cr.fluentbit.io/fluent/fluent-bit:1.9.3
@@ -57,6 +61,9 @@ spec:
             - name: etcmachineid
               readOnly: true
               mountPath: /etc/machine-id
+            - name: systemdlog
+              readOnly: true
+              mountPath: /run/log/journal
           livenessProbe:
             httpGet:
               path: /

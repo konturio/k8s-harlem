@@ -10,7 +10,7 @@ metadata:
   namespace: monitoring
 spec:
   groups:
-  - name: kubernetes-apps
+  - name: kubernetes-apps #TODO disable this block for sandbox namespaces
     rules:
     - alert: KubePodCrashLooping
       annotations:
@@ -677,30 +677,30 @@ spec:
       for: 15m
       labels:
         severity: critical
-  - name: kubernetes-system-scheduler
-    rules:
-    - alert: KubeSchedulerDown
-      annotations:
-        description: KubeScheduler has disappeared from Prometheus target discovery.
-        runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeschedulerdown
-        summary: Target disappeared from Prometheus target discovery.
-      expr: |
-        absent(up{job="kube-scheduler"} == 1)
-      for: 15m
-      labels:
-        severity: critical
-  - name: kubernetes-system-controller-manager
-    rules:
-    - alert: KubeControllerManagerDown
-      annotations:
-        description: KubeControllerManager has disappeared from Prometheus target discovery.
-        runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecontrollermanagerdown
-        summary: Target disappeared from Prometheus target discovery.
-      expr: |
-        absent(up{job="kube-controller-manager"} == 1)
-      for: 15m
-      labels:
-        severity: critical
+#  - name: kubernetes-system-scheduler #TODO https://kontur.fibery.io/Tasks/Task/kube-scheduler-and-kube-controller-manager-cannot-be-monitored-with-prometheus-11839
+#    rules:
+#    - alert: KubeSchedulerDown
+#      annotations:
+#        description: KubeScheduler has disappeared from Prometheus target discovery.
+#        runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeschedulerdown
+#        summary: Target disappeared from Prometheus target discovery.
+#      expr: |
+#        absent(up{job="kube-scheduler"} == 1)
+#      for: 15m
+#      labels:
+#        severity: critical
+#  - name: kubernetes-system-controller-manager #TODO https://kontur.fibery.io/Tasks/Task/kube-scheduler-and-kube-controller-manager-cannot-be-monitored-with-prometheus-11839
+#    rules:
+#    - alert: KubeControllerManagerDown
+#      annotations:
+#        description: KubeControllerManager has disappeared from Prometheus target discovery.
+#        runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecontrollermanagerdown
+#        summary: Target disappeared from Prometheus target discovery.
+#      expr: |
+#        absent(up{job="kube-controller-manager"} == 1)
+#      for: 15m
+#      labels:
+#        severity: critical
   - name: kube-apiserver-burnrate.rules
     rules:
     - expr: |
