@@ -45,7 +45,6 @@ spec:
           envFrom:
             - secretRef:
                 name: fluent-bit-es-secrets
-          resources: {}
           volumeMounts:
             - name: config
               mountPath: /fluent-bit/etc/fluent-bit.conf
@@ -64,6 +63,13 @@ spec:
             - name: systemdlog
               readOnly: true
               mountPath: /run/log/journal
+          resources:
+            requests:
+              memory: 100Mi
+              cpu: 100m
+            limits:
+              memory: 200Mi
+              cpu: 500m
           livenessProbe:
             httpGet:
               path: /
