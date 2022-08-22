@@ -19,8 +19,7 @@ spec:
           for: 5m
           labels:
             severity: warning
-            target: OnCall
-        - alert: NoOutputBytesProcessed
+        - alert: FluentBitNoOutputBytesProcessed
           expr: rate(fluentbit_output_proc_bytes_total[5m]) == 0
           annotations:
             message: |
@@ -30,4 +29,3 @@ spec:
           for: 15m
           labels:
             severity: warning
-            #TODO after checking set: target: OnCall
