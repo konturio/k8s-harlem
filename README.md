@@ -8,6 +8,7 @@ Flux GitOps repository
   * [Kustomization](#kustomization)
 - [Repository Structure](#repository-structure)
 - [Installation](#installation)
+- [Notifications](#notifications)
 - [FAQ](#faq)
   * [How can I safely move resources from one dir to another?](#How can I safely move resources from one dir to another?)
   * [Useful commands](Useful commands)
@@ -114,6 +115,9 @@ The `clusters` configuration is structured into:
 
 ## Installation
 Flux itself is bootstrapped via [terraform](https://gitlab.com/kontur-private/operations/terraform/-/tree/main/kubernetes/flux).
+
+## Notifications
+The Flux controllers emit Kubernetes events whenever a resource status changes. We use the `notification-controller` to forward these [events](https://fluxcd.io/docs/guides/notifications/) to Slack `#flux` channel.
 
 ## FAQ
 ### How can I safely move resources from one dir to another?
