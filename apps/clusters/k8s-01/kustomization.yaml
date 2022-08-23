@@ -5,5 +5,7 @@ resources:
   - ../../base/kube-prometheus
   - ../../base/postgres-exporter
   - ../../base/fluentbit
+  - ../../base/flux
 patchesStrategicMerge:
   - vmcluster/vmcluster-crd.yaml
+  - flux/alerts.yaml
