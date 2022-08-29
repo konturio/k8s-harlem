@@ -21,9 +21,6 @@ metadata:
 spec:
   force: true # recreate resources on immutable fields changes
   interval: 10m0s # detect drift and undo kubectl edits every 10 minutes
-  dependsOn:
-    - name: core-apps
-    - name: apps
   sourceRef:
     kind: GitRepository
     name: kontur-platform
