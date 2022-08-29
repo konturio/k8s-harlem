@@ -109,7 +109,8 @@ The `clusters` configuration is structured into:
 ├── k8s-01
 │   ├── flux-system
 │   ├── apps.yaml
-│   └── core-apps.yaml
+│   ├── core-apps.yaml
+│   └── kontur-platform.yaml
 └── k8s-02
 ```
 
