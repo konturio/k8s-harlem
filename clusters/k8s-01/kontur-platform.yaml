@@ -10,7 +10,7 @@ spec:
   ref:
     branch: 11715-setup-flux-repo-for-kontur-business-applications #TODO set to main
   secretRef:
-    name: flux-system #TODO separate secret ?
+    name: disaster-ninja-cd
   url: ssh://git@gitlab.com/kontur-private/platform/disaster-ninja-cd.git #TODO move to a separate repo / rename?
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
