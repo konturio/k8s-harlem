@@ -3,6 +3,9 @@ kind: Kustomization
 resources:
   - ../../base/vmcluster
   - ../../base/flux
+  - ../../base/calico
 patchesStrategicMerge:
   - vmcluster/vmcluster-crd.yaml
   - flux/alerts.yaml
+  - calico/host_endpoint_master.yaml
+  - calico/host_endpoint_worker.yaml

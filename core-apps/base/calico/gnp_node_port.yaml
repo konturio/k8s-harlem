@@ -1,0 +1,16 @@
+# pre-DNAT policy for NodePort pinhole, for external access
+
+apiVersion: crd.projectcalico.org/v1
+kind: GlobalNetworkPolicy
+metadata:
+  name: allow-nodeport
+spec:
+  selector: has(host-endpoint)
+  order: 10
+  preDNAT: true
+  applyOnForward: true
+  ingress:
+    - action: Allow
+      protocol: TCP
+      destination:
+        ports: [30000:32767]

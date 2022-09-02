@@ -1,3 +1,5 @@
+# TODO move ports from Felix under network policy. Probably left only as recommended here 
+# https://projectcalico.docs.tigera.io/security/protect-hosts#avoid-accidentally-cutting-all-host-connectivity
 apiVersion: crd.projectcalico.org/v1
 kind: FelixConfiguration
 metadata:

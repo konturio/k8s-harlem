@@ -1,0 +1,48 @@
+# https://projectcalico.docs.tigera.io/security/tutorials/protect-hosts
+# pre-DNAT policy that we need to disallow incoming external traffic in general
+# this policy allows traffic coming from IP addresses that are known to be cluster-internal, 
+# and denies traffic from any other sources. For the cluster-internal IP addresses in this example, 
+# we assume 10.240.0.0/16 for the nodes’ own IP addresses, and 192.168.0.0/16 for IP addresses that Kubernetes will assign to pods
+# The explicit drop-other-ingress policy is needed because there is no automatic default-drop semantic for pre-DNAT policy.
+# We also need policy to allow egress traffic through each node’s external interface. Otherwise, when we define host endpoints for those interfaces, 
+# no egress traffic will be allowed from local processes (except for traffic that is allowed by the failsafe rules.
+
+apiVersion: crd.projectcalico.org/v1
+kind: GlobalNetworkPolicy
+metadata:
+  name: allow-cluster-internal-ingress
+spec:
+  selector: has(host-endpoint)
+  order: 10
+  preDNAT: true
+  applyOnForward: true
+  ingress:
+    - action: Allow
+      protocol: ICMP
+    - action: Allow
+      source:
+        nets: [10.0.0.0/8, 192.168.0.0/16]
+
+---
+apiVersion: crd.projectcalico.org/v1
+kind: GlobalNetworkPolicy
+metadata:
+  name: drop-other-ingress
+spec:
+  selector: has(host-endpoint)
+  order: 20
+  preDNAT: true
+  applyOnForward: true
+  ingress:
+    - action: Deny
+
+---
+apiVersion: crd.projectcalico.org/v1
+kind: GlobalNetworkPolicy
+metadata:
+  name: allow-outbound-external
+spec:
+  selector: has(host-endpoint)
+  order: 10
+  egress:
+    - action: Allow

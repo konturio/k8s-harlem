@@ -1,0 +1,61 @@
+# All interfaces hosts endpoints
+---
+apiVersion: crd.projectcalico.org/v1
+kind: HostEndpoint
+metadata:
+  name: worker01-all-interfaces
+  labels:
+    role: worker-all-int
+spec:
+  interfaceName: "*"
+
+---
+apiVersion: crd.projectcalico.org/v1
+kind: HostEndpoint
+metadata:
+  name: worker02-all-interfaces
+  labels:
+    role: worker-all-int
+spec:
+  interfaceName: "*"
+
+---
+apiVersion: crd.projectcalico.org/v1
+kind: HostEndpoint
+metadata:
+  name: worker03-all-interfaces
+  labels:
+    role: worker-all-int
+spec:
+  interfaceName: "*"
+
+# External eth0 interface hosts endpoints
+---
+apiVersion: crd.projectcalico.org/v1
+kind: HostEndpoint
+metadata:
+  name: worker01-eth0
+  labels:
+    host-endpoint: ingress
+spec:
+  interfaceName: eth0
+
+---
+apiVersion: crd.projectcalico.org/v1
+kind: HostEndpoint
+metadata:
+  name: worker02-eth0
+  labels:
+    host-endpoint: ingress
+spec:
+  interfaceName: eth0
+
+---
+apiVersion: crd.projectcalico.org/v1
+kind: HostEndpoint
+metadata:
+  name: worker03-eth0
+  labels:
+    host-endpoint: ingress
+spec:
+  interfaceName: eth0

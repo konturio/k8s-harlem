@@ -1,0 +1,28 @@
+# https://projectcalico.docs.tigera.io/security/kubernetes-nodes
+# The workers’ ingress policy consists of two rules. The first rule allows all traffic to localhost. 
+# As with the masters, the worker nodes need to access their localhost kubelet API and calico/node healthcheck. 
+# The second rule allows the masters to access the workers kubelet API. 
+
+apiVersion: crd.projectcalico.org/v1
+kind: GlobalNetworkPolicy
+metadata:
+  name: ingress-k8s-workers
+spec:
+  selector: "role == 'worker-all-int'"
+  order: 50
+  ingress:
+  # Allow all traffic to localhost.
+  - action: Allow
+    destination:
+      nets:
+      - 127.0.0.0/8
+  # Allow only the masters access to the nodes kubelet API.
+  - action: Allow
+    protocol: TCP
+    # source:
+    #   selector: has(node-role.kubernetes.io/master)
+    destination:
+      ports:
+      - 10250
+  egress:
+  - action: Allow

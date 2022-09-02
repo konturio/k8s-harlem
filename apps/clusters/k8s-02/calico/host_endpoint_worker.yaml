@@ -1,0 +1,67 @@
+# All interfaces hosts endpoints
+---
+apiVersion: crd.projectcalico.org/v1
+kind: HostEndpoint
+metadata:
+  name: worker01-all-interfaces
+  labels:
+    role: worker-all-int
+spec:
+  interfaceName: "*"
+  node: node01.k8s-02.kontur.io
+
+---
+apiVersion: crd.projectcalico.org/v1
+kind: HostEndpoint
+metadata:
+  name: worker02-all-interfaces
+  labels:
+    role: worker-all-int
+spec:
+  interfaceName: "*"
+  node: node02.k8s-02.kontur.io
+
+---
+apiVersion: crd.projectcalico.org/v1
+kind: HostEndpoint
+metadata:
+  name: worker03-all-interfaces
+  labels:
+    role: worker-all-int
+spec:
+  interfaceName: "*"
+  node: node03.k8s-02.kontur.io
+
+# External eth0 interface hosts endpoints
+---
+apiVersion: crd.projectcalico.org/v1
+kind: HostEndpoint
+metadata:
+  name: worker01-eth0
+  labels:
+    host-endpoint: ingress
+spec:
+  interfaceName: eth0
+  node: node01.k8s-02.kontur.io
+
+---
+apiVersion: crd.projectcalico.org/v1
+kind: HostEndpoint
+metadata:
+  name: worker02-eth0
+  labels:
+    host-endpoint: ingress
+spec:
+  interfaceName: eth0
+  node: node02.k8s-02.kontur.io
+
+---
+apiVersion: crd.projectcalico.org/v1
+kind: HostEndpoint
+metadata:
+  name: worker03-eth0
+  labels:
+    host-endpoint: ingress
+spec:
+  interfaceName: eth0
+  node: node03.k8s-02.kontur.io
