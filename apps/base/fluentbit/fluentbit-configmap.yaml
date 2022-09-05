@@ -19,6 +19,23 @@ data:
         Format json
         Time_Key timestamp
         Time_Format %Y-%m-%dT%H:%M:%S.%f %z
+    
+    [MULTILINE_PARSER]
+        Name multiline_psql
+        Type regex
+        Flush_timeout 1000
+        Key_content log
+        # Regex rules for multiline parsing
+        # ---------------------------------
+        # configuration hints:
+        #  - first state always has the name: start_state
+        #  - every field in the rule must be inside double quotes
+        #
+        # rules   |   state name   | regex pattern                   | next state name
+        # --------|----------------|--------------------------------------------------
+        rule         "start_state"   "(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d{3})(.*)"  "cont"
+        rule         "cont"          "^([^0-9]{4})(.*)$"                     "cont"
+
   fluent-bit.conf: |
     [SERVICE]
         Daemon Off
@@ -36,6 +53,15 @@ data:
         Path /var/log/containers/*.log
         multiline.parser docker, cri
         Tag kube.*
+        Mem_Buf_Limit 5MB
+        Skip_Long_Lines On
+
+    [INPUT]
+        Name tail
+        Path /var/log/postgres/*.log
+        multiline.parser multiline_psql
+        Skip_Empty_Lines On
+        Tag postgres.*
         Mem_Buf_Limit 5MB
         Skip_Long_Lines On
 
@@ -75,6 +101,24 @@ data:
     [OUTPUT]
         Name es
         Match host.*
+        Host ${FLUENT_ELASTICSEARCH_HOST}
+        Port ${FLUENT_ELASTICSEARCH_PORT}
+        HTTP_User ${FLUENT_ELASTICSEARCH_USER}
+        HTTP_Passwd ${FLUENT_ELASTICSEARCH_PASSWORD}
+        Logstash_Format Off
+        Retry_Limit False
+        tls On
+        Suppress_Type_Name On
+        # Trace_Output On
+        Trace_Error On
+        Replace_Dots On
+        Include_Tag_Key true
+        Tag_Key tags
+        Index logstash
+
+    [OUTPUT]
+        Name es
+        Match postgres.*
         Host ${FLUENT_ELASTICSEARCH_HOST}
         Port ${FLUENT_ELASTICSEARCH_PORT}
         HTTP_User ${FLUENT_ELASTICSEARCH_USER}
