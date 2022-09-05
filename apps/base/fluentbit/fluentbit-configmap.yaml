@@ -34,7 +34,7 @@ data:
         # rules   |   state name   | regex pattern                   | next state name
         # --------|----------------|--------------------------------------------------
         rule         "start_state"   "(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d{3})(.*)"  "cont"
-        rule         "cont"          "^([^0-9]{4})(.*)$"                     "cont"
+        rule         "cont"          "^([^0-9]{4}|[ \t]+)(.*)$"                     "cont"
 
   fluent-bit.conf: |
     [SERVICE]
