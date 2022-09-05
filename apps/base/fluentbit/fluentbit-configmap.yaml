@@ -79,6 +79,11 @@ data:
         Keep_Log Off
         K8S-Logging.Parser On
         K8S-Logging.Exclude On
+    
+    [FILTER]
+        Name Modify
+        Match postgres.*
+        Add nodename ${NODE_NAME}
 
     [OUTPUT]
         Name es

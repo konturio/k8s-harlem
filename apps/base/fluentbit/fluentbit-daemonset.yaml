@@ -42,6 +42,11 @@ spec:
             - name: http
               containerPort: 2020
               protocol: TCP
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
           envFrom:
             - secretRef:
                 name: fluent-bit-es-secrets
