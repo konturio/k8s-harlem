@@ -87,43 +87,7 @@ data:
 
     [OUTPUT]
         Name es
-        Match kube.*
-        Host ${FLUENT_ELASTICSEARCH_HOST}
-        Port ${FLUENT_ELASTICSEARCH_PORT}
-        HTTP_User ${FLUENT_ELASTICSEARCH_USER}
-        HTTP_Passwd ${FLUENT_ELASTICSEARCH_PASSWORD}
-        Logstash_Format Off
-        Retry_Limit False
-        tls On
-        Suppress_Type_Name On
-        # Trace_Output On
-        Trace_Error On
-        Replace_Dots On
-        Include_Tag_Key true
-        Tag_Key tags
-        Index logstash
-
-    [OUTPUT]
-        Name es
-        Match host.*
-        Host ${FLUENT_ELASTICSEARCH_HOST}
-        Port ${FLUENT_ELASTICSEARCH_PORT}
-        HTTP_User ${FLUENT_ELASTICSEARCH_USER}
-        HTTP_Passwd ${FLUENT_ELASTICSEARCH_PASSWORD}
-        Logstash_Format Off
-        Retry_Limit False
-        tls On
-        Suppress_Type_Name On
-        # Trace_Output On
-        Trace_Error On
-        Replace_Dots On
-        Include_Tag_Key true
-        Tag_Key tags
-        Index logstash
-
-    [OUTPUT]
-        Name es
-        Match postgres.*
+        Match *
         Host ${FLUENT_ELASTICSEARCH_HOST}
         Port ${FLUENT_ELASTICSEARCH_PORT}
         HTTP_User ${FLUENT_ELASTICSEARCH_USER}
