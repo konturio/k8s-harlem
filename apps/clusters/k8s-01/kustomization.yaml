@@ -6,6 +6,7 @@ resources:
   - ../../base/postgres-exporter
   - ../../base/fluentbit
   - ../../base/flux
+  - flux/podmonitor.yaml
 patchesStrategicMerge:
   - vmcluster/vmcluster-crd.yaml
   - flux/alerts.yaml
