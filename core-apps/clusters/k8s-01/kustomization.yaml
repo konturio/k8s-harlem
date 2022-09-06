@@ -10,6 +10,7 @@ resources:
   - ../../base/kube-prometheus-operator
   - ../../base/local-path-provisioner
   - ../../base/calico
+  - ../../base/nginx-ingress
 patchesStrategicMerge:
   - victoriametrics-operator/release.yaml
   - kube-prometheus-operator/prometheus-operator-deployment.yaml
