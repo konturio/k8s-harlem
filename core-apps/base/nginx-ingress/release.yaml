@@ -11,6 +11,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: nginx-ingress
+        namespace: flux-system
   interval: 10m0s
   install:
     crds: Create
