@@ -6,7 +6,9 @@ resources:
   - ../../base/postgres-exporter
   - ../../base/fluentbit
   - ../../base/flux
+  - ../../base/weave-gitops
   - flux/podmonitor.yaml
 patchesStrategicMerge:
   - vmcluster/vmcluster-crd.yaml
   - flux/alerts.yaml
+  - weave-gitops/release.yaml
