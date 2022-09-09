@@ -3,5 +3,5 @@ kind: HelmRepository
 metadata:
   name: ww-gitops
 spec:
-  interval: 10m0s
+  interval: 1h0m0s
   url: https://helm.gitops.weave.works
