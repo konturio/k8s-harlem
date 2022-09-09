@@ -28,7 +28,7 @@ spec:
               service:
                 name: "ww-gitops-weave-gitops"
                 port:
-                  number: 9001
+                  name: http
       tls:
       - hosts:
         - flux.k8s-01.konturlabs.com
