@@ -3,5 +3,5 @@ kind: HelmRepository
 metadata:
   name: nginx-ingress
 spec:
-  interval: 10m0s
+  interval: 1h0m0s
   url: https://helm.nginx.com/stable

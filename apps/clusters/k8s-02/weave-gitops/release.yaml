@@ -11,7 +11,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: ww-gitops
-  interval: 1m0s
+  interval: 10m
   values:
     logLevel: info
     ingress:
