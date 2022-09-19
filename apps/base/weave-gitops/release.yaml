@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: weave-gitops
-      version: v3.0.3
+      version: v4.0.0
       sourceRef:
         kind: HelmRepository
         name: ww-gitops
