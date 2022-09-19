@@ -13,13 +13,12 @@ spec:
     ingress:
       hosts:
       - host: flux.k8s-02.konturlabs.com
-        http:
-          paths:
+        paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: ww-gitops-weave-gitops
+                name: "ww-gitops-weave-gitops"
                 port:
                   number: 9001
       tls:
