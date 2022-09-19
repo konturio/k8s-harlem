@@ -4,19 +4,15 @@ metadata:
   name: ww-gitops
   namespace: flux-system
 spec:
-  chart:
-    spec:
-      chart: weave-gitops
-      version: v4.0.0
-      sourceRef:
-        kind: HelmRepository
-        name: ww-gitops
-  interval: 10m
   values:
     logLevel: info
+    adminUser:
+      create: true
+      username: weave-gitops
+      passwordHash: "$2a$10$YEPsU.FmvQlG0vkD2FjUN.OMWZmOIcX3WTJFidI/HSPobwjupARbe"
     ingress:
       hosts:
-      - host: flux.k8s-01.konturlabs.com
+      - host: flux.k8s-02.konturlabs.com
         http:
           paths:
           - path: /
@@ -28,5 +24,5 @@ spec:
                   number: 9001
       tls:
       - hosts:
-        - flux.k8s-01.konturlabs.com
+        - flux.k8s-02.konturlabs.com
         secretName: flux-ui-tls

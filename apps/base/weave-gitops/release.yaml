@@ -14,8 +14,6 @@ spec:
   interval: 10m
   values:
     logLevel: info
-    adminUser:
-      create: true
     rbac:
       create: true
     ingress:
