@@ -47,9 +47,9 @@ spec:
           clientSecret: $GITHUB_CLIENT_SECRET
           redirectURI: https://dex.k8s-02.konturlabs.com/callback
           orgs:
-          - name: konturio
-            teams:
-            - "Front-end developers OSS"
+          - name: fibednet 
+            # teams:
+            # - "Front-end developers OSS"
 
 
     ingress:
