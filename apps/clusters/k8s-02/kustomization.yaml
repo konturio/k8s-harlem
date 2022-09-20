@@ -4,7 +4,9 @@ resources:
   - ../../base/vmcluster
   - ../../base/flux
   - ../../base/weave-gitops
+  - ../../base/dex
 patchesStrategicMerge:
   - vmcluster/vmcluster-crd.yaml
   - flux/alerts.yaml
   - weave-gitops/release.yaml
+  - dex/release.yaml
