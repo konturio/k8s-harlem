@@ -1,0 +1,37 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: dex
+  namespace: dex
+spec:
+  values:
+    config:
+      # Set it to a valid URL
+      issuer: https://dex.k8s-02.konturlabs.com
+
+      staticClients:
+      - name: 'Weave GitOps Core'
+        id: weave-gitops
+        secret: yYe26K2_QZj5JiougESejS68XoXXP
+
+      connectors:
+      - type: github
+        id: github
+        name: GitHub
+        config:
+          redirectURI: https://dex.k8s-02.konturlabs.com/callback
+          orgs:
+          - name: konturio
+            teams:
+            - "Front-end developers OSS"
+    
+    ingress:
+      hosts:
+        - host: dex.k8s-02.konturlabs.com
+          paths:
+          - path: /
+            pathType: ImplementationSpecific
+      tls:
+        - hosts:
+          - dex.k8s-02.konturlabs.com
+          secretName: dex-tls

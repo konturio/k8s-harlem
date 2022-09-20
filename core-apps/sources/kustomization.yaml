@@ -6,3 +6,4 @@ resources:
   - prometheus-community.yaml
   - nginx-ingress.yaml
   - weave-gitops.yaml
+  - dex.yaml
