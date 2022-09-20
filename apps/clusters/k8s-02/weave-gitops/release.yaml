@@ -10,6 +10,12 @@ spec:
       create: true
       username: weave-gitops
       passwordHash: "$2a$10$YEPsU.FmvQlG0vkD2FjUN.OMWZmOIcX3WTJFidI/HSPobwjupARbe"
+    oidcSecret:
+      create: true
+      clientID: "weave-gitops"
+      clientSecret: "yYe26K2_QZj5JiougESejS68XoXXP"
+      issuerURL: "https://dex.k8s-02.konturlabs.com"
+      redirectURL: "https://flux.k8s-02.konturlabs.com/oauth2/callback"
     ingress:
       hosts:
       - host: flux.k8s-02.konturlabs.com

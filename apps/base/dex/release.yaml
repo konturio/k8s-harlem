@@ -43,6 +43,7 @@ spec:
         - 'http://localhost:4567/oauth2/callback'
         - 'https://localhost:4567/oauth2/callback'
         - 'http://localhost:3000/oauth2/callback'
+        - 'https://flux.k8s-02.konturlabs.com/oauth2/callback'
 
       connectors:
       - type: github
