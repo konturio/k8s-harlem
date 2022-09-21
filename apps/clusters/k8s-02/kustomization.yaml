@@ -5,8 +5,11 @@ resources:
   - ../../base/flux
   - ../../base/weave-gitops
   - ../../base/dex
+  - ../../base/cert-manager
 patchesStrategicMerge:
   - vmcluster/vmcluster-crd.yaml
   - flux/alerts.yaml
   - weave-gitops/release.yaml
   - dex/release.yaml
+  - cert-manager/cluster_issuer_letsencrypt_prod.yaml
+  - cert-manager/cluster_issuer_letsencrypt_stage.yaml
