@@ -9,6 +9,7 @@ resources:
   - ../../base/victoriametrics-operator
   - ../../base/local-path-provisioner
   - ../../base/calico
+  - ../../base/cert-manager-crds
 patchesStrategicMerge:
   - victoriametrics-operator/release.yaml
   - local-path-provisioner/configmap.yaml
