@@ -11,6 +11,7 @@ resources:
   - ../../base/local-path-provisioner
   - ../../base/calico
   - ../../base/nginx-ingress
+  - ../../base/cert-manager-crds
 patchesStrategicMerge:
   - victoriametrics-operator/release.yaml
   - kube-prometheus-operator/prometheus-operator-deployment.yaml

@@ -28,3 +28,11 @@ metadata:
   name: prod-raster-tiler
   annotations:
     kustomize.toolkit.fluxcd.io/prune: disabled
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager
+  annotations:
+    kustomize.toolkit.fluxcd.io/prune: disabled
