@@ -12,3 +12,6 @@ spec:
       name: '*'
     - kind: Kustomization
       name: '*'
+  # https://github.com/fluxcd/kustomize-controller/issues/492#issuecomment-1195300509
+  exclusionList:
+    - "^Dependencies.*"
