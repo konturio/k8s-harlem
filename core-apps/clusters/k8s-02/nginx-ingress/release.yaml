@@ -4,7 +4,6 @@ metadata:
   name: default
   namespace: default
 spec:
-  suspend: true
   chart:
     spec:
       chart: nginx-ingress
