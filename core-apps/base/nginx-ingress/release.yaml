@@ -3,8 +3,6 @@ kind: HelmRelease
 metadata:
   name: default
   namespace: default
-  labels:
-    kustomize.toolkit.fluxcd.io/reconcile: disabled
 spec:
   suspend: true
   chart:
