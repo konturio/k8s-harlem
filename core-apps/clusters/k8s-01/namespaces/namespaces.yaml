@@ -4,3 +4,27 @@ metadata:
   name: monitoring
   annotations:
     kustomize.toolkit.fluxcd.io/prune: disabled
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev-raster-tiler
+  annotations:
+    kustomize.toolkit.fluxcd.io/prune: disabled
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test-raster-tiler
+  annotations:
+    kustomize.toolkit.fluxcd.io/prune: disabled
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: prod-raster-tiler
+  annotations:
+    kustomize.toolkit.fluxcd.io/prune: disabled

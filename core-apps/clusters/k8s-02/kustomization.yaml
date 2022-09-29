@@ -10,6 +10,7 @@ resources:
   - ../../base/local-path-provisioner
   - ../../base/calico
   - ../../base/nginx-ingress
+  - ../../base/cert-manager-crds
 patchesStrategicMerge:
   - victoriametrics-operator/release.yaml
   - local-path-provisioner/configmap.yaml

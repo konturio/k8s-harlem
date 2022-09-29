@@ -3,5 +3,5 @@ kind: HelmRepository
 metadata:
   name: victoriametrics
 spec:
-  interval: 30m
+  interval: 1h0m0s
   url: https://victoriametrics.github.io/helm-charts/

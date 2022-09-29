@@ -11,6 +11,9 @@ spec:
     name: flux-system
   path: ./core-apps/clusters/k8s-01
   prune: true # remove stale resources from cluster
-  wait: true # wait for all applied resources to become ready
-  timeout: 3m0s # give up waiting after three minutes
+  # Disable Health assessment
+  # https://fluxcd.io/flux/components/kustomize/kustomization/#health-assessment
+  # https://fluxcd.io/flux/components/kustomize/kustomization/#status
+  wait: false # wait for all applied resources to become ready
+  # timeout: 3m0s # give up waiting after three minutes
   retryInterval: 2m0s # retry every two minutes on apply or waiting failures

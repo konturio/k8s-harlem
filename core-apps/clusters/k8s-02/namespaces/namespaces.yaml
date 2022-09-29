@@ -12,3 +12,19 @@ metadata:
   name: local-path-storage
   annotations:
     kustomize.toolkit.fluxcd.io/prune: disabled
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dex
+  annotations:
+    kustomize.toolkit.fluxcd.io/prune: disabled
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager
+  annotations:
+    kustomize.toolkit.fluxcd.io/prune: disabled

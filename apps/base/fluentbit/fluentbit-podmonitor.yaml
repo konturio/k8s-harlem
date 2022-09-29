@@ -12,7 +12,7 @@ spec:
     - path: /api/v1/metrics/prometheus
       scheme: http
       port: 'http'
-      interval: 60s
+      interval: 30s
   selector:
     matchLabels:
       app.kubernetes.io/name: fluent-bit
