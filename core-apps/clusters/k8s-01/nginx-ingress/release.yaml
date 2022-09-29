@@ -1,0 +1,16 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: default
+  namespace: default
+spec:
+  suspend: true
+  chart:
+    spec:
+      chart: nginx-ingress
+      version: 0.12.2
+  values:
+    controller.enableSnippets: true
+    annotations:
+      metallb.universe.tf/address-pool: default
+      metallb.universe.tf/allow-shared-ip: SHARED-IP-01

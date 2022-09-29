@@ -16,3 +16,4 @@ patchesStrategicMerge:
   - kube-prometheus-operator/prometheus-operator-deployment.yaml
   - local-path-provisioner/configmap.yaml
   - local-path-provisioner/deployment.yaml
+  - nginx-ingress/release.yaml
