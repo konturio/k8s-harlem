@@ -30,12 +30,10 @@ spec:
             key: apiKey
     config:
       exporters:
-        logging:
-          loglevel: debug
         otlp/elastic:
           endpoint: "kontur-elastic-deployment.apm.eastus2.azure.elastic-cloud.com:443"
           headers:
-            Authorization: "${ELASTIC_CLOUD_API_KEY}"
+            Authorization: Apikey ${ELASTIC_CLOUD_API_KEY}
       receivers:
         jaeger: null
         otlp:
@@ -47,13 +45,12 @@ spec:
       service:
         telemetry:
           logs:
-            level: "debug"
+            level: "error"
         pipelines:
           logs: null
           metrics: null
           traces:
             exporters:
-              - logging
               - otlp/elastic
             processors:
               - memory_limiter
