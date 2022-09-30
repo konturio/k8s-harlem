@@ -33,7 +33,7 @@ spec:
         otlp/elastic:
           endpoint: "kontur-elastic-deployment.apm.eastus2.azure.elastic-cloud.com:443"
           headers:
-            Authorization: Apikey ${ELASTIC_CLOUD_API_KEY}
+            Authorization: ApiKey ${ELASTIC_CLOUD_API_KEY}
       receivers:
         jaeger: null
         otlp:
