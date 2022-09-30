@@ -7,3 +7,4 @@ resources:
   - nginx-ingress.yaml
   - cert-manager.yaml
   - open-telemetry.yaml
+  - metallb.yaml
