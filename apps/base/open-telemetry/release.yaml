@@ -32,7 +32,7 @@ spec:
       exporters:
         logging:
           loglevel: debug
-        otlp_elastic:
+        otlp/elastic:
           endpoint: "kontur-elastic-deployment.apm.eastus2.azure.elastic-cloud.com:443"
           headers:
             Authorization: "${ELASTIC_CLOUD_API_KEY}"
@@ -54,7 +54,7 @@ spec:
           traces:
             exporters:
               - logging
-              - otlp_elastic
+              - otlp/elastic
             processors:
               - memory_limiter
               - batch
