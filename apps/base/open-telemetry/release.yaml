@@ -22,14 +22,20 @@ spec:
       remediateLastFailure: true
   values:
     mode: "daemonset"
+    extraEnvs:
+      - name: ELASTIC_CLOUD_API_KEY
+        valueFrom:
+          secretKeyRef:
+            name: open-telemetry-elastic-apikey
+            key: apiKey
     config:
       exporters:
         logging:
           loglevel: debug
         otlp_elastic:
           endpoint: "kontur-elastic-deployment.apm.eastus2.azure.elastic-cloud.com:443"
-      #      headers:
-      #        Authorization: "ApiKey blablabla" #set from secret, see valuesFrom below
+          headers:
+            Authorization: "${ELASTIC_CLOUD_API_KEY}"
       receivers:
         jaeger: null
         otlp:
@@ -94,7 +100,4 @@ spec:
         enabled: false
       # additional labels for the PrometheusRule
       extraLabels: { }
-  valuesFrom:
-    - kind: Secret
-      name: open-telemetry-elastic-apikey
 ---
