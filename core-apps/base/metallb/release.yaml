@@ -3,7 +3,6 @@ kind: HelmRelease
 metadata:
   name: metallb
 spec:
-  suspend: true
   chart:
     spec:
       chart: metallb
