@@ -11,8 +11,10 @@ resources:
   - ../../base/calico
   - ../../base/nginx-ingress
   - ../../base/cert-manager-crds
+  - ../../base/metallb
 patchesStrategicMerge:
   - victoriametrics-operator/release.yaml
   - local-path-provisioner/configmap.yaml
   - local-path-provisioner/deployment.yaml
   - nginx-ingress/release.yaml
+  - metallb/release.yaml
