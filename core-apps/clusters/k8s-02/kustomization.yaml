@@ -12,7 +12,7 @@ resources:
   - ../../base/nginx-ingress
   - ../../base/cert-manager-crds
   - ../../base/metallb
-  - ../../tigera-operator
+  - ../../base/tigera-operator
 patchesStrategicMerge:
   - victoriametrics-operator/release.yaml
   - local-path-provisioner/configmap.yaml
