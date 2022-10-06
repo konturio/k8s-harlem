@@ -12,6 +12,7 @@ resources:
   - ../../base/calico
   - ../../base/nginx-ingress
   - ../../base/metallb
+  - ../../base/cert-manager-crds
 patchesStrategicMerge:
   - victoriametrics-operator/release.yaml
   - kube-prometheus-operator/prometheus-operator-deployment.yaml
