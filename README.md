@@ -143,3 +143,11 @@ flux get helmreleases -A
 kubectl get helmreleases -A
 helm ls -A
 ```
+
+### How verify customization?
+```bash
+kustomize build --load-restrictor=LoadRestrictionsNone --reorder=legacy core-apps/clusters/k8s-02/ | less
+```
+```bash
+kustomize build --load-restrictor=LoadRestrictionsNone --reorder=legacy core-apps/clusters/k8s-02/ | kubectl apply --server-side --dry-run=server -f-
+```

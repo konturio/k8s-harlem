@@ -1,7 +1,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: ww-gitops
+  name: metallb
 spec:
   interval: 1h0m0s
-  url: https://helm.gitops.weave.works
+  url: https://metallb.github.io/metallb

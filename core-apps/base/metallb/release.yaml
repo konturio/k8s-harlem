@@ -1,23 +1,19 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: default
-  namespace: default
+  name: metallb
 spec:
-  suspend: true
   chart:
     spec:
-      chart: nginx-ingress
-      version: 0.12.2
+      chart: metallb
+      version: v0.11.0
       sourceRef:
         kind: HelmRepository
-        name: nginx-ingress
+        name: metallb
         namespace: flux-system
   interval: 10m
   install:
     crds: Create
   upgrade:
     crds: CreateReplace # Create new CRDs, update (replace) existing ones, but do not delete CRDs which no longer exist in the current helm release.
-  values:
-    setAsDefaultIngress: true
-    externalTrafficPolicy: Cluster
+

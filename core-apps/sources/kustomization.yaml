@@ -5,6 +5,7 @@ resources:
   - victoriametrics.yaml
   - prometheus-community.yaml
   - nginx-ingress.yaml
-  - weave-gitops.yaml
-  - dex.yaml
   - cert-manager.yaml
+  - open-telemetry.yaml
+  - metallb.yaml
+  - calico.yaml

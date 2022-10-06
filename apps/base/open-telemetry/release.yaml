@@ -1,0 +1,100 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  namespace: tracing
+  name: open-telemetry
+spec:
+  suspend: false
+  interval: 10m
+  chart:
+    spec:
+      chart: opentelemetry-collector
+      version: 0.30.0
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: open-telemetry
+        namespace: flux-system
+      interval: 1h
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+  values:
+    mode: "daemonset"
+    extraEnvs:
+      - name: ELASTIC_CLOUD_API_KEY
+        valueFrom:
+          secretKeyRef:
+            name: open-telemetry-elastic-apikey
+            key: apiKey
+    config:
+      exporters:
+        otlp/elastic:
+          endpoint: "kontur-elastic-deployment.apm.eastus2.azure.elastic-cloud.com:443"
+          headers:
+            Authorization: ApiKey ${ELASTIC_CLOUD_API_KEY}
+      receivers:
+        jaeger: null
+        otlp:
+          protocols:
+            grpc:
+              endpoint: 0.0.0.0:4317
+        prometheus: null
+        zipkin: null
+      service:
+        telemetry:
+          logs:
+            level: "error"
+        pipelines:
+          logs: null
+          metrics: null
+          traces:
+            exporters:
+              - otlp/elastic
+            processors:
+              - memory_limiter
+              - batch
+            receivers:
+              - otlp
+    # Configuration for ports
+    ports:
+      otlp:
+        enabled: true
+        containerPort: 4317
+        servicePort: 4317
+        hostPort: 4317
+        protocol: TCP
+      otlp-http:
+        enabled: false
+      jaeger-compact:
+        enabled: false
+      jaeger-thrift:
+        enabled: false
+      jaeger-grpc:
+        enabled: false
+      zipkin:
+        enabled: false
+      metrics:
+        enabled: true
+        containerPort: 8888
+        servicePort: 8888
+        protocol: TCP
+    podMonitor:
+      # The pod monitor by default scrapes the metrics port.
+      # The metrics port needs to be enabled as well.
+      enabled: true
+      metricsEndpoints:
+        - port: metrics
+          interval: 30s
+      # additional labels for the PodMonitor
+      extraLabels: { }
+    prometheusRule:
+      enabled: false #TODO enable
+      groups: [ ]
+      # Create default rules for monitoring the collector
+      defaultRules:
+        enabled: false
+      # additional labels for the PrometheusRule
+      extraLabels: { }
+---

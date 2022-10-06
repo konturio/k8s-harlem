@@ -6,12 +6,11 @@ resources:
   - ../../base/postgres-exporter
   - ../../base/fluentbit
   - ../../base/flux
-  #- ../../base/weave-gitops
   - ../../base/cert-manager
+  - ../../base/open-telemetry
   - flux/podmonitor.yaml
 patchesStrategicMerge:
   - vmcluster/vmcluster-crd.yaml
   - flux/alerts.yaml
-  #- weave-gitops/release.yaml
   - cert-manager/cluster_issuer_letsencrypt_prod.yaml
   - cert-manager/cluster_issuer_letsencrypt_stage.yaml
