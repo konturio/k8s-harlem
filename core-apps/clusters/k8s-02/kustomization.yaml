@@ -10,7 +10,7 @@ resources:
   - ../../base/local-path-provisioner
   - ../../base/calico
   - ../../base/nginx-ingress
-  # - ../../base/cert-manager-crds
+  - ../../base/cert-manager-crds
   - ../../base/metallb
   - ../../base/tigera-operator
 patchesStrategicMerge:
