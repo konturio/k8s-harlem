@@ -3,9 +3,9 @@ kind: Kustomization
 resources:
   - ../../base/vmcluster
   - ../../base/flux
-  - ../../base/cert-manager
+  # - ../../base/cert-manager
 patchesStrategicMerge:
   - vmcluster/vmcluster-crd.yaml
   - flux/alerts.yaml
-  - cert-manager/cluster_issuer_letsencrypt_prod.yaml
-  - cert-manager/cluster_issuer_letsencrypt_stage.yaml
+  # - cert-manager/cluster_issuer_letsencrypt_prod.yaml
+  # - cert-manager/cluster_issuer_letsencrypt_stage.yaml
