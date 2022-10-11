@@ -3,10 +3,8 @@ kind: HelmRelease
 metadata:
   name: cert-manager
   namespace: cert-manager
-  annotations:
-    kustomize.toolkit.fluxcd.io/reconcile: disabled
 spec:
-  suspend: true
+  suspend: false
   chart:
     spec:
       chart: cert-manager
