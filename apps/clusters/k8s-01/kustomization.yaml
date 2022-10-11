@@ -14,3 +14,4 @@ patchesStrategicMerge:
   - flux/alerts.yaml
   - cert-manager/cluster_issuer_letsencrypt_prod.yaml
   - cert-manager/cluster_issuer_letsencrypt_stage.yaml
+  - cert-manager/release.yaml
