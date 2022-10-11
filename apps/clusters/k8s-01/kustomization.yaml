@@ -6,12 +6,12 @@ resources:
   - ../../base/postgres-exporter
   - ../../base/fluentbit
   - ../../base/flux
-  - ../../base/cert-manager
+  # - ../../base/cert-manager
   - ../../base/open-telemetry
   - flux/podmonitor.yaml
 patchesStrategicMerge:
   - vmcluster/vmcluster-crd.yaml
   - flux/alerts.yaml
-  - cert-manager/cluster_issuer_letsencrypt_prod.yaml
-  - cert-manager/cluster_issuer_letsencrypt_stage.yaml
-  - cert-manager/release.yaml
+  # - cert-manager/cluster_issuer_letsencrypt_prod.yaml
+  # - cert-manager/cluster_issuer_letsencrypt_stage.yaml
+  # - cert-manager/release.yaml
