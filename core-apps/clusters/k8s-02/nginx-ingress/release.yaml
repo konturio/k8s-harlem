@@ -15,6 +15,9 @@ spec:
       enableSnippets: true
       # The number of replicas of the Ingress controller deployment.
       replicaCount: 2
-      annotations:
-        metallb.universe.tf/address-pool: default
-        metallb.universe.tf/allow-shared-ip: SHARED-IP-01
+
+      service:
+        # The annotations of the Ingress Controller service.
+        annotations:
+          metallb.universe.tf/address-pool: default
+          metallb.universe.tf/allow-shared-ip: SHARED-IP-01
