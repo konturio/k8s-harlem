@@ -8,8 +8,9 @@ spec:
   chart:
     spec:
       chart: nginx-ingress
-      version: 0.12.2
+      version: 0.15.0
   values:
+# Enable custom NGINX configuration snippets in Ingress, VirtualServer, VirtualServerRoute and TransportServer resources.
     controller.enableSnippets: true
     annotations:
       metallb.universe.tf/address-pool: default
