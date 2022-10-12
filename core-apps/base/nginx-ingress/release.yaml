@@ -23,7 +23,7 @@ spec:
       # Enable custom NGINX configuration snippets in Ingress, VirtualServer, VirtualServerRoute and TransportServer resources.
       enableSnippets: true
       # The number of replicas of the Ingress controller deployment.
-      replicaCount: 2
+      replicaCount: 3
 
       # The Ingress Controller processes all the resources that do not have the "ingressClassName" field for all versions of kubernetes.
       ingressClass: nginx
