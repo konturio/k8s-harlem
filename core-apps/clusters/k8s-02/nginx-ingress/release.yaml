@@ -9,6 +9,15 @@ spec:
     spec:
       chart: nginx-ingress
       version: 0.15.0
+      sourceRef:
+        kind: HelmRepository
+        name: nginx-ingress
+        namespace: flux-system
+  interval: 10m
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace # Create new CRDs, update (replace) existing ones, but do not delete CRDs which no longer exist in the current helm release.
   values:
     controller:
       # Enable custom NGINX configuration snippets in Ingress, VirtualServer, VirtualServerRoute and TransportServer resources.
@@ -24,7 +33,7 @@ spec:
 
       service:
         # The externalTrafficPolicy of the service. The value Local preserves the client source IP.
-        externalTrafficPolicy: Cluster
+        # externalTrafficPolicy: Cluster
 
         # The annotations of the Ingress Controller service.
         annotations:
