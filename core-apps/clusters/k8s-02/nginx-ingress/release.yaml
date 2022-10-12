@@ -4,11 +4,11 @@ metadata:
   name: default
   namespace: default
 spec:
-  suspend: false
+  suspend: true
   chart:
     spec:
       chart: nginx-ingress
-      version: 0.15.0
+      version: 0.12.2
       sourceRef:
         kind: HelmRepository
         name: nginx-ingress
