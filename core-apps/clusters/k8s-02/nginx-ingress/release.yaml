@@ -8,9 +8,12 @@ spec:
   chart:
     spec:
       chart: nginx-ingress
-      version: 0.12.2
+      version: 0.15.0
   values:
+# Enable custom NGINX configuration snippets in Ingress, VirtualServer, VirtualServerRoute and TransportServer resources.
     controller.enableSnippets: true
+# The number of replicas of the Ingress controller deployment.
+    controller.replicaCount: 2
     annotations:
       metallb.universe.tf/address-pool: default
       metallb.universe.tf/allow-shared-ip: SHARED-IP-01
