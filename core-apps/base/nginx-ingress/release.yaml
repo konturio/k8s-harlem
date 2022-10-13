@@ -14,29 +14,6 @@ spec:
         name: nginx-ingress
         namespace: flux-system
   interval: 10m
-  install:
-    crds: Create
-  upgrade:
-    crds: CreateReplace # Create new CRDs, update (replace) existing ones, but do not delete CRDs which no longer exist in the current helm release.
   values:
     controller:
-      # Enable custom NGINX configuration snippets in Ingress, VirtualServer, VirtualServerRoute and TransportServer resources.
-      enableSnippets: true
-
-      # The number of replicas of the Ingress controller deployment.
       replicaCount: 2
-
-      # The Ingress Controller processes all the resources that do not have the "ingressClassName" field for all versions of kubernetes.
-      ingressClass: nginx
-
-      # New Ingresses without an ingressClassName field specified will be assigned the class specified in `controller.ingressClass`.
-      setAsDefaultIngress: true
-
-      service:
-        # The externalTrafficPolicy of the service. The value Local preserves the client source IP.
-        externalTrafficPolicy: Cluster
-
-        # The annotations of the Ingress Controller service.
-        annotations:
-          metallb.universe.tf/address-pool: default
-          metallb.universe.tf/allow-shared-ip: SHARED-IP-01

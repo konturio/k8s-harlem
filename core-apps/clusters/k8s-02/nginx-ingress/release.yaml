@@ -16,5 +16,4 @@ spec:
   interval: 10m
   values:
     controller:
-      # The number of replicas of the Ingress controller deployment.
       replicaCount: 1
