@@ -40,3 +40,4 @@ spec:
         annotations:
           metallb.universe.tf/address-pool: default
           metallb.universe.tf/allow-shared-ip: SHARED-IP-01
+#
