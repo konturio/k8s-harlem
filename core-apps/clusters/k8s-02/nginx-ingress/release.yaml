@@ -16,4 +16,4 @@ spec:
   interval: 10m
   values:
     controller:
-      replicaCount: 1
+      replicaCount: 2
