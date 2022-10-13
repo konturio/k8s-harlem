@@ -33,7 +33,7 @@ spec:
 
       service:
         # The externalTrafficPolicy of the service. The value Local preserves the client source IP.
-        # externalTrafficPolicy: Cluster
+        externalTrafficPolicy: Cluster
 
         # The annotations of the Ingress Controller service.
         annotations:
