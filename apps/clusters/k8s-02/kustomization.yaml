@@ -4,6 +4,7 @@ resources:
   - ../../base/vmcluster
   - ../../base/flux
   - ../../base/cert-manager
+  - ../../base/kube-prometheus
 patchesStrategicMerge:
   - vmcluster/vmcluster-crd.yaml
   - flux/alerts.yaml
