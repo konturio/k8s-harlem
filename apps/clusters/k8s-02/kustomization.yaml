@@ -21,3 +21,6 @@ patchesStrategicMerge:
   - cert-manager/cluster_issuer_letsencrypt_stage.yaml
   - cert-manager/release.yaml
   - prometheus/prometheus-prometheus.yaml
+  - grafana/grafana-prometheusRule.yaml
+  - grafana/grafana-storage-pvc.yaml
+  - grafana/grafana-ingress.yaml
