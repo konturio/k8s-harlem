@@ -14,6 +14,25 @@ spec:
   groups:
   - name: node-exporter
     rules:
+    - alert: NodeFilesystemSpaceIsLow
+      annotations:
+        description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left.
+        runbook_url: https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemspacefillingup
+        summary: Filesystem {{ $labels.mountpoint }} on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left.
+      expr: |
+          node_filesystem_avail_bytes{job="node-exporter",fstype!=""} / node_filesystem_size_bytes{job="node-exporter",fstype!=""} * 100 < 20
+      for: 1m
+      labels:
+        severity: warning
+    - alert: NodeAvailableMemoryIsLow
+      annotations:
+        description: Memory at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available.
+        summary: Memory at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available.
+      expr: |
+          node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 15
+      for: 2m
+      labels:
+        severity: warning
     - alert: NodeFilesystemSpaceFillingUp
       annotations:
         description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left and is filling up.
@@ -27,7 +46,7 @@ spec:
         and
           node_filesystem_readonly{job="node-exporter",fstype!=""} == 0
         )
-      for: 1h
+      for: 2m
       labels:
         severity: warning
     - alert: NodeFilesystemSpaceFillingUp
@@ -43,12 +62,12 @@ spec:
         and
           node_filesystem_readonly{job="node-exporter",fstype!=""} == 0
         )
-      for: 1h
+      for: 2m
       labels:
         severity: critical
     - alert: NodeFilesystemAlmostOutOfSpace
       annotations:
-        description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left.
+        description: Filesystem {{ $labels.mountpoint }} on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left.
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemalmostoutofspace
         summary: Filesystem has less than 5% space left.
       expr: |
@@ -57,12 +76,12 @@ spec:
         and
           node_filesystem_readonly{job="node-exporter",fstype!=""} == 0
         )
-      for: 30m
+      for: 2m
       labels:
         severity: warning
     - alert: NodeFilesystemAlmostOutOfSpace
       annotations:
-        description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left.
+        description: Filesystem {{ $labels.mountpoint }} on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left.
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemalmostoutofspace
         summary: Filesystem has less than 3% space left.
       expr: |
@@ -71,12 +90,12 @@ spec:
         and
           node_filesystem_readonly{job="node-exporter",fstype!=""} == 0
         )
-      for: 30m
+      for: 2m
       labels:
         severity: critical
     - alert: NodeFilesystemFilesFillingUp
       annotations:
-        description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left and is filling up.
+        description: Filesystem {{ $labels.mountpoint }} on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left and is filling up.
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemfilesfillingup
         summary: Filesystem is predicted to run out of inodes within the next 24 hours.
       expr: |
@@ -87,12 +106,12 @@ spec:
         and
           node_filesystem_readonly{job="node-exporter",fstype!=""} == 0
         )
-      for: 1h
+      for: 2m
       labels:
         severity: warning
     - alert: NodeFilesystemFilesFillingUp
       annotations:
-        description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left and is filling up fast.
+        description: Filesystem {{ $labels.mountpoint }} on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left and is filling up fast.
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemfilesfillingup
         summary: Filesystem is predicted to run out of inodes within the next 4 hours.
       expr: |
@@ -103,12 +122,12 @@ spec:
         and
           node_filesystem_readonly{job="node-exporter",fstype!=""} == 0
         )
-      for: 1h
+      for: 2m
       labels:
         severity: critical
     - alert: NodeFilesystemAlmostOutOfFiles
       annotations:
-        description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left.
+        description: Filesystem {{ $labels.mountpoint }} on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left.
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemalmostoutoffiles
         summary: Filesystem has less than 5% inodes left.
       expr: |
@@ -117,12 +136,12 @@ spec:
         and
           node_filesystem_readonly{job="node-exporter",fstype!=""} == 0
         )
-      for: 1h
+      for: 2m
       labels:
         severity: warning
     - alert: NodeFilesystemAlmostOutOfFiles
       annotations:
-        description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left.
+        description: Filesystem {{ $labels.mountpoint }} on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left.
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemalmostoutoffiles
         summary: Filesystem has less than 3% inodes left.
       expr: |
@@ -131,7 +150,7 @@ spec:
         and
           node_filesystem_readonly{job="node-exporter",fstype!=""} == 0
         )
-      for: 1h
+      for: 2m
       labels:
         severity: critical
     - alert: NodeNetworkReceiveErrs
