@@ -5436,7 +5436,8 @@ items:
         "editable": true,
         "fiscalYearStartMonth": 0,
         "graphTooltip": 0,
-        "iteration": 1660301931476,
+        "id": 70,
+        "iteration": 1666255940211,
         "links": [],
         "liveNow": false,
         "panels": [
@@ -5691,7 +5692,7 @@ items:
                     "spanNulls": true,
                     "stacking": {
                     "group": "A",
-                    "mode": "normal"
+                    "mode": "none"
                     },
                     "thresholdsStyle": {
                     "mode": "off"
@@ -5787,7 +5788,7 @@ items:
                     "spanNulls": true,
                     "stacking": {
                     "group": "A",
-                    "mode": "normal"
+                    "mode": "none"
                     },
                     "thresholdsStyle": {
                     "mode": "off"
@@ -5993,7 +5994,7 @@ items:
                     "spanNulls": true,
                     "stacking": {
                     "group": "A",
-                    "mode": "normal"
+                    "mode": "none"
                     },
                     "thresholdsStyle": {
                     "mode": "off"
@@ -6061,7 +6062,7 @@ items:
             "list": [
             {
                 "current": {
-                "selected": true,
+                "selected": false,
                 "text": "victoriametrics",
                 "value": "victoriametrics"
                 },
@@ -6146,7 +6147,7 @@ items:
             ]
         },
         "time": {
-            "from": "now-3h",
+            "from": "now-12h",
             "to": "now"
         },
         "timepicker": {
