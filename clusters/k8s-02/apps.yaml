@@ -12,7 +12,7 @@ spec:
     kind: GitRepository
     name: flux-system
   path: ./apps/clusters/k8s-02
-  prune: true # remove stale resources from cluster
+  prune: false # remove stale resources from cluster
   wait: true # wait for all applied resources to become ready
   timeout: 3m0s # give up waiting after three minutes
   retryInterval: 2m0s # retry every two minutes on apply or waiting failures
