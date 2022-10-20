@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: monitoring
+resources:
+  - kube-prometheus-prometheusRule.yaml
+  - kubernetes-kubeControllerManagerPrometheusDiscoveryService.yaml
+  - kubernetes-kubeSchedulerPrometheusDiscoveryService.yaml
+  - kubernetes-prometheusRule.yaml
+  - prometheus-clusterRole.yaml
+  - prometheus-clusterRoleBinding.yaml
+  - prometheus-operator-prometheusRule.yaml
+  - prometheus-operator-serviceMonitor.yaml
+  - prometheus-podDisruptionBudget.yaml
+  - prometheus-prometheus.yaml
+  - prometheus-prometheusRule.yaml
+  - prometheus-roleBindingConfig.yaml
+  - prometheus-roleConfig.yaml
+  - prometheus-service.yaml
+  - prometheus-serviceAccount.yaml
+  - prometheus-serviceMonitor.yaml

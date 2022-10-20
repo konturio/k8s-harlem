@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: monitoring
+resources:
+  - kubernetes-serviceMonitorApiserver.yaml
+  - kubernetes-serviceMonitorCoreDNS.yaml
+  - kubernetes-serviceMonitorKubeControllerManager.yaml
+  - kubernetes-serviceMonitorKubeScheduler.yaml
+  - kubernetes-serviceMonitorKubelet.yaml
