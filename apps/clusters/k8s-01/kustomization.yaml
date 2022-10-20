@@ -22,6 +22,9 @@ patchesStrategicMerge:
   - vmcluster/vmcluster-crd.yaml
   - flux/alerts.yaml
   - prometheus/prometheus-prometheus.yaml
+  - grafana/grafana-prometheusRule.yaml
+  - grafana/grafana-storage-pvc.yaml
+  - grafana/grafana-ingress.yaml
   # - cert-manager/cluster_issuer_letsencrypt_prod.yaml
   # - cert-manager/cluster_issuer_letsencrypt_stage.yaml
   # - cert-manager/release.yaml
