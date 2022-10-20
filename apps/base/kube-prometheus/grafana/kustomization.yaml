@@ -11,3 +11,4 @@ resources:
   - grafana-serviceAccount.yaml
   - grafana-serviceMonitor.yaml
   - grafana-storage-pvc.yaml
+  - grafana-ingress.yaml
