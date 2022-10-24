@@ -546,12 +546,22 @@ spec:
     rules:
     - alert: KubeNodeNotReady
       annotations:
-        description: '{{ $labels.node }} has been unready for more than 2 minutes.'
+        description: '{{ $labels.node }} has been unready for more than 1 minute.'
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodenotready
         summary: Node is not ready.
       expr: |
         kube_node_status_condition{job="kube-state-metrics",condition="Ready",status="true"} == 0
-      for: 2m
+      for: 1m
+      labels:
+        severity: critical
+    - alert: KubeCondition
+      annotations:
+        description: '{{ $labels.node }} is in {{ $labels.condition }} condition'
+        runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodenotready
+        summary: Node is not ready.
+      expr: |
+        kube_node_status_condition{condition!="Ready",status="true"} == 1
+      for: 1m
       labels:
         severity: critical
     - alert: KubeNodeUnreachable
