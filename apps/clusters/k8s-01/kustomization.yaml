@@ -2,15 +2,29 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ../../base/vmcluster
-  - ../../base/kube-prometheus
+  - ../../base/kube-prometheus/_custom_rules
+  - ../../base/kube-prometheus/alertmanager
+  - ../../base/kube-prometheus/blackbox-exporter
+  - ../../base/kube-prometheus/grafana
+  - ../../base/kube-prometheus/kube-state-metrics
+  - ../../base/kube-prometheus/kubernetes-servicemonitors
+  - ../../base/kube-prometheus/node-exporter
+  - ../../base/kube-prometheus/prometheus
+  - ../../base/kube-prometheus/prometheus-adapter
+  - ../../base/kube-prometheus/victoriametrics  
   - ../../base/postgres-exporter
   - ../../base/fluentbit
   - ../../base/flux
-  - ../../base/cert-manager
+  # - ../../base/cert-manager
   - ../../base/open-telemetry
   - flux/podmonitor.yaml
 patchesStrategicMerge:
   - vmcluster/vmcluster-crd.yaml
   - flux/alerts.yaml
-  - cert-manager/cluster_issuer_letsencrypt_prod.yaml
-  - cert-manager/cluster_issuer_letsencrypt_stage.yaml
+  - prometheus/prometheus-prometheus.yaml
+  - grafana/grafana-prometheusRule.yaml
+  - grafana/grafana-storage-pvc.yaml
+  - grafana/grafana-ingress.yaml
+  # - cert-manager/cluster_issuer_letsencrypt_prod.yaml
+  # - cert-manager/cluster_issuer_letsencrypt_stage.yaml
+  # - cert-manager/release.yaml

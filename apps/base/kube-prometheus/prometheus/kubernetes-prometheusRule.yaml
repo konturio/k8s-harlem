@@ -546,12 +546,12 @@ spec:
     rules:
     - alert: KubeNodeNotReady
       annotations:
-        description: '{{ $labels.node }} has been unready for more than 5 minutes.'
+        description: '{{ $labels.node }} has been unready for more than 2 minutes.'
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodenotready
         summary: Node is not ready.
       expr: |
         kube_node_status_condition{job="kube-state-metrics",condition="Ready",status="true"} == 0
-      for: 5m
+      for: 2m
       labels:
         severity: critical
     - alert: KubeNodeUnreachable
@@ -561,9 +561,9 @@ spec:
         summary: Node is unreachable.
       expr: |
         (kube_node_spec_taint{job="kube-state-metrics",key="node.kubernetes.io/unreachable",effect="NoSchedule"} unless ignoring(key,value) kube_node_spec_taint{job="kube-state-metrics",key=~"ToBeDeletedByClusterAutoscaler|cloud.google.com/impending-node-termination|aws-node-termination-handler/spot-itn"}) == 1
-      for: 15m
+      for: 2m
       labels:
-        severity: warning
+        severity: critical
     - alert: KubeletTooManyPods
       annotations:
         description: Kubelet '{{ $labels.node }}' is running at {{ $value | humanizePercentage }} of its Pod capacity.
@@ -582,12 +582,12 @@ spec:
         severity: info
     - alert: KubeNodeReadinessFlapping
       annotations:
-        description: The readiness status of node {{ $labels.node }} has changed {{ $value }} times in the last 15 minutes.
+        description: The readiness status of node {{ $labels.node }} has changed {{ $value }} times in the last 5 minutes.
         runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodereadinessflapping
         summary: Node readiness status is flapping.
       expr: |
-        sum(changes(kube_node_status_condition{status="true",condition="Ready"}[15m])) by (node) > 2
-      for: 15m
+        sum(changes(kube_node_status_condition{status="true",condition="Ready"}[5m])) by (node) > 2
+      for: 5m
       labels:
         severity: warning
     - alert: KubeletPlegDurationHigh

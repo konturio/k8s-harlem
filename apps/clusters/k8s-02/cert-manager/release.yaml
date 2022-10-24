@@ -1,19 +1,18 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: default
-  namespace: default
+  name: cert-manager
+  namespace: cert-manager
 spec:
   suspend: false
   chart:
     spec:
-      chart: nginx-ingress
-      version: 0.15.0
+      chart: cert-manager
+      version: v1.6.3
       sourceRef:
         kind: HelmRepository
-        name: nginx-ingress
+        name: jetstack
         namespace: flux-system
   interval: 10m
   values:
-    controller:
-      replicaCount: 2
+    logLevel: 6

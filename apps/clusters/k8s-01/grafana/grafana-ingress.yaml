@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.org/location-snippets: |
+      location /api/live/ {
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header Host $http_host;
+        proxy_pass http://grafana.monitoring.svc.cluster.local:3000;
+      }
+  name: grafana02-kontur-io
+  namespace: monitoring
+spec:
+  rules:
+  - host: grafana02.kontur.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: grafana
+            port:
+              number: 3000
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - grafana02.kontur.io
+    secretName: grafana02-kontur-io-tls

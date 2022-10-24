@@ -19,3 +19,4 @@ patchesStrategicMerge:
   - local-path-provisioner/configmap.yaml
   - local-path-provisioner/deployment.yaml
   - metallb/release.yaml
+  - nginx-ingress/release.yaml
