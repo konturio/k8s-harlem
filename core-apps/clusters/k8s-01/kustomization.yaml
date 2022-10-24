@@ -11,10 +11,12 @@ resources:
   - ../../base/local-path-provisioner
   - ../../base/calico
   - ../../base/nginx-ingress
+  - ../../base/metallb
   - ../../base/cert-manager-crds
 patchesStrategicMerge:
   - victoriametrics-operator/release.yaml
   - kube-prometheus-operator/prometheus-operator-deployment.yaml
   - local-path-provisioner/configmap.yaml
   - local-path-provisioner/deployment.yaml
+  - metallb/release.yaml
   - nginx-ingress/release.yaml

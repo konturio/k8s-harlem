@@ -1,0 +1,17 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: metallb
+spec:
+  chart:
+    spec:
+      chart: metallb
+      version: v0.11.0
+  values:
+    configInline:
+      address-pools:
+        - name: default
+          protocol: layer2
+          avoid-buggy-ips: true
+          addresses:
+            - 46.4.70.177/32
