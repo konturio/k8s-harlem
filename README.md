@@ -42,7 +42,7 @@ The Kustomization custom resource represents a local set of Kubernetes resources
 
 Each cluster state is defined in a dedicated dir e.g. `clusters/production` where the specific apps and infrastructure overlays are referenced.
 
->The separation between apps and infrastructure makes it possible to define the order in which a cluster is reconciled, e.g. first the cluster addons and other >Kubernetes controllers, then the applications.
+>The separation between apps and infrastructure makes it possible to define the order in which a cluster is reconciled, e.g. first the cluster add-ons and other >Kubernetes controllers, then the applications.
 
 ```
 ├── apps
@@ -83,7 +83,7 @@ The `apps` configuration is structured into:
 The `core-apps` configuration is structured into:
 - **core-apps/base/** dir contains common k8s manifests and Helm release definitions
 - **core-apps/clusters/** dir contains custom apps patches from `base` folder for particular cluster and namespace definitions
-- **core-apps/sources/** dir contains HelmRepository source definitions
+- **core-apps/sources/** dir contains known Source's for Source Controller, e.g., HelmRepository, GitRepository, etc.
 ```
 .
 .
