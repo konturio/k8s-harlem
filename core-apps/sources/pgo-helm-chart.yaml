@@ -14,4 +14,4 @@ spec:
   ref:
     branch: main
   timeout: 60s
-  url: 'https://github.com/konturio/task13066.git'
+  url: 'https://github.com/CrunchyData/postgres-operator-examples'
