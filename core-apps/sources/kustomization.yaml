@@ -9,4 +9,4 @@ resources:
   - open-telemetry.yaml
   - metallb.yaml
   - calico.yaml
-  - pgo-helm-chart.yaml
+  # - pgo-helm-chart.yaml

@@ -8,6 +8,7 @@ spec:
   chart:
     spec:
       chart: ./helm/install
+      version: 0.6.0
       valuesFiles:
         - ./helm/install/values.yaml
       reconcileStrategy: Revision
