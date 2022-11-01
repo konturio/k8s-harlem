@@ -18,9 +18,9 @@ spec:
         namespace: flux-system
       interval: 30m
   values:
-    debug: 'false'
-    singleNamespace: 'false'
-    disable_check_for_upgrades: 'false'
+    debug: false
+    singleNamespace: false
+    disable_check_for_upgrades: false
 
     # archive_mode: 'true'
     # archive_timeout: '60'
