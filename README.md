@@ -37,7 +37,7 @@ The Kustomization custom resource represents a local set of Kubernetes resources
 
 ## Repository structure
 - **apps** dir contains Helm releases and k8s manifests with a custom configuration per cluster
-- **core-apps** dir contains Helm releases and k8s manifests for common toolsm which should be provisioned first. For example, `vmcluster` from `apps` has a dependency on `local-path-provisioner` from `core-apps`
+- **core-apps** dir contains Helm releases and k8s manifests for common tools, which should be provisioned first. For example, `vmcluster` from `apps` has a dependency on `local-path-provisioner` from `core-apps`
 - **clusters** dir contains the Flux configuration per cluster
 
 Each cluster state is defined in a dedicated dir e.g. `clusters/production` where the specific apps and infrastructure overlays are referenced.
