@@ -10,8 +10,8 @@ Flux GitOps repository
 - [Installation](#installation)
 - [Notifications](#notifications)
 - [FAQ](#faq)
-  * [How can I safely move resources from one dir to another?](#How can I safely move resources from one dir to another?)
-  * [Useful commands](Useful commands)
+  * [How can I safely move resources from one dir to another?](#how-can-i-safely-move-resources-from-one-dir-to-another)
+  * [Useful commands](#useful-commands)
 
 This repository stores Kubernetes manifests, which are synced and applied to the clusters every N minutes via Flux - https://fluxcd.io/
 
