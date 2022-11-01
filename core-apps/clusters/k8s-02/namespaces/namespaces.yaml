@@ -33,6 +33,6 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: pgo
+  name: postgres-operator
   annotations:
     kustomize.toolkit.fluxcd.io/prune: disabled
