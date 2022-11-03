@@ -14,7 +14,7 @@ resources:
   - ../../base/metallb
   - ../../base/tigera-operator
   - ../../base/kube-prometheus-operator
-  - ../../base/postgres-operator
+  # - ../../base/postgres-operator
 patchesStrategicMerge:
   - victoriametrics-operator/release.yaml
   - local-path-provisioner/configmap.yaml
