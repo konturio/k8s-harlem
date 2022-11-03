@@ -18,6 +18,6 @@ spec:
         namespace: flux-system
       interval: 30m
   values:
-    debug: false
+    debug: true
     singleNamespace: false
     disable_check_for_upgrades: false
