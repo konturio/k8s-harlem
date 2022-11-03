@@ -22,7 +22,7 @@ spec:
             - --debug
             - start
             - --config
-            - /etc/config/config.json
+            - /etc/config/config-regular.json
             - --provisioner-name
             - local-path-regular
           volumeMounts:
