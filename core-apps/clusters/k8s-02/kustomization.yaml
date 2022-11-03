@@ -16,6 +16,7 @@ resources:
   - ../../base/kube-prometheus-operator
   - ../../base/postgres-operator
   - ../../base/local-path-provisioner-regular
+  - ../../base/local-path-provisioner-fast
 patchesStrategicMerge:
   - victoriametrics-operator/release.yaml
   - local-path-provisioner/configmap.yaml
@@ -26,3 +27,5 @@ patchesStrategicMerge:
   - kube-prometheus-operator/prometheus-operator-deployment.yaml
   - local-path-provisioner-regular/configmap.yaml
   - local-path-provisioner-regular/deployment.yaml
+  - local-path-provisioner-fast/configmap.yaml
+  - local-path-provisioner-fast/deployment.yaml
