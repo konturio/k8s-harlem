@@ -15,6 +15,7 @@ resources:
   - ../../base/tigera-operator
   - ../../base/kube-prometheus-operator
   - ../../base/postgres-operator
+  - ../../base/local-path-provisioner-regular
 patchesStrategicMerge:
   - victoriametrics-operator/release.yaml
   - local-path-provisioner/configmap.yaml
@@ -23,3 +24,5 @@ patchesStrategicMerge:
   - metallb/release.yaml
   - tigera-operator/release.yaml
   - kube-prometheus-operator/prometheus-operator-deployment.yaml
+  - local-path-provisioner-regular/configmap.yaml
+  - local-path-provisioner-regular/deployment.yaml

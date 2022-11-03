@@ -1,0 +1,7 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-path-regular
+provisioner: rancher.io/local-path-regular
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Delete
