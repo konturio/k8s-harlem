@@ -1,17 +1,15 @@
-# FIXME do not forget to remove if PGO Helm installer is not used
-
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:
-  name: pgo-helm-chart
+  name: pgo-kustomize-installer
   namespace: flux-system
 spec:
   gitImplementation: go-git
   ignore: |
     /*
-    !/helm/install
-    /helm/install/**/.gitignore
-    /helm/install/**/.gitattributes
+    !/kustomize
+    /kustomize/**/.gitignore
+    /kustomize/**/.gitattributes
   interval: 1m0s
   ref:
     # branch: main

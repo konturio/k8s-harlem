@@ -1,23 +1,43 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
 metadata:
   name: postgres-operator
-  namespace: default
 spec:
-  interval: 5m
-  chart:
-    spec:
-      chart: ./helm/install
-      version: 0.6.0
-      valuesFiles:
-        - ./helm/install/values.yaml
-      reconcileStrategy: Revision
-      sourceRef:
-        kind: GitRepository
-        name: pgo-helm-chart
-        namespace: flux-system
-      interval: 30m
-  values:
-    debug: false
-    singleNamespace: false
-    disable_check_for_upgrades: false
+  force: false
+  healthChecks:
+  - apiVersion: apps/v1
+    kind: Deployment
+    name: pgo
+    namespace: postgres-operator
+  interval: 30m
+  path: ./kustomize/install/default
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: pgo-kustomize-installer
+    namespace: flux-system
+  timeout: 2m
+
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: postgres-operator
+#   namespace: default
+# spec:
+#   interval: 5m
+#   chart:
+#     spec:
+#       chart: ./helm/install
+#       version: 0.6.0
+#       valuesFiles:
+#         - ./helm/install/values.yaml
+#       reconcileStrategy: Revision
+#       sourceRef:
+#         kind: GitRepository
+#         name: pgo-helm-chart
+#         namespace: flux-system
+#       interval: 30m
+#   values:
+#     debug: true
+#     singleNamespace: false
+#     disable_check_for_upgrades: false
