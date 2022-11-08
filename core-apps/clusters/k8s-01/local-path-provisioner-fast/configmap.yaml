@@ -9,7 +9,7 @@ data:
             "nodePathMap":[
             {
                     "node":"DEFAULT_PATH_FOR_NON_LISTED_NODES",
-                    "paths":["/mnt/local-path-provisioner-fast"]
+                    "paths":["/opt/local-path-provisioner"]
             }
             ]
     }
