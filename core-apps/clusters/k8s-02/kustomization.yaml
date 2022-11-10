@@ -14,7 +14,7 @@ resources:
   - ../../base/metallb
   - ../../base/tigera-operator
   - ../../base/kube-prometheus-operator
-  - ../../base/postgres-operator
+  # - ../../base/postgres-operator
   - ../../base/local-path-provisioner-regular
   - ../../base/local-path-provisioner-fast
 patchesStrategicMerge:
