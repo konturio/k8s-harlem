@@ -24,7 +24,7 @@ spec:
             - --config
             - /etc/config/config-fast.json
             - --provisioner-name
-            - local-path-fast
+            - rancher.io/local-path-fast
           volumeMounts:
             - name: config-volume
               mountPath: /etc/config/

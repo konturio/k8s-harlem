@@ -4,7 +4,7 @@ metadata:
   name: local-path-config-regular
   namespace: local-path-storage
 data:
-  config-regular.json: |-
+  config.json: |-
     {
             "nodePathMap":[
             {

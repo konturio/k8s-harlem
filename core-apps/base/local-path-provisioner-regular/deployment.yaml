@@ -24,7 +24,7 @@ spec:
             - --config
             - /etc/config/config-regular.json
             - --provisioner-name
-            - local-path-regular
+            - rancher.io/local-path-regular
           volumeMounts:
             - name: config-volume
               mountPath: /etc/config/

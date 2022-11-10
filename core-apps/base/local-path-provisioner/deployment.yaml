@@ -15,7 +15,7 @@ spec:
       serviceAccountName: local-path-provisioner-service-account
       containers:
         - name: local-path-provisioner
-          image: rancher/local-path-provisioner:v0.0.22
+          image: rancher/local-path-provisioner:v0.0.23
           imagePullPolicy: IfNotPresent
           command:
             - local-path-provisioner
@@ -23,6 +23,8 @@ spec:
             - start
             - --config
             - /etc/config/config.json
+            - --provisioner-name
+            - rancher.io/local-path
           volumeMounts:
             - name: config-volume
               mountPath: /etc/config/
