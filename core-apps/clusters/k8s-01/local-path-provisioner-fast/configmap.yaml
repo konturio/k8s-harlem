@@ -4,7 +4,7 @@ metadata:
   name: local-path-config-fast
   namespace: local-path-storage
 data:
-  config-fast.json: |-
+  config.json: |-
     {
             "nodePathMap":[
             {

@@ -22,7 +22,7 @@ spec:
             - --debug
             - start
             - --config
-            - /etc/config/config-fast.json
+            - /etc/config/config.json
             - --provisioner-name
             - rancher.io/local-path-fast
           volumeMounts:

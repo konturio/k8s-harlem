@@ -22,7 +22,7 @@ spec:
             - --debug
             - start
             - --config
-            - /etc/config/config-regular.json
+            - /etc/config/config.json
             - --provisioner-name
             - rancher.io/local-path-regular
           volumeMounts:
