@@ -13,6 +13,6 @@ spec:
   interval: 1m0s
   ref:
     # branch: main
-    commit: 206cc6aa0aa148133d3147d286f9b3c68b820ffb
+    #commit: 206cc6aa0aa148133d3147d286f9b3c68b820ffb
   timeout: 60s
   url: 'https://github.com/konturio/postgres-operator-examples'

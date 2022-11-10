@@ -1,0 +1,9 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: pgo-kustomize-installer
+  namespace: flux-system
+spec:
+  ref:
+    branch: main
+  timeout: 61s

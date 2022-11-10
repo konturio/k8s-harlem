@@ -29,3 +29,4 @@ patchesStrategicMerge:
   - local-path-provisioner-regular/deployment.yaml
   - local-path-provisioner-fast/configmap.yaml
   - local-path-provisioner-fast/deployment.yaml
+  - postgres-operator/source.yaml
