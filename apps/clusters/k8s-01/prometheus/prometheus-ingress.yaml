@@ -1,0 +1,8 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    # nginx.org/basic-auth-secret: prometheus-k8s-passwd
+    # nginx.org/basic-auth-realm: Prometheus k8s
+  name: prometheus-ingress
+  namespace: monitoring
