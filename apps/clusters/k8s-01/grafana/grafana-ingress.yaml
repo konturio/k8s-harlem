@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: grafana02-kontur-io
+  namespace: monitoring
 spec:
   rules:
     - host: grafana02.kontur.io
