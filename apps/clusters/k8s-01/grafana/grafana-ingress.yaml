@@ -6,6 +6,15 @@ metadata:
 spec:
   rules:
     - host: grafana02.kontur.io
+      http:
+        paths:
+          - backend:
+              service:
+                name: grafana
+                port:
+                  number: 3000
+            path: /
+            pathType: Prefix
   tls:
     - hosts:
         - grafana02.kontur.io
