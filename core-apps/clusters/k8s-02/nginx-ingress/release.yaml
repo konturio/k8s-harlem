@@ -4,16 +4,6 @@ metadata:
   name: default
   namespace: default
 spec:
-  suspend: false
   chart:
     spec:
-      chart: nginx-ingress
-      version: 0.15.0
-      sourceRef:
-        kind: HelmRepository
-        name: nginx-ingress
-        namespace: flux-system
-  interval: 10m
-  values:
-    controller:
-      replicaCount: 2
+      version: 0.15.1
