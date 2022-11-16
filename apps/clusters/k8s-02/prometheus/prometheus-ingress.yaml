@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.org/basic-auth-secret: prometheus-k8s-passwd
+    nginx.org/basic-auth-realm: Prometheus k8s
+  name: prometheus-k8s
+  namespace: monitoring
+spec:
+  rules:
+    - host: prometheus02.k8s-02.konturlabs.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: prometheus-k8s
+                port:
+                  name: web
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - prometheus02.k8s-02.konturlabs.com
+      secretName: prometheus02-k8s-02-konturlabs-com-tls
