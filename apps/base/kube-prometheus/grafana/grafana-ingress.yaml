@@ -16,6 +16,7 @@ metadata:
   name: grafana02-kontur-io
   namespace: monitoring
 spec:
+  ingressClassName: nginx
   rules:
     - host: grafana02.kontur.io
       http:
