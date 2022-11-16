@@ -22,6 +22,6 @@ patchesStrategicMerge:
   - grafana/grafana-ingress.yaml
   - grafana/grafana-prometheusRule.yaml
   - grafana/grafana-storage-pvc.yaml
-  - prometheus/prometheus-ingress.yaml
+  # - prometheus/prometheus-ingress.yaml
   - prometheus/prometheus-prometheus.yaml
   - vmcluster/vmcluster-crd.yaml
