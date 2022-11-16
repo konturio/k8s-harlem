@@ -8,7 +8,7 @@ resources:
   - kubernetes-prometheusRule.yaml
   - prometheus-clusterRole.yaml
   - prometheus-clusterRoleBinding.yaml
-  # - prometheus-ingress.yaml
+  - prometheus-ingress.yaml
   - prometheus-operator-prometheusRule.yaml
   - prometheus-operator-serviceMonitor.yaml
   - prometheus-podDisruptionBudget.yaml
