@@ -6,8 +6,8 @@ metadata:
 spec:
   chart:
     spec:
-      values:
-        image:
-          repository: 'nexus.kontur.io:8084/konturdev/nginx-ingress'
-          tag: 2.4.2-kontur-mainline
       version: 0.15.2
+  values:
+    image:
+      repository: 'nexus.kontur.io:8084/konturdev/nginx-ingress'
+      tag: 2.4.2-kontur-mainline
