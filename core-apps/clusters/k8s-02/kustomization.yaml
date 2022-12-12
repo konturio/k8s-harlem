@@ -18,6 +18,7 @@ resources:
   - ../../base/local-path-provisioner-fast
   - ../../base/postgres-operator
   - ../../base/resource-quota/dev-insights-api
+
 patchesStrategicMerge:
   - victoriametrics-operator/release.yaml
   - local-path-provisioner/configmap.yaml

@@ -6,4 +6,11 @@ metadata:
 spec:
   chart:
     spec:
-      version: 0.15.1
+      version: 0.15.2
+  values:
+    controller:
+      image:
+        repository: 'nexus.kontur.io:8084/konturdev/nginx-ingress'
+        tag: 2.4.2-kontur-mainline
+        pullPolicy: Always
+      replicaCount: 1
