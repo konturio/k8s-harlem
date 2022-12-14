@@ -18,7 +18,8 @@ spec:
   interval: 10m
   suspend: false
   upgrade:
-    crds: CreateReplace # Create new CRDs, update (replace) existing ones, but do not delete CRDs which no longer exist in the current helm release.
+    # Create new CRDs, update (replace) existing ones, but do not delete CRDs which no longer exist in the current helm release.
+    crds: CreateReplace
   values:
     controller:
       config:
@@ -34,13 +35,10 @@ spec:
       image:
         repository: 'nexus.kontur.io:8084/konturdev/nginx-ingress'
         tag: 2.4.2-kontur-mainline
-
       # The Ingress Controller processes all the resources that do not have the "ingressClassName" field for all versions of kubernetes.
       ingressClass: nginx
       # The number of replicas of the Ingress controller deployment.
       replicaCount: 2
-
-
       service:
         # The annotations of the Ingress Controller service.
         annotations:
