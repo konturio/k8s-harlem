@@ -6,11 +6,11 @@ spec:
   limits:
   - type: PersistentVolumeClaim
     max:
-      storage: "100Gi"
+      storage: "50Gi" # maximum storage request size
   - type: Container
-    default: 
+    default: # define default limits
       cpu: 1
       memory: 1Gi
-    defaultRequest:
+    defaultRequest: # define default requests
       cpu: 0.1
       memory: 100Mi
