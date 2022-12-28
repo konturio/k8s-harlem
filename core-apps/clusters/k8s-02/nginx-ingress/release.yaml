@@ -9,8 +9,16 @@ spec:
       version: 0.15.2
   values:
     controller:
+      config:
+        entries:
+          http-snippets: |
+            include CORS_01_http.inc.conf;
+          main-snippets: |
+            pcre_jit on;
+            load_module /usr/lib/nginx/modules/ngx_http_headers_more_filter_module.so;
+            load_module /usr/lib/nginx/modules/ngx_http_js_module.so;
       image:
         repository: 'nexus.kontur.io:8084/konturdev/nginx-ingress'
         tag: 2.4.2-kontur-mainline
-        pullPolicy: Always
-      replicaCount: 1
+        pullPolicy: Always # DEBUG
+      replicaCount: 1 # DEBUG

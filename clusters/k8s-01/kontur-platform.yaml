@@ -5,13 +5,13 @@ metadata:
   name: kontur-platform
   namespace: flux-system
 spec:
-  suspend: false
   interval: 5m0s
   ref:
     branch: main
   secretRef:
     name: disaster-ninja-cd-auth
-  url: 'ssh://git@github.com/konturio/disaster-ninja-cd.git'
+  suspend: false
+  url: ssh://git@github.com/konturio/disaster-ninja-cd.git
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
@@ -21,12 +21,16 @@ metadata:
 spec:
   force: true # recreate resources on immutable fields changes
   interval: 10m0s # detect drift and undo kubectl edits every 10 minutes
+  path: ./flux/clusters/k8s-01
+  postBuild:
+    substitute:
+      var_substitution_enabled: 'true'
+      k8s_cluster_flavor: k8s-01.kontur.io
+  prune: true # remove stale resources from cluster
+  retryInterval: 2m0s # retry every two minutes on apply or waiting failures
   sourceRef:
     kind: GitRepository
     name: kontur-platform
     namespace: flux-system
-  path: ./flux/clusters/k8s-01
-  prune: true # remove stale resources from cluster
-  wait: true # wait for all applied resources to become ready
   timeout: 3m0s # give up waiting after three minutes
-  retryInterval: 2m0s # retry every two minutes on apply or waiting failures
+  wait: true # wait for all applied resources to become ready
