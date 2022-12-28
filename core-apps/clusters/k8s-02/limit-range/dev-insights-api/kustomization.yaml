@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - ../../../../base/limit-range
 
-namespace: dev-epig
+namespace: dev-insights-api
