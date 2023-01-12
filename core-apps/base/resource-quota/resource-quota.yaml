@@ -8,4 +8,4 @@ spec:
     requests.storage: "100Gi" # cumulative capacity of PVCs
     pods: "50"
     services.loadbalancers: "0" # we have only one service of type LB in cluster for ingress
-    services.nodeports: "0"
+    services.nodeports: "5" # required for cert-manager
