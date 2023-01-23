@@ -8,9 +8,9 @@ spec:
   interval: 60s
   module: http_2xx
   prober:
-    url: https://disaster.ninja
+    url: https://disaster.ninja/active
     scheme: https
-    path: /active
+    path: /probe
   targets:
     staticConfig:
       static: []
