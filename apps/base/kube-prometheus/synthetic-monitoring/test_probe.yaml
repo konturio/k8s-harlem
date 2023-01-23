@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: blackbox-exporter
+  namespace: monitoring
+spec:
+  jobName: https-get
+  interval: 60s
+  module: http_2xx
+  prober:
+    url: https://disaster.ninja
+    scheme: https
+    path: /active
+  targets:
+    staticConfig:
+      static: []
