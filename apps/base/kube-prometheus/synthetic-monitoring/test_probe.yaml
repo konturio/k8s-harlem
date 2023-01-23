@@ -4,13 +4,13 @@ metadata:
   name: blackbox-exporter
   namespace: monitoring
 spec:
-  jobName: https-get
+  jobName: https-get-dn
   interval: 60s
   module: http_2xx
   prober:
-    url: https://disaster.ninja/active
-    scheme: https
+    url: blackbox-exporter.monitoring.svc.cluster.local:19115
+    scheme: http
     path: /probe
   targets:
     staticConfig:
-      static: []
+      static: [https://disaster.ninja/active]
