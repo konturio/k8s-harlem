@@ -13,4 +13,17 @@ spec:
     path: /probe
   targets:
     staticConfig:
-      static: [https://disaster.ninja/active]
+      static:
+        - https://disaster.ninja/active
+
+        - https://apps.kontur.io/userprofile/apps/c5ecc65b-1e7e-4e31-92a4-222fadeaeef0
+        - https://prod-user-profile-api.k8s-01.konturlabs.com/userprofile/apps/c5ecc65b-1e7e-4e31-92a4-222fadeaeef0
+
+        - https://apps.kontur.io/userprofile/features
+        - https://prod-user-profile-api.k8s-01.konturlabs.com/userprofile/features
+
+        - https://apps.kontur.io/userprofile/apps/default_id
+        - https://prod-user-profile-api.k8s-01.konturlabs.com/userprofile/apps/default_id
+
+        - https://apps.kontur.io/userprofile/apps/58851b50-9574-4aec-a3a6-425fa18dcb54
+        - https://prod-user-profile-api.k8s-01.konturlabs.com/userprofile/apps/58851b50-9574-4aec-a3a6-425fa18dcb54
