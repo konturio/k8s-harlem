@@ -1,0 +1,42 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: blackbox-exporter
+  namespace: monitoring
+spec:
+  jobName: https-get-endpoints
+  interval: 60s
+  module: http_2xx
+  prober:
+    url: blackbox-exporter.monitoring.svc.cluster.local:19115
+    scheme: http
+    path: /probe
+  targets:
+    staticConfig:
+      static:
+        - "https://disaster.ninja/active"
+        - "https://disaster.ninja/active/api/apps/default_id"
+        - "https://disaster.ninja/active/api/tiles/bivariate/v1/6/52/27.mvt"
+        - "https://disaster.ninja/active/insights-api/tiles/bivariate/v1/5/24/14.mvt?indicatorsClass=general"
+        - "https://disaster.ninja/active/api/tiles/bivariate/v1/6/50/30.mvt?indicatorsClass=general"
+        - "https://disaster.ninja/active/api/events/?feed=kontur-public"
+
+        - "https://apps.kontur.io/userprofile/apps/c5ecc65b-1e7e-4e31-92a4-222fadeaeef0"
+        - "https://prod-user-profile-api.k8s-01.konturlabs.com/userprofile/apps/c5ecc65b-1e7e-4e31-92a4-222fadeaeef0"
+
+        - "https://apps.kontur.io/userprofile/features"
+        - "https://prod-user-profile-api.k8s-01.konturlabs.com/userprofile/features"
+
+        - "https://apps.kontur.io/userprofile/apps/default_id"
+        - "https://prod-user-profile-api.k8s-01.konturlabs.com/userprofile/apps/default_id"
+
+        - "https://apps.kontur.io/userprofile/apps/58851b50-9574-4aec-a3a6-425fa18dcb54"
+        - "https://prod-user-profile-api.k8s-01.konturlabs.com/userprofile/apps/58851b50-9574-4aec-a3a6-425fa18dcb54"
+        
+        - "https://apps.kontur.io/insights-api/tiles/bivariate/v1/5/24/14.mvt?indicatorsClass=general"
+        - "https://prod-insights-api.k8s-01.konturlabs.com/insights-api/tiles/bivariate/v1/5/24/14.mvt?indicatorsClass=general"
+
+        - "https://api.kontur.io/layers/v2/swagger-ui/index.html"
+        - "https://prod-layers-api.k8s-01.konturlabs.com/layers/v2/swagger-ui/index.html"
+
+        - "https://keycloak01.kontur.io"
