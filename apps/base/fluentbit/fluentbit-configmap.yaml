@@ -105,3 +105,4 @@ data:
         Include_Tag_Key true
         Tag_Key tags
         Index logstash
+        Workers 1
