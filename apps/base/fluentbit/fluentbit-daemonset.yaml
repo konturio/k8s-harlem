@@ -37,7 +37,7 @@ spec:
             type: ''
       containers:
         - name: fluent-bit
-          image: cr.fluentbit.io/fluent/fluent-bit:1.9.3
+          image: cr.fluentbit.io/fluent/fluent-bit:2.0.8
           ports:
             - name: http
               containerPort: 2020
