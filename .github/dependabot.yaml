@@ -1,0 +1,121 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+registries:
+  dockerhub: # Define access for a private registry
+    type: docker-registry
+    url: https://nexus.kontur.io
+    username: #username
+    password: ${{secrets.NEXUS_PASSWORD}}
+updates:
+  - package-ecosystem: "docker"
+    directory: "/apps/base/fluentbit/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/apps/base/kube-prometheus/alertmanager/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/apps/base/kube-prometheus/blackbox-exporter/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/apps/base/kube-prometheus/grafana/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/apps/base/kube-prometheus/kube-state-metrics/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/apps/base/kube-prometheus/node-exporter/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/apps/base/kube-prometheus/prometheus/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/apps/base/kube-prometheus/prometheus-adapter/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/apps/clusters/k8s-01/prometheus/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/apps/clusters/k8s-02/prometheus/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/clusters/k8s-01/flux-system/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/clusters/k8s-02/flux-system/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/core-apps/base/kube-prometheus-operator/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/core-apps/base/local-path-provisioner/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/core-apps/base/local-path-provisioner-fast/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/core-apps/base/local-path-provisioner-regular/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/core-apps/base/nginx-ingress/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/core-apps/clusters/k8s-01/kube-prometheus-operator/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/core-apps/clusters/k8s-01/local-path-provisioner/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/core-apps/clusters/k8s-01/local-path-provisioner-fast/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/core-apps/clusters/k8s-01/local-path-provisioner-regular/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/core-apps/clusters/k8s-01/nginx-ingress/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/core-apps/clusters/k8s-02/kube-prometheus-operator/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/core-apps/clusters/k8s-02/local-path-provisioner/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/core-apps/clusters/k8s-02/local-path-provisioner-fast/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/core-apps/clusters/k8s-02/local-path-provisioner-regular/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "docker"
+    directory: "/core-apps/clusters/k8s-02/nginx-ingress/"
+    schedule:
+      interval: "weekly"
