@@ -6,11 +6,17 @@ metadata:
 spec:
   providerRef:
     name: slack
-  eventSeverity: info
+  eventSeverity: info # when the value is set to info, all events are forwarded to the alert provider API, including errors
   eventSources:
     - kind: GitRepository
       name: '*'
     - kind: Kustomization
+      name: '*'
+    - kind: HelmRepository
+      name: '*'
+    - kind: HelmChart
+      name: '*'
+    - kind: HelmRelease
       name: '*'
   # https://github.com/fluxcd/kustomize-controller/issues/492#issuecomment-1195300509
   exclusionList:
