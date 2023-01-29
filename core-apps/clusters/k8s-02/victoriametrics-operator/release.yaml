@@ -4,6 +4,10 @@ metadata:
   name: vmoperator
   namespace: monitoring
 spec:
+  chart:
+    spec:
+      chart: victoria-metrics-operator
+      version: 0.11.0
   values:
     resources:
       limits:
