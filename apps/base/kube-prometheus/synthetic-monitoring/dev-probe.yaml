@@ -21,6 +21,7 @@ spec:
         - "https://test-apps-ninja02.konturlabs.com/active/insights-api/tiles/bivariate/v1/5/24/14.mvt?indicatorsClass=general"
         - "https://test-apps-ninja02.konturlabs.com/active/api/tiles/bivariate/v1/6/50/30.mvt?indicatorsClass=general"
         - "https://test-apps-ninja02.konturlabs.com/active/api/events/?feed=kontur-public"
+        - "https://test-apps-ninja02.konturlabs.com/active/api/events/user_feeds"
 
         - "https://test-apps02.konturlabs.com/userprofile/apps"
         - "https://dev-user-profile-api.k8s-01.konturlabs.com/userprofile/apps"
