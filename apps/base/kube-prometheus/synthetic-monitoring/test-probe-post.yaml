@@ -1,0 +1,19 @@
+# https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#monitoring.coreos.com/v1.Probe
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: test-blackbox-exporter-post
+  namespace: monitoring
+spec:
+  jobName: test-https-post-endpoints
+  interval: 120s
+  module: http_post_custom
+  prober:
+    url: blackbox-exporter.monitoring.svc.cluster.local:19115
+    scheme: http
+    path: /probe
+  targets:
+    staticConfig:
+      static:
+        - "https://test-apps02.konturlabs.com/insights-api/graphql"
+
