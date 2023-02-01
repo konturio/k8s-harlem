@@ -4,4 +4,5 @@ namespace: monitoring
 resources:
   - probes.yaml
   - dev-probe.yaml
-  - additional-scrape-configs-dev-post.yaml
+  - dev-probe-post.yaml
+  # - additional-scrape-configs-dev-post.yaml
