@@ -1,0 +1,9 @@
+# https://github.com/prometheus-operator/prometheus-operator/blob/main/example/additional-scrape-configs/additional-scrape-configs.yaml
+
+apiVersion: v1
+data:
+  prometheus-additional-dev-post.yaml: LSBqb2JfbmFtZTogJ2Rldi1ibGFja2JveC1leHBvcnRlci1wb3N0JwogIG1ldHJpY3NfcGF0aDogL3Byb2JlCiAgcGFyYW1zOgogICAgbW9kdWxlOiBbaHR0cF8yeHhdCiAgc3RhdGljX2NvbmZpZ3M6CiAgICAtIHRhcmdldHM6IFsiaHR0cHM6Ly9nb29nbGUuY29tIiBd
+kind: Secret
+metadata:
+  namespace: monitoring
+  name: additional-scrape-configs-dev-post
