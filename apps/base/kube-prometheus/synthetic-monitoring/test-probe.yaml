@@ -1,0 +1,46 @@
+# https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#monitoring.coreos.com/v1.Probe
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: test-blackbox-exporter
+  namespace: monitoring
+spec:
+  jobName: test-https-get-endpoints
+  interval: 120s
+  module: http_2xx
+  prober:
+    url: blackbox-exporter.monitoring.svc.cluster.local:19115
+    scheme: http
+    path: /probe
+  targets:
+    staticConfig:
+      static:
+        - "https://test-apps-ninja01.konturlabs.com/active/"
+        - "https://test-apps-ninja01.konturlabs.com/active/api/apps/default_id"
+        - "https://test-apps-ninja01.konturlabs.com/active/api/tiles/bivariate/v1/6/52/27.mvt"
+        - "https://test-apps-ninja01.konturlabs.com/active/insights-api/tiles/bivariate/v1/5/24/14.mvt?indicatorsClass=general"
+        - "https://test-apps-ninja01.konturlabs.com/active/api/tiles/bivariate/v1/6/50/30.mvt?indicatorsClass=general"
+        - "https://test-apps-ninja01.konturlabs.com/active/api/events/?feed=kontur-public"
+        - "https://test-apps-ninja01.konturlabs.com/active/api/events/user_feeds"
+        - "https://test-disaster-ninja.k8s-01.konturlabs.com/active/"
+        - "https://test-disaster-ninja.k8s-01.konturlabs.com/active/api/apps/default_id"
+        - "https://test-disaster-ninja.k8s-01.konturlabs.com/active/api/tiles/bivariate/v1/6/52/27.mvt"
+        - "https://test-disaster-ninja.k8s-01.konturlabs.com/active/insights-api/tiles/bivariate/v1/5/24/14.mvt?indicatorsClass=general"
+        - "https://test-disaster-ninja.k8s-01.konturlabs.com/active/api/tiles/bivariate/v1/6/50/30.mvt?indicatorsClass=general"
+        - "https://test-disaster-ninja.k8s-01.konturlabs.com/active/api/events/?feed=kontur-public"
+        - "https://test-disaster-ninja.k8s-01.konturlabs.com/active/api/events/user_feeds"
+
+        - "https://test-apps.konturlabs.com/userprofile/apps"
+        - "https://test-user-profile-api.k8s-01.konturlabs.com/userprofile/apps"
+
+        - "https://test-apps.konturlabs.com/userprofile/features"
+        - "https://test-user-profile-api.k8s-01.konturlabs.com/userprofile/features"
+
+        - "https://test-apps.konturlabs.com/userprofile/apps/default_id"
+        - "https://test-user-profile-api.k8s-01.konturlabs.com/userprofile/apps/default_id"
+        
+        - "https://test-apps.konturlabs.com/insights-api/tiles/bivariate/v1/5/24/14.mvt?indicatorsClass=general"
+        - "https://test-insights-api.k8s-01.konturlabs.com/insights-api/tiles/bivariate/v1/5/24/14.mvt?indicatorsClass=general"
+
+        - "https://test-api.konturlabs.com/layers/v2/swagger-ui/index.html"
+        - "https://test-layers-api.k8s-01.konturlabs.com/layers/v2/swagger-ui/index.html"
