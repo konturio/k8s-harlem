@@ -6,3 +6,4 @@ resources:
   - dev-probe.yaml
   - dev-probe-post.yaml
   - test-probe.yaml
+  - test-probe-post.yaml
