@@ -22,7 +22,3 @@ spec:
     requests:
       memory: 400Mi
   version: 2.34.0
-  # # https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/additional-scrape-config.md
-  # additionalScrapeConfigs:
-  #   name: additional-scrape-configs-dev-post
-  #   key: prometheus-additional-dev-post.yaml
