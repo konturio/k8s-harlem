@@ -9,7 +9,7 @@ metadata:
   name: blackbox-exporter
   namespace: monitoring
 spec:
-  replicas: 6
+  replicas: 3
   selector:
     matchLabels:
       app.kubernetes.io/component: exporter
