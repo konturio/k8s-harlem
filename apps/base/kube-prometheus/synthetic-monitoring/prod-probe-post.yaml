@@ -1,0 +1,60 @@
+# https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#monitoring.coreos.com/v1.Probe
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: prod-post-custom-bivariate
+  namespace: monitoring
+spec:
+  jobName: prod-post-custom-bivariate
+  interval: 120s
+  module: http_post_custom_bivariate
+  prober:
+    url: blackbox-exporter.monitoring.svc.cluster.local:19115
+    scheme: http
+    path: /probe
+  targets:
+    staticConfig:
+      static:
+        - "https://apps.kontur.io/insights-api/graphql"
+        - "https://prod-insights-api.k8s-01.konturlabs.com/insights-api/graphql"
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: prod-post-custom-bivariate-world
+  namespace: monitoring
+spec:
+  jobName: prod-post-custom-bivariate-world
+  interval: 120s
+  module: http_post_custom_bivariate_world
+  prober:
+    url: blackbox-exporter.monitoring.svc.cluster.local:19115
+    scheme: http
+    path: /probe
+  targets:
+    staticConfig:
+      static:
+        - "https://apps.kontur.io/insights-api/graphql"
+        - "https://prod-insights-api.k8s-01.konturlabs.com/insights-api/graphql"
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: prod-post-custom-adv-analytics
+  namespace: monitoring
+spec:
+  jobName: prod-post-custom-adv-analytics
+  interval: 120s
+  module: http_post_custom_adv_analytics
+  prober:
+    url: blackbox-exporter.monitoring.svc.cluster.local:19115
+    scheme: http
+    path: /probe
+  targets:
+    staticConfig:
+      static:
+        - "https://apps.kontur.io/insights-api/graphql"
+        - "https://prod-insights-api.k8s-01.konturlabs.com/insights-api/graphql"

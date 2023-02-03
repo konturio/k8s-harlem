@@ -2,10 +2,10 @@
 apiVersion: monitoring.coreos.com/v1
 kind: Probe
 metadata:
-  name: dev-blackbox-exporter-post
+  name: dev-post-custom
   namespace: monitoring
 spec:
-  jobName: dev-https-post-endpoints
+  jobName: dev-post-custom
   interval: 120s
   module: http_post_2xx
   prober:
