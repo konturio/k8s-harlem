@@ -50,6 +50,35 @@ data:
             "Accept": "application/json"
             "Content-Type": "text/plain"
           "body": '{"query":"{\n  polygonStatistic(polygonStatisticRequest: {\n    polygonV2: {type: FeatureCollection, features: [{type: Feature, properties: {}, geometry: {type: Polygon, coordinates: [[[13.348388671875, -9.275622176792098], [19.215087890624996, -9.275622176792098], [19.215087890624996, -6.937332868878443], [13.348388671875, -6.937332868878443], [13.348388671875, -9.275622176792098]]]}}]}\n  })\n  {\n    bivariateStatistic {\n      covarianceRates {\n        metrics\n        rate\n        avgMetricsX\n        avgMetricsY\n        quality\n        correlation\n        avgCorrelationX\n        avgCorrelationY\n        x {\n          label\n          quotient\n          parent\n          steps {\n            label\n            value\n          }\n          quality\n          quotients {\n            name\n            label\n            direction\n          }\n          parent\n        }\n        y {\n          label\n          quotient\n          parent\n          steps {\n            label\n            value\n          }\n          quality\n          quotients {\n            name\n            label\n            direction\n          }\n          parent\n        }\n      }\n    }\n  }\n}","variables":null}'
+      "http_post_custom_bivariate":
+        "prober": "http"
+        "timeout": 5m
+        "http":
+          "method": "POST"
+          "preferred_ip_protocol": "ip4"
+          "headers":
+            "Accept": "application/json"
+            "Content-Type": "application/json"
+          "body": '{"query":"{\n  polygonStatistic(polygonStatisticRequest: {\n    polygonV2: {type: FeatureCollection, features: [{type: Feature, properties: {}, geometry: {type: Polygon, coordinates: [[[13.348388671875, -9.275622176792098], [19.215087890624996, -9.275622176792098], [19.215087890624996, -6.937332868878443], [13.348388671875, -6.937332868878443], [13.348388671875, -9.275622176792098]]]}}]}\n  })\n  {\n    bivariateStatistic {\n      covarianceRates {\n        metrics\n        rate\n        avgMetricsX\n        avgMetricsY\n        quality\n        correlation\n        avgCorrelationX\n        avgCorrelationY\n        x {\n          label\n          quotient\n          parent\n          steps {\n            label\n            value\n          }\n          quality\n          quotients {\n            name\n            label\n            direction\n          }\n          parent\n        }\n        y {\n          label\n          quotient\n          parent\n          steps {\n            label\n            value\n          }\n          quality\n          quotients {\n            name\n            label\n            direction\n          }\n          parent\n        }\n      }\n    }\n  }\n}","variables":null}'
+      "http_post_custom_bivariate_world":
+        "prober": "http"
+        "timeout": 5m
+        "http":
+          "method": "POST"
+          "preferred_ip_protocol": "ip4"
+          "headers":
+            "Content-Type": "application/json"
+          "body": '{"query":"\n      fragment AxisFields on Axis {\n        label\n        steps {\n          label\n          value\n        }\n        quality\n        quotient\n      }\n\n    query getPolygonStatistics {\n      polygonStatistic(polygonStatisticRequest: {}) {\n        bivariateStatistic {\n          axis {\n            ...AxisFields\n          }\n          meta {\n            max_zoom\n            min_zoom\n          }\n          overlays {\n            name\n            description\n            active\n            colors {\n              id\n              color\n            }\n            x {\n              ...AxisFields\n            }\n            y {\n              ...AxisFields\n            }\n          }\n          indicators {\n            name\n            label\n            copyrights\n            direction\n          }\n          correlationRates {\n            x {\n              ...AxisFields\n            }\n            y {\n              ...AxisFields\n            }\n            rate\n            quality\n            correlation\n          }\n          colors {\n            fallback\n            combinations {\n              color\n              corner\n              color_comment\n            }\n          }\n        }\n      }\n    }"}'
+      "http_post_custom_adv_analytics":
+        "prober": "http"
+        "timeout": 5m
+        "http":
+          "method": "POST"
+          "preferred_ip_protocol": "ip4"
+          "headers":
+            "Accept": "application/json"
+            "Content-Type": "text/plain"
+          "body": '{"query":"{\n  polygonStatistic(polygonStatisticRequest: {polygonV2: {type: FeatureCollection, features: [{type: Feature, properties: {}, geometry: {type: Polygon, coordinates: [[[13.348388671875, -9.275622176792098], [19.215087890624996, -9.275622176792098], [19.215087890624996, -6.937332868878443], [13.348388671875, -6.937332868878443], [13.348388671875, -9.275622176792098]]]}}]}}) {\n    analytics {\n      advancedAnalytics(args: [{numerator: \"total_hours\", denominator: \"area_km2\", calculations: [\"mean\", \"min\", \"max\"]}, {numerator: \"man_distance_to_hospital\", denominator: \"population\", calculations: [\"sum\", \"min\", \"max\", \"stddev\"]}]) {\n        numerator\n        numeratorLabel\n        denominator\n        denominatorLabel\n        analytics {\n          calculation\n          value\n          quality\n        }\n      }\n    }\n  }\n}\n","variables":null}'
 kind: ConfigMap
 metadata:
   labels:
