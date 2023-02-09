@@ -1,0 +1,72 @@
+---
+# How to install:
+# pre-commit install
+
+default_language_version:
+  python: python3
+
+# How temporary skip one of hooks: https://pre-commit.com/#temporarily-disabling-hooks
+
+repos:
+# # # In-house hooks
+# - repo: local
+#   hooks:
+#   - id: pre-commit-local
+#     name: pre-commit-local
+#     entry: git-hooks/pre-commit
+#     language: system
+#     stages:
+#       - commit
+#     pass_filenames: false
+#   - id: pre-push-local
+#     name: pre-push-local
+#     entry: git-hooks/pre-push
+#     language: system
+#     stages:
+#       - push
+#     pass_filenames: false
+
+# to automate formatting correction
+# https://yamllint.readthedocs.io
+- repo: https://github.com/adrienverge/yamllint.git
+  rev: v1.29.0
+  hooks:
+    - id: yamllint
+      args: [-c=.yamllint]
+
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.4.0
+  hooks:
+    # Git style
+    - id: check-added-large-files
+    - id: check-merge-conflict
+    - id: check-vcs-permalinks
+    - id: no-commit-to-branch
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+
+    # Cross platform
+    - id: check-case-conflict
+
+    # # Security
+    - id: detect-private-key
+
+# to check the compliance of Kubernetes definition files according to best development practices and custom rules
+- repo: https://github.com/bridgecrewio/checkov.git
+  rev: 2.2.331
+  hooks:
+    - id: checkov
+      args: [-d .]
+
+# to check the compliance of Kubernetes definition files according to the version of Kubernetes used
+- repo: https://github.com/Agilicus/pre-commit-hook-k8svalidate.git
+  rev: v0.1.0
+  hooks:
+    - id: k8svalidate
+      files: .yaml$
+
+# to detect any sensitive data and avoid their storage in the code
+- repo: https://github.com/Yelp/detect-secrets
+  rev: v1.4.0
+  hooks:
+    - id: detect-secrets
