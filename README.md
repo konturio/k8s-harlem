@@ -142,3 +142,26 @@ flux get helmreleases -A
 kubectl get helmreleases -A
 helm ls -A
 ```
+
+### How verify customization?
+```bash
+kustomize build --load-restrictor=LoadRestrictionsNone --reorder=legacy core-apps/clusters/k8s-02/ | less
+```
+```bash
+kustomize build --load-restrictor=LoadRestrictionsNone --reorder=legacy core-apps/clusters/k8s-02/ | kubectl apply --server-side --dry-run=server -f-
+```
+
+## Pre-commit hooks
+This repository utilizes pre-commit hooks which are managed by [pre-commit tool](https://pre-commit.com/).
+
+### Installing pre-commit hooks
+All of the required tooling can be installed directly or via the setup script:
+
+```bash
+./git-hooks/setup-git-hooks.sh
+```
+
+### Usage pre-commit hooks
+pre-commit hooks will now run on every commit. Every time you clone a project using pre-commit running `pre-commit install` or script above `./git-hooks/setup-git-hooks.sh` should always be the first thing you do.
+
+If you want to manually run all pre-commit hooks on a repository, run `pre-commit run -a`. To run individual hooks use `pre-commit run <hook_id>`
