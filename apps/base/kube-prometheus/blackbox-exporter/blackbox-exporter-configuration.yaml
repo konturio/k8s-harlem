@@ -6,6 +6,7 @@ data:
         "http":
           "preferred_ip_protocol": "ip4"
         "prober": "http"
+        "timeout": 1m
       "http_post_2xx":
         "http":
           "method": "POST"
