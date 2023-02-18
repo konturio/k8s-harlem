@@ -88,6 +88,11 @@ data:
         Match postgres.*
         Add nodename ${NODE_NAME}
 
+    [FILTER]
+        Name record_modifier
+        Match *
+        Remove_key output.*
+
     [OUTPUT]
         Name es
         Match *
