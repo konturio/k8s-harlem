@@ -15,6 +15,7 @@ resources:
   # - ../../base/kube-prometheus/prometheus-adapter
   - ../../base/kube-prometheus/victoriametrics
   - ../../base/kube-prometheus/synthetic-monitoring
+  - ../../base/nodelocaldns
 patchesStrategicMerge:
   - cert-manager/cluster_issuer_letsencrypt_prod.yaml
   - cert-manager/cluster_issuer_letsencrypt_stage.yaml
