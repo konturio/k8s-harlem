@@ -91,7 +91,7 @@ data:
     [FILTER]
         Name record_modifier
         Match *
-        Remove_key LimitRange*
+        Remove_key output*
 
     [OUTPUT]
         Name es
