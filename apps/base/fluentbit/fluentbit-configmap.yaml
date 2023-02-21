@@ -91,7 +91,6 @@ data:
     [FILTER]
         Name record_modifier
         Match *
-        Remove_key output.LimitRange*
         Remove_key LimitRange*
 
     [OUTPUT]
