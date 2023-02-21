@@ -111,3 +111,22 @@ data:
         Tag_Key tags
         Index logstash
         Workers 1
+
+    [OUTPUT]
+        Name es
+        Match *
+        Host ${FLUENT_ELASTICSEARCH_HOST}
+        Port ${FLUENT_ELASTICSEARCH_PORT}
+        HTTP_User ${FLUENT_ELASTICSEARCH_USER}
+        HTTP_Passwd ${FLUENT_ELASTICSEARCH_PASSWORD}
+        Logstash_Format Off
+        Retry_Limit False
+        tls On
+        Suppress_Type_Name On
+        # Trace_Output On
+        Trace_Error On
+        Replace_Dots On
+        Include_Tag_Key true
+        Tag_Key tags
+        Index fluentbit
+        Workers 1
