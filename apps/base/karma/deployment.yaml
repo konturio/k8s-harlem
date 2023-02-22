@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karma
+  labels:
+    app: karma
+    component: infrastructure
+    environment: k8s-01
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: karma
+  template:
+    metadata:
+      labels:
+        app: karma
+        component: infrastructure
+        environment: k8s-01
+        version: v0.112
+    spec:
+      containers:
+        - name: karma
+          image: ghcr.io/prymitive/karma:v0.112
+          env:
+          - name: ALERTMANAGER_URI
+            value: http://alertmanager-main.monitoring.svc:9093
+          ports:
+          - name: karma
+            containerPort: 8080
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 100m
+            limits:
+              memory: 1Gi
+              cpu: 500m
+          livenessProbe:
+            periodSeconds: 60
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+          readinessProbe:
+            periodSeconds: 60
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+      dnsConfig:
+        options:
+          - name: ndots
+            value: "0"

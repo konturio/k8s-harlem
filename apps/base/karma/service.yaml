@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: karma
+  labels:
+    app: karma
+    component: infrastructure
+    environment: k8s-01
+spec:
+  type: ClusterIP
+  ports:
+  - name: karma
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: karma
