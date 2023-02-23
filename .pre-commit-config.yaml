@@ -1,0 +1,72 @@
+---
+# How to install:
+# pre-commit install
+
+default_language_version:
+  python: python3
+
+# How temporary skip one of hooks: https://pre-commit.com/#temporarily-disabling-hooks
+
+repos:
+
+# A linter for YAML files
+# https://yamllint.readthedocs.io
+- repo: https://github.com/adrienverge/yamllint.git
+  rev: v1.29.0
+  hooks:
+    - id: yamllint
+      args: [-c=.yamllint]
+
+
+# Сheck the compliance of Kubernetes definition files according to best development practices and custom rules
+- repo: https://github.com/bridgecrewio/checkov.git
+  rev: 2.2.331
+  hooks:
+    - id: checkov
+      files: ^(apps|core-apps)/
+      # Example how we can skip checks
+      # entry: checkov -d . --skip-check CKV_K8S_14,CKV_K8S_29,CKV_K8S_31,CKV_K8S_38,CKV_K8S_43,CKV_K8S_13,CKV_K8S_15,CKV_K8S_28
+      # added just few checks as example, need to specify which exactly you want
+      entry: checkov -d . --check CKV_K8S_158,CKV_K8S_146,CKV_K8S_18
+
+# commented this because too strict checks and file changes required
+# This is a pre-commit hook to validate input YAML against the Kubernetes API specification.
+# - repo: https://github.com/Agilicus/pre-commit-hook-k8svalidate.git
+#   rev: v0.1.0
+#   hooks:
+#     - id: k8svalidate
+#       files: .yaml$
+
+# commented this because too strict checks and file changes required
+# Detect any sensitive data and avoid their storage in the code
+# - repo: https://github.com/Yelp/detect-secrets
+#   rev: v1.4.0
+#   hooks:
+#     - id: detect-secrets
+
+# - repo: https://github.com/rhysd/actionlint
+#   rev: v1.6.23
+#   hooks:
+#     - id: actionlint-docker
+#       # SC2129 - Consider using { cmd1; cmd2; } >> file instead of individual redirects.
+#       args: ["-ignore", "SC2129"]
+
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.4.0
+  hooks:
+    # Git style
+    - id: check-added-large-files
+    - id: check-merge-conflict
+    - id: check-vcs-permalinks
+    - id: no-commit-to-branch
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+    # - id: check-yaml
+
+    # Cross platform
+    - id: check-case-conflict
+
+    # # Security
+    - id: detect-aws-credentials
+      args: ['--allow-missing-credentials']
+    - id: detect-private-key

@@ -19,7 +19,7 @@ data:
         Format json
         Time_Key timestamp
         Time_Format %Y-%m-%dT%H:%M:%S.%f %z
-    
+
     [MULTILINE_PARSER]
         Name multiline_psql
         Type regex
@@ -82,7 +82,7 @@ data:
         K8S-Logging.Parser On
         K8S-Logging.Exclude On
         Buffer_Size 256KB
-    
+
     [FILTER]
         Name Modify
         Match postgres.*

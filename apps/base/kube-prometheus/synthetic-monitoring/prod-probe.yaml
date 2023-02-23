@@ -42,7 +42,7 @@ spec:
 
         - "https://apps.kontur.io/userprofile/apps/58851b50-9574-4aec-a3a6-425fa18dcb54"
         - "https://prod-user-profile-api.k8s-01.konturlabs.com/userprofile/apps/58851b50-9574-4aec-a3a6-425fa18dcb54"
-        
+
         - "https://apps.kontur.io/insights-api/tiles/bivariate/v1/5/24/14.mvt?indicatorsClass=general"
         - "https://prod-insights-api.k8s-01.konturlabs.com/insights-api/tiles/bivariate/v1/5/24/14.mvt?indicatorsClass=general"
 
