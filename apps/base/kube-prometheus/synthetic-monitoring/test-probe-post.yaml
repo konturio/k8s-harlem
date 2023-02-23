@@ -16,4 +16,3 @@ spec:
     staticConfig:
       static:
         - "https://test-apps02.konturlabs.com/insights-api/graphql"
-

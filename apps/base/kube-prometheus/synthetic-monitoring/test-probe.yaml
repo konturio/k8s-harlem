@@ -38,7 +38,7 @@ spec:
 
         - "https://test-apps.konturlabs.com/userprofile/apps/default_id"
         - "https://test-user-profile-api.k8s-01.konturlabs.com/userprofile/apps/default_id"
-        
+
         - "https://test-apps.konturlabs.com/insights-api/tiles/bivariate/v1/5/24/14.mvt?indicatorsClass=general"
         - "https://test-insights-api.k8s-01.konturlabs.com/insights-api/tiles/bivariate/v1/5/24/14.mvt?indicatorsClass=general"
 

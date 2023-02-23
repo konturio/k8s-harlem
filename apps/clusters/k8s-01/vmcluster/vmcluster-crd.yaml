@@ -5,7 +5,7 @@ metadata:
   namespace: monitoring
 spec:
   retentionPeriod: "6"
-  replicationFactor: 2   
+  replicationFactor: 2
   vmstorage:
     replicaCount: 3
     # https://github.com/VictoriaMetrics/VictoriaMetrics/issues/86

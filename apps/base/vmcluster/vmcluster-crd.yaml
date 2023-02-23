@@ -4,7 +4,7 @@ metadata:
   name: vmcluster-persistent
 spec:
   retentionPeriod: "1"
-  replicationFactor: 1     
+  replicationFactor: 1
   vmstorage:
     replicaCount: 1
     storageDataPath: "/vm-data"

@@ -16,4 +16,3 @@ spec:
     staticConfig:
       static:
         - "https://test-apps-ninja02.konturlabs.com/active/about?app=58851b50-9574-4aec-a3a6-425fa18dcb54&feed=kontur-public&layers=BIV__Kontur+OpenStreetMap+Quantity%2CactiveContributors%2CeventShape%2CKLA__hotProjects_outlines%2Cfocused-geometry"
-

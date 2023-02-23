@@ -16,4 +16,3 @@ spec:
     crds: Create
   upgrade:
     crds: CreateReplace # Create new CRDs, update (replace) existing ones, but do not delete CRDs which no longer exist in the current helm release.
-
