@@ -12,7 +12,6 @@ resources:
  - dev-layers-api
  - dev-layers-db
  - dev-layers-tiles-api
- - dev-mosaic
  - dev-osrm
  - dev-raster-tiler
  - dev-rasters
