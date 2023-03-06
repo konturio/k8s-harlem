@@ -12,6 +12,7 @@ resources:
   - ../../base/nginx-ingress
   - ../../base/cert-manager-crds
   - ../../base/metallb
+  - ../../base/metrics-server
   - ../../base/tigera-operator
   - ../../base/kube-prometheus-operator
   - ../../base/local-path-provisioner-regular
