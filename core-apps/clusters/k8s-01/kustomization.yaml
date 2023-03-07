@@ -11,6 +11,7 @@ resources:
   - ../../base/local-path-provisioner
   - ../../base/calico
   - ../../base/nginx-ingress
+  - ../../base/metrics-server
   - ../../base/cert-manager-crds
   - ../../base/local-path-provisioner-regular
   - ../../base/local-path-provisioner-fast
