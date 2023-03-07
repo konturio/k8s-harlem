@@ -6,6 +6,10 @@ metadata:
   namespace: kube-system
 spec:
   releaseName: metrics-server
+  valuesFrom:
+  - kind: ConfigMap
+    name: metrics-server-helm-chart-value-overrides # Align with the name of the ConfigMap containing all values
+    valuesKey: values.yaml 
   chart:
     spec:
       chart: metrics-server
@@ -14,8 +18,8 @@ spec:
         kind: HelmRepository
         name: metrics-server
         namespace: kube-system
-      valuesFiles:
-        - values.yaml
+      # valuesFiles:
+      #   - values.yaml
   interval: 5m
   suspend: false
   install:
