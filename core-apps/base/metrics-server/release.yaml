@@ -15,7 +15,7 @@ spec:
         name: metrics-server
         namespace: kube-system
       valuesFiles:
-        - ./core-apps/base/metrics-server/values.yaml
+        - values.yaml
   interval: 5m
   suspend: false
   install:
