@@ -5,7 +5,7 @@ metadata:
 spec:
   hard:
     persistentvolumeclaims: "10"
-    requests.storage: "3000Gi" # cumulative capacity of PVCs
+    requests.storage: "9000Gi" # cumulative capacity of PVCs
     pods: "50"
     services.loadbalancers: "0" # we have only one service of type LB in cluster for ingress
     services.nodeports: "5" # required for cert-manager
