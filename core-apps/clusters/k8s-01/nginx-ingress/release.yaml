@@ -13,6 +13,7 @@ spec:
         entries:
           http-snippets: |
             include CORS_01_http.inc.conf;
+            include redirect_handling.conf;
           main-snippets: |
             pcre_jit on;
             load_module /usr/lib/nginx/modules/ngx_http_headers_more_filter_module.so;
