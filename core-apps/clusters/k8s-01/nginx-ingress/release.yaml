@@ -20,4 +20,4 @@ spec:
             load_module /usr/lib/nginx/modules/ngx_http_js_module.so;
       image:
         repository: 'nexus.kontur.io:8084/konturdev/nginx-ingress'
-        tag: 2.4.2-kontur-mainline
+        tag: 2.4.2-kontur-mainline-neo
