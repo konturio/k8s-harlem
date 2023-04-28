@@ -35,7 +35,7 @@ spec:
       enableSnippets: true
       image:
         repository: 'nexus.kontur.io:8084/konturdev/nginx-ingress'
-        tag: 2.4.2-kontur-mainline-neo
+        tag: 2.4.2-kontur-mainline
       # The Ingress Controller processes all the resources that do not have the "ingressClassName" field for all versions of kubernetes.
       ingressClass: nginx
       # The number of replicas of the Ingress controller deployment.
