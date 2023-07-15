@@ -109,5 +109,5 @@ data:
         Replace_Dots On
         Include_Tag_Key true
         Tag_Key tags
-        Index logstash
+        Index logstash2
         Workers 1
