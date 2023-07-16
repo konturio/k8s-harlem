@@ -51,8 +51,7 @@ data:
     [INPUT]
         Name tail
         Path /var/log/containers/*.log
-        Exclude_Path /var/log/containers/test-raster-tiler*.log
-        Exclude_Path /var/log/containers/test-tiler*.log
+        Exclude_Path /var/log/containers/test-(raster-tiler|tiler)*.log
         multiline.parser docker, cri
         Tag kube.*
         Mem_Buf_Limit 20MB
