@@ -4,6 +4,7 @@ metadata:
   name: grafana02-kontur-io
   namespace: monitoring
 spec:
+  ingressClassName: ingress-nginx
   rules:
     - host: grafana.k8s-02.konturlabs.com
       http:
