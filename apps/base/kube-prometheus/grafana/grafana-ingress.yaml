@@ -5,7 +5,7 @@ metadata:
     acme.cert-manager.io/http01-edit-in-place: 'true'
     cert-manager.io/cluster-issuer: letsencrypt-production
     # kubernetes.io/ingress.class: nginx
-    nginx.org/server-snippets: |
+    nginx.ingress.kubernetes.io/server-snippet: |
       location /api/live/ {
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
