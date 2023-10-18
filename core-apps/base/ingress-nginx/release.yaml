@@ -40,8 +40,9 @@ spec:
       ingressClass: ingress-nginx
 
       image:
-        repository: 'nexus.kontur.io:8084/konturdev/ingress-nginx'
+        repository: 'nexus.kontur.io:8085/konturdev/ingress-nginx'
         tag: 1.8.0
+        digest: 2abc9ca92220dd057eaa8ffbe585a62c1480727db7b349611b86b3c2961f1e93
       ingressClassResource:
         name: ingress-nginx
       metrics:
