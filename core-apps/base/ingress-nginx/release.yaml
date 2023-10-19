@@ -1,3 +1,12 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: ingress-nginx
+  namespace: ingress-nginx
+spec:
+  interval: 5m0s
+  url: https://kubernetes.github.io/ingress-nginx
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -12,7 +21,7 @@ spec:
         kind: HelmRepository
         name: ingress-nginx
         namespace: ingress-nginx
-      version: 1.8.1
+      version: 4.8.2
   install:
     crds: Create
   interval: 10m
@@ -27,13 +36,11 @@ spec:
         prometheus.io/port: 10254
       config:
         http-snippet: |
-          include CORS_01_http.inc.conf;
-          include redirect_handling.conf;
+          include /etc/nginx/CORS_01_http.inc.conf;
         main-snippet: |
           pcre_jit on;
-          load_module /usr/lib/nginx/modules/ngx_http_headers_more_filter_module.so;
-          load_module /usr/lib/nginx/modules/ngx_http_js_module.so;
-        allow-snippet-annotations: true
+        server-snippet: |
+          include /etc/nginx/redirect_handling.conf;
         enable-access-log-for-default-backend: "true"
         worker-processes: "4"
       # The Ingress Controller processes all the resources that do not have the "ingressClassName" field for all versions of kubernetes.
@@ -42,7 +49,7 @@ spec:
       image:
         repository: 'nexus.kontur.io:8085/konturdev/ingress-nginx'
         tag: 1.8.0
-        digest: 2abc9ca92220dd057eaa8ffbe585a62c1480727db7b349611b86b3c2961f1e93
+        digest: sha256:be49aa6859d3a789b053396946ccf906000608c973769e85fbeb007a736125e8
       ingressClassResource:
         name: ingress-nginx
       metrics:
