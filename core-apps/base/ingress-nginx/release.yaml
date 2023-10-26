@@ -37,6 +37,10 @@ spec:
       config:
         http-snippet: |
           include /etc/nginx/CORS_01_http.inc.conf;
+          map "$host" $dn2021_robots_txt {
+            "~*^(?:www\.)?disaster\.ninja$"   "User-agent: *\nAllow: /\n";
+            default                           "User-agent: RED\nDisallow:\n\nUser-agent: *\nDisallow: /\n";
+          }
         main-snippet: |
           pcre_jit on;
         server-snippet: |
