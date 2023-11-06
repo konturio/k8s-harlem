@@ -33,6 +33,20 @@ spec:
     controller:
       config:
         allow-snippet-annotations: true
+        enable-underscores-in-headers: "true"
+        client-body-buffer-size: "32k"
+        ssl-prefer-server-ciphers: "false"
+        ssl-session-timeout: "1d"
+        ssl-session-tickets: "false"
+        proxy-buffer-size: "256k"
+        proxy-buffers-number: "4"
+        keep-alive: "65s"
+        enable-brotli: "true"
+        brotli-level: "4"
+        brotli-min-length: "20"
+        brotli-types: "application/ecmascript application/javascript application/json application/x-ecmascript application/x-javascript application/xml application/xml+rss text/css text/ecmascript text/javascript text/javascript1.0 text/javascript1.1 text/javascript1.2 text/javascript1.3 text/javascript1.4 text/javascript1.5 text/jscript text/livescript text/plain text/x-component text/x-ecmascript text/x-javascript text/xml application/vnd.ms-fontobject image/x-icon image/vnd.microsoft.icon image/svg+xml application/font-woff application/x-font-ttf font/opentype application/xhtml+xml application/rss+xml application/vnd.mapbox-vector-tile"
+        enable-access-log-for-default-backend: "true"
+
         http-snippet: |
           include /etc/nginx/CORS_01_http.inc.conf;
           include /etc/nginx/ngx_http_proxy_module.conf;
@@ -120,11 +134,8 @@ spec:
           #    proxy_connect_timeout 60s;
           proxy_bind 127.0.0.1;
 
-          proxy_buffer_size 128k;
-          proxy_buffers 4 256k;
-
+          proxy_busy_buffers_size 256k;
           proxy_temp_file_write_size 256k;
-
           proxy_max_temp_file_size 2048m;
 
           proxy_cache_key '$request_method$host$uri$is_args$args$http_authorization';
@@ -145,12 +156,7 @@ spec:
           #    real_ip_header X-Forwarded-For;
           #    real_ip_recursive on;
 
-          # TODO: check brotli
-          # brotli on;
-          # brotli_types application/ecmascript application/javascript application/json application/x-ecmascript application/x-javascript application/xml application/xml+rss text/css text/ecmascript text/javascript text/javascript1.0 text/javascript1.1 text/javascript1.2 text/javascript1.3 text/javascript1.4 text/javascript1.5 text/jscript text/livescript text/plain text/x-component text/x-ecmascript text/x-javascript text/xml application/vnd.ms-fontobject image/x-icon image/vnd.microsoft.icon image/svg+xml application/font-woff application/x-font-ttf font/opentype application/xhtml+xml application/rss+xml application/vnd.mapbox-vector-tile; # please match `gzip_types'
-          # brotli_comp_level 4;
-          # brotli_window 512k;
-          # brotli_min_length 20;
+          brotli_window 512k;
 
           gzip on;
           gzip_proxied any;
