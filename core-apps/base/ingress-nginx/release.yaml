@@ -41,7 +41,7 @@ spec:
         ssl-session-tickets: "false"
         proxy-buffer-size: "256k"
         proxy-buffers-number: "4"
-        keep-alive: "65s"
+        keep-alive: 65
         enable-brotli: "true"
         brotli-level: "4"
         brotli-min-length: "20"
