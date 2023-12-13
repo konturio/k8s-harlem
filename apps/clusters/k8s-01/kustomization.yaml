@@ -17,6 +17,7 @@ resources:
   - ../../base/flux
   # - ../../base/cert-manager
   - ../../base/open-telemetry
+  - ../../base/postgres-exporter-pgo
   - ../../base/karma
   - flux/podmonitor.yaml
 patchesStrategicMerge:
