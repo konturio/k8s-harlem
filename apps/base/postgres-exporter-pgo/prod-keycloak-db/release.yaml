@@ -1,0 +1,49 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: prod-keycloak-db-postgres-exporter
+  namespace: prod-keycloak
+spec:
+  releaseName: prod-keycloak-db-postgres-exporter
+  chart:
+    spec:
+      chart: prometheus-postgres-exporter
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+      version: 3.0.3
+  interval: 1h
+  install:
+    remediation:
+      retries: 3
+  values:
+    service:
+      port: 9187
+    serviceMonitor:
+      enabled: true
+      namespace: prod-keycloak
+      interval: 30s
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    rbac:
+      create: true
+      pspEnabled: false
+    serviceAccount:
+      create: true
+    config:
+      datasource:
+        host: db-insights-api-primary.prod-keycloak.svc
+        user: keycloak
+        database: keycloak-db
+        passwordSecret:
+          name: prod-keycloak-db-postgres-exporter
+          key: data_source_password
+        sslmode: require
+      logLevel: "info"
+      logFormat: "logfmt"
