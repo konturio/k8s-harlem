@@ -1,10 +1,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: test-layers-db-db-postgres-exporter
+  name: test-layers-db-postgres-exporter
   namespace: test-layers-db
 spec:
-  releaseName: test-layers-db-db-postgres-exporter
+  releaseName: test-layers-db-postgres-exporter
   chart:
     spec:
       chart: prometheus-postgres-exporter
@@ -42,7 +42,7 @@ spec:
         user: layers-db
         database: layers-db
         passwordSecret:
-          name: test-layers-db-db-postgres-exporter
+          name: test-layers-db-postgres-exporter
           key: data_source_password
         sslmode: require
       logLevel: "info"

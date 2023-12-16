@@ -4,7 +4,7 @@ metadata:
   name: prod-layers-db-postgres-exporter
   namespace: prod-layers-db
 spec:
-  releaseName: prod-layers-db-db-postgres-exporter
+  releaseName: prod-layers-db-postgres-exporter
   chart:
     spec:
       chart: prometheus-postgres-exporter
@@ -42,7 +42,7 @@ spec:
         user: layers-db
         database: layers-db
         passwordSecret:
-          name: prod-layers-db-db-postgres-exporter
+          name: prod-layers-db-postgres-exporter
           key: data_source_password
         sslmode: require
       logLevel: "info"
