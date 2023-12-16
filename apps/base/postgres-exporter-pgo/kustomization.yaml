@@ -2,18 +2,4 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: test-insights-api
 resources:
-  - dev-event-api-db/release.yaml
-  - test-event-api-db/release.yaml
-  - prod-event-api-db/release.yaml
-  - dev-keycloak-db/release.yaml
-  - test-keycloak-db/release.yaml
-  - prod-keycloak-db/release.yaml
-  - dev-layers-db/release.yaml
-  - test-layers-db/release.yaml
-  - prod-layers-db/release.yaml
-  - dev-user-profile-api-db/release.yaml
-  - test-user-profile-api-db/release.yaml
-  - prod-user-profile-api-db/release.yaml
-  - dev-insights-api-db/release.yaml
   - test-insights-api-db/release.yaml
-#  - prod-insights-api-db/release.yaml
