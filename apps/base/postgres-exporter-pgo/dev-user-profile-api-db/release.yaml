@@ -40,7 +40,7 @@ spec:
       datasource:
         host: db-user-profile-api-primary.dev-user-profile-api.svc
         user: user-profile-api
-        database: user-profile-api
+        database: user-profile-api-db
         passwordSecret:
           name: dev-user-profile-api-db-postgres-exporter
           key: data_source_password
