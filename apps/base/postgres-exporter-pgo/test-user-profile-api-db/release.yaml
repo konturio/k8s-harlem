@@ -38,7 +38,7 @@ spec:
       create: true
     config:
       datasource:
-        host: db-insights-api-primary.test-user-profile-api.svc
+        host: db-user-profile-api-primary.test-user-profile-api.svc
         user: user-profile-api
         database: user-profile-api
         passwordSecret:

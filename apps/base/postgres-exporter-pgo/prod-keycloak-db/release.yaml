@@ -38,7 +38,7 @@ spec:
       create: true
     config:
       datasource:
-        host: db-insights-api-primary.prod-keycloak.svc
+        host: db-keycloak-primary.prod-keycloak.svc
         user: keycloak
         database: keycloak-db
         passwordSecret:
