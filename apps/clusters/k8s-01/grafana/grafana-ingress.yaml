@@ -1,28 +1,6 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: grafana02-kontur-io
-  namespace: monitoring
-spec:
-  rules:
-    - host: grafana02.kontur.io
-      http:
-        paths:
-          - backend:
-              service:
-                name: grafana
-                port:
-                  name: http
-            path: /
-            pathType: Prefix
-  tls:
-    - hosts:
-        - grafana02.kontur.io
-      secretName: grafana02-kontur-io-tls
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
   name: grafana02-kontur-io-ng
   namespace: monitoring
 spec:

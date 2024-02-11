@@ -4,40 +4,6 @@ metadata:
   labels:
     app.kubernetes.io/component: alert-router
     app.kubernetes.io/instance: main
-    app.kubernetes.io/name: alertmanager
-    app.kubernetes.io/version: 0.23.0
-  name: alertmanager-main
-  namespace: monitoring
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-production #use letsencrypt-staging for testing
-    acme.cert-manager.io/http01-edit-in-place: "true" #required otherwise ACME challenge can't be completed
-#    nginx.org/server-snippets: | #TODO ngx_http_auth_basic_module module for basic auth
-#      location / {
-#      }
-spec:
-  tls:
-    - hosts:
-        - alertmanager.k8s-01.konturlabs.com
-      secretName: alertmanager-main-tls
-  ingressClassName: nginx
-  rules:
-    - host: alertmanager.k8s-01.konturlabs.com
-      http:
-        paths:
-          - path: /-/healthy
-            pathType: Exact
-            backend:
-              service:
-                name: alertmanager-main
-                port:
-                  number: 9093
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  labels:
-    app.kubernetes.io/component: alert-router
-    app.kubernetes.io/instance: main
     app.kubernetes.io/name: alertmanager-ng
     app.kubernetes.io/version: 0.23.0
   name: alertmanager-main-ng
