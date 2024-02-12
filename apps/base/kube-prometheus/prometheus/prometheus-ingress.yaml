@@ -4,6 +4,8 @@ metadata:
   annotations:
     acme.cert-manager.io/http01-edit-in-place: 'true'
     cert-manager.io/cluster-issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
     nginx.ingress.kubernetes.io/server-snippet: |
       proxy_bind off;
   labels:
