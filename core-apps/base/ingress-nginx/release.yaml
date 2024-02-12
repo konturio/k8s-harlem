@@ -1,0 +1,196 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: ingress-nginx
+  namespace: ingress-nginx
+spec:
+  interval: 5m0s
+  url: https://kubernetes.github.io/ingress-nginx
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ingress-nginx
+  namespace: ingress-nginx
+spec:
+  chart:
+    spec:
+      chart: ingress-nginx
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: ingress-nginx
+        namespace: ingress-nginx
+      version: 4.8.2
+  install:
+    crds: Create
+  interval: 10m
+  suspend: false
+  upgrade:
+    # Create new CRDs, update (replace) existing ones, but do not delete CRDs which no longer exist in the current helm release.
+    crds: CreateReplace
+  values:
+    controller:
+      config:
+        use-forwarded-headers: "true" # allow X-Forwarded-Host for different hostnames
+        allow-snippet-annotations: true
+        enable-underscores-in-headers: "true"
+        client-body-buffer-size: "32k"
+        ssl-prefer-server-ciphers: "false"
+        ssl-session-timeout: "1d"
+        ssl-session-tickets: "false"
+        proxy-buffer-size: "256k"
+        proxy-buffers-number: "4"
+        keep-alive: 65
+        enable-brotli: "true"
+        brotli-level: "4"
+        brotli-min-length: "20"
+        brotli-types: "application/ecmascript application/javascript application/json application/x-ecmascript application/x-javascript application/xml application/xml+rss text/css text/ecmascript text/javascript text/javascript1.0 text/javascript1.1 text/javascript1.2 text/javascript1.3 text/javascript1.4 text/javascript1.5 text/jscript text/livescript text/plain text/x-component text/x-ecmascript text/x-javascript text/xml application/vnd.ms-fontobject image/x-icon image/vnd.microsoft.icon image/svg+xml application/font-woff application/x-font-ttf font/opentype application/xhtml+xml application/rss+xml application/vnd.mapbox-vector-tile"
+        enable-access-log-for-default-backend: "true"
+
+        http-snippet: |
+          include /etc/nginx/CORS_01_http.inc.conf;
+          include /etc/nginx/ngx_http_proxy_module.conf;
+
+          map $http_pragma:$http_cache_control $client_wants_no_cache {
+            "~*\bno-cache\b" "no-cache";
+            default          "";
+          }
+
+          map $server_name:$server_port $new_location {
+            # PROD
+            "app.kontur.io:443"   "https://apps.kontur.io:443$request_uri";
+
+            # TEST
+            "api.konturlabs.com:443"    "https://test-api.konturlabs.com:443/===%3EUSE_CORRECT_KC_DOMAIN";
+            "app.konturlabs.com:443"    "https://test-apps.konturlabs.com:443/===%3EUSE_CORRECT_KC_DOMAIN";
+            "apps.konturlabs.com:443"   "https://test-apps.konturlabs.com:443/===%3EUSE_CORRECT_KC_DOMAIN";
+            "test-app.konturlabs.com:443"   "https://test-apps.konturlabs.com:443/===%3EUSE_CORRECT_KC_DOMAIN";
+
+            default  "https://nonexistent.kontur.io:443";
+          }
+
+          map "$host" $dn2021_x_frame_options {
+            "~*^apps\.disaster\.ninja$"                         "";
+            "~*^test-emb-apps-ninja[0-9]+\.konturlabs\.com$"    "";
+            "~*^(?:dev|test|prod)-disaster-ninja(?:-emb-apps)?\.konturlabs\.com$"       "";
+            default                                             "SAMEORIGIN";
+          }
+
+          map "$host" $dn2021_robots_txt {
+            "~*^(?:www\.)?disaster\.ninja$"   "User-agent: *\nAllow: /\n";
+            default                           "User-agent: RED\nDisallow:\n\nUser-agent: *\nDisallow: /\n";
+          }
+
+          map "$sent_http_content_type:$uri" $dn2021_expires {
+            "~^.*:/active/api/"                                   -1;
+            default                                               off;
+
+            "~^.*:/(?:index\.html)?$"                             -1;
+            "~^.*:/active/(?:index\.html\|config/appconfig\.js)?$" -1;
+
+            "~^application/vnd.mapbox-vector-tile:"     12h;
+            "~^application/javascript:"                 12h;
+            "~^application/json:"                       12h;
+            "~^text/.*"                                 12h;
+            "~^image/.*"                                12h;
+          }
+
+          map "$sent_http_content_type:$uri" $dn_expires {
+            default                                     off;
+            "~^.*:/kcapi/"                              -1;
+            "~^.*:/kcfirebrigade/"                      -1;
+            "~^.*:/kcfirebrigade-fe/"                   -1;
+
+            # TASK 13170
+            #           "~^.*:/live/metrics"                        -1;
+            #           "~^.*:/graphql"                             off;
+            #           "~^.*:/(?:index\.html)?$"                   -1;
+            #           "~^.*:/live/(?:index\.html)?$"              -1;
+
+            "~^application/vnd.mapbox-vector-tile:"     12h;
+            "~^application/javascript:"                 12h;
+            "~^application/json:"                       12h;
+            "~^text/.*"                                 12h;
+            "~^image/.*" 12h;
+          }
+
+          log_format combined_ssl '$host:$server_port <= $remote_addr:$remote_port - $remote_user [$time_local] '
+          '"$request" $status $body_bytes_sent '
+          '"$http_referer" "$http_user_agent" "$http_x_forwarded_for" $ssl_protocol/$ssl_cipher/$http2 '
+          '"$http_location" sids="$cookie_JSESSIONID;$cookie_JSESSIONIDSSO;$cookie_PHPSESSID" "<<$request_length" ">>$bytes_sent" gzip_ratio=$gzip_ratio "upstream_addr=$upstream_addr" request_id=$request_id';
+
+          access_log /dev/stdout combined_ssl buffer=4k flush=5s; # the buffer must not exceed Block size" displayed by "stat -f ..." command
+
+          proxy_http_version 1.1;
+          proxy_bind 127.0.0.1;
+
+          proxy_temp_file_write_size 256k;
+          proxy_max_temp_file_size 2048m;
+
+          proxy_cache_key '$request_method$host$uri$is_args$args$http_authorization';
+          proxy_cache_lock on;
+          proxy_cache_use_stale error updating;
+          proxy_cache_background_update on;
+          proxy_cache_methods GET HEAD POST;
+          proxy_cache_path /var/lib/nginx/tmp/proxy/main1 levels=1:2 keys_zone=main1:10m inactive=10m use_temp_path=on max_size=5g;
+          proxy_cache_path /var/lib/nginx/tmp/proxy/apps01 levels=1:2 keys_zone=apps01:10m inactive=10m use_temp_path=on max_size=5g;
+          proxy_cache_path /var/lib/nginx/tmp/proxy/api01 levels=1:2 keys_zone=api01:10m inactive=10m use_temp_path=on max_size=5g;
+          proxy_cache_bypass $client_wants_no_cache;
+
+          proxy_set_header Origin ""; # Disable CORS processing by upstreams
+          proxy_set_header Host $http_host;
+          proxy_set_header X-Forwarded-Host $host;
+
+          brotli_window 512k;
+
+          gzip on;
+          gzip_proxied any;
+          gzip_comp_level 6;
+          gzip_disable msie6;
+          gzip_min_length 20;
+          gzip_http_version 1.1;
+          gzip_vary on;
+          gzip_types application/ecmascript application/javascript application/json application/x-ecmascript application/x-javascript application/xml application/xml+rss text/css text/ecmascript text/javascript text/javascript1.0 text/javascript1.1 text/javascript1.2 text/javascript1.3 text/javascript1.4 text/javascript1.5 text/jscript text/livescript text/plain text/x-component text/x-ecmascript text/x-javascript text/xml application/vnd.ms-fontobject image/x-icon image/vnd.microsoft.icon image/svg+xml application/font-woff application/x-font-ttf font/opentype application/xhtml+xml application/rss+xml application/vnd.mapbox-vector-tile;
+
+          sendfile on;
+          sendfile_max_chunk 1024k;
+
+          # Default SSL settings
+          ssl_session_cache shared:SSL:10m;
+          ssl_stapling on;
+          ssl_stapling_verify on;
+
+          resolver_timeout 5s;
+        main-snippet: |
+          pcre_jit on;
+        server-snippet: |
+          include /etc/nginx/redirect_handling.conf;
+        enable-access-log-for-default-backend: "true"
+        worker-processes: "4"
+      # The Ingress Controller processes all the resources that do not have the "ingressClassName" field for all versions of kubernetes.
+      podAnnotations:
+        prometheus.io/scrape: true
+        prometheus.io/port: 10254
+      ingressClass: ingress-nginx
+
+      image:
+        repository: 'nexus.kontur.io:8085/konturdev/ingress-nginx'
+        tag: 1.8.2
+        digest: sha256:f038349eb77825ace132ba761a0f24a53e45af8126a703afed4cdccb8467b25b
+      ingressClassResource:
+        name: ingress-nginx
+      metrics:
+        serviceMonitor:
+          enabled: true
+        enabled: true
+
+      # The number of replicas of the Ingress controller deployment.
+      replicaCount: 2
+      service:
+        # The annotations of the Ingress Controller service.
+        annotations:
+          metallb.universe.tf/address-pool: default
+          metallb.universe.tf/allow-shared-ip: SHARED-IP-02
+        # The externalTrafficPolicy of the service. The value Local preserves the client source IP.
+        externalTrafficPolicy: Cluster
