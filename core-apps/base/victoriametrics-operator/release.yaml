@@ -24,3 +24,5 @@ spec:
     operator:
       disable_prometheus_converter: true
       psp_auto_creation_enabled: false
+    rbac:
+      pspEnabled: false
