@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/instance: k8s
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 2.34.0
+    app.kubernetes.io/version: 2.41.0
   name: k8s
   namespace: monitoring
 spec:
@@ -16,9 +16,9 @@ spec:
   replicaExternalLabelName: ""
   externalLabels:
     cluster: "k8s-01"
-  image: quay.io/prometheus/prometheus:v2.34.0
+  image: quay.io/prometheus/prometheus:v2.41.0
   replicas: 2
   resources:
     requests:
       memory: 400Mi
-  version: 2.34.0
+  version: 2.41.0
