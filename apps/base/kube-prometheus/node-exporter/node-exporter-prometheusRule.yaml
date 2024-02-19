@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/component: exporter
     app.kubernetes.io/name: node-exporter
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 1.3.1
+    app.kubernetes.io/version: 1.5.0
     prometheus: k8s
     role: alert-rules
   name: node-exporter-rules
@@ -14,25 +14,6 @@ spec:
   groups:
   - name: node-exporter
     rules:
-    - alert: NodeFilesystemSpaceIsLow
-      annotations:
-        description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left.
-        runbook_url: https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemspacefillingup
-        summary: Filesystem {{ $labels.mountpoint }} on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left.
-      expr: |
-          node_filesystem_avail_bytes{job="node-exporter",fstype!=""} / node_filesystem_size_bytes{job="node-exporter",fstype!=""} * 100 < 20
-      for: 1m
-      labels:
-        severity: warning
-    - alert: NodeAvailableMemoryIsLow
-      annotations:
-        description: Memory at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available.
-        summary: Memory at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available.
-      expr: |
-          node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 15
-      for: 2m
-      labels:
-        severity: warning
     - alert: NodeFilesystemSpaceFillingUp
       annotations:
         description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left and is filling up.
