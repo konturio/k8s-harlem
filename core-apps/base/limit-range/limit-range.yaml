@@ -9,8 +9,8 @@ spec:
       storage: 50Gi # maximum storage request size
   - type: Container
     default: # define default limits
-      cpu: "1"
-      memory: 1Gi
+      cpu: "64"
+      memory: 512Gi
     defaultRequest: # define default requests
       cpu: "0.1"
       memory: 100Mi
