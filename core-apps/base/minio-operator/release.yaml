@@ -12,9 +12,10 @@ spec:
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: operator
+  name: minio-operator
   namespace: minio-operator
 spec:
+  interval: 10m
   chart:
     spec:
       chart: operator
