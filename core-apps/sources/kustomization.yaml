@@ -10,3 +10,4 @@ resources:
   - metallb.yaml
   - calico.yaml
   - pgo-kustomize-installer.yaml
+  - minio-operator.yaml
