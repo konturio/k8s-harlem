@@ -16,6 +16,7 @@ resources:
   - ../../base/local-path-provisioner-regular
   - ../../base/local-path-provisioner-fast
   - ../../base/postgres-operator
+  - ../../base/minio-operator
   - ./resource-quota
   - ./limit-range
 
