@@ -45,3 +45,10 @@ metadata:
   annotations:
     kustomize.toolkit.fluxcd.io/prune: disabled
 
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: minio-operator
+  annotations:
+    kustomize.toolkit.fluxcd.io/prune: disabled
