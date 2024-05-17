@@ -4,4 +4,5 @@ namespace: minio-operator
 resources:
   - release.yaml
   - ingress.yaml
+  - s3-ingress.yaml
 #  - secret.yaml
