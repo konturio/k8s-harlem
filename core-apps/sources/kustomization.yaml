@@ -11,3 +11,4 @@ resources:
   - calico.yaml
   - pgo-kustomize-installer.yaml
   - minio-operator.yaml
+  - longhorn.yaml
