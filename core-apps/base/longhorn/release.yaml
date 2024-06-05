@@ -78,7 +78,7 @@ spec:
         type: ClusterIP
         nodePort: ""
     persistence:
-      defaultClass: true
+      defaultClass: false
       defaultFsType: xfs
       defaultMkfsParams: ""
       defaultClassReplicaCount: 1
