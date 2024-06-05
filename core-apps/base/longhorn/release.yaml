@@ -1,0 +1,141 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: longhorn
+  namespace: longhorn-system
+spec:
+  chart:
+    spec:
+      chart: longhorn
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: longhorn
+        namespace: longhorn-system
+      version: 1.6.2
+  install:
+    crds: Create
+  interval: 30m
+  suspend: false
+  upgrade:
+    crds: CreateReplace
+  values:
+    networkPolicies:
+      enabled: false
+      type: "k3s"
+    image:
+      longhorn:
+        engine:
+          repository: longhornio/longhorn-engine
+          tag: v1.6.2
+        manager:
+          repository: longhornio/longhorn-manager
+          tag: v1.6.2
+        ui:
+          repository: longhornio/longhorn-ui
+          tag: v1.6.2
+        instanceManager:
+          repository: longhornio/longhorn-instance-manager
+          tag: v1.6.2
+        shareManager:
+          repository: longhornio/longhorn-share-manager
+          tag: v1.6.2
+        backingImageManager:
+          repository: longhornio/backing-image-manager
+          tag: v1.6.2
+        supportBundleKit:
+          repository: longhornio/support-bundle-kit
+          tag: v0.0.37
+      csi:
+        attacher:
+          repository: longhornio/csi-attacher
+          tag: v4.5.1
+        provisioner:
+          repository: longhornio/csi-provisioner
+          tag: v3.6.4
+        nodeDriverRegistrar:
+          repository: longhornio/csi-node-driver-registrar
+          tag: v2.9.2
+        resizer:
+          repository: longhornio/csi-resizer
+          tag: v1.10.1
+        snapshotter:
+          repository: longhornio/csi-snapshotter
+          tag: v6.3.4
+        livenessProbe:
+          repository: longhornio/livenessprobe
+          tag: v2.12.0
+      openshift:
+        oauthProxy:
+          repository: longhornio/openshift-origin-oauth-proxy
+          tag: 4.14
+      pullPolicy: IfNotPresent
+    service:
+      ui:
+        type: ClusterIP
+        nodePort: null
+      manager:
+        type: ClusterIP
+        nodePort: ""
+    persistence:
+      defaultClass: true
+      defaultFsType: xfs
+      defaultMkfsParams: ""
+      defaultClassReplicaCount: 1
+      defaultDataLocality: disabled
+      reclaimPolicy: Delete
+      migratable: false
+      nfsOptions: ""
+      recurringJobSelector:
+        enable: false
+        jobList: []
+      defaultNodeSelector:
+        enable: false
+        selector: ""
+      removeSnapshotsDuringFilesystemTrim: ignored
+    preUpgradeChecker:
+      jobEnabled: true
+      upgradeVersionCheck: true
+    csi:
+      attacherReplicaCount: 3
+      provisionerReplicaCount: 3
+      resizerReplicaCount: 3
+      snapshotterReplicaCount: 3
+    defaultSettings:
+      defaultDataPath: /opt/local-path-provisioner/longhorn/
+      defaultDataLocality: disabled
+      replicaSoftAntiAffinity: false
+      replicaAutoBalance: disabled
+      storageOverProvisioningPercentage: 100
+      storageMinimalAvailablePercentage: 5
+      storageReservedPercentageForDefaultDisk: 1
+      upgradeChecker: false
+      defaultReplicaCount: 1
+      defaultLonghornStaticStorageClass: longhorn-single
+      backupstorePollInterval: 400
+      failedBackupTTL: 1440
+      restoreVolumeRecurringJobs: false
+      recurringSuccessfulJobsHistoryLimit: 1
+      recurringFailedJobsHistoryLimit: 1
+      priorityClass: longhorn-critical
+      autoSalvage: true
+      autoDeletePodWhenVolumeDetachedUnexpectedly: true
+      disableSchedulingOnCordonedNode: false
+      replicaZoneSoftAntiAffinity: false
+      replicaDiskSoftAntiAffinity: false
+      nodeDownPodDeletionPolicy: do-nothing
+      nodeDrainPolicy: block-if-contains-last-replica
+    longhornManager:
+      log:
+        format: plain
+    longhornDriver:
+      tolerations: []
+      nodeSelector: {}
+    longhornUI:
+      replicas: 2
+    enablePSP: false
+    namespaceOverride: ""
+    annotations: {}
+    metrics:
+      serviceMonitor:
+        enabled: true
