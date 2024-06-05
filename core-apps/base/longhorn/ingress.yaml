@@ -4,6 +4,8 @@ metadata:
   name: longhorn-ingress
   namespace: longhorn-system
   annotations:
+    acme.cert-manager.io/http01-edit-in-place: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-production
     nginx.ingress.kubernetes.io/auth-type: basic
     nginx.ingress.kubernetes.io/ssl-redirect: 'false'
     nginx.ingress.kubernetes.io/auth-secret: basic-auth
