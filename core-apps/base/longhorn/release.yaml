@@ -121,7 +121,7 @@ spec:
       autoSalvage: true
       autoDeletePodWhenVolumeDetachedUnexpectedly: true
       disableSchedulingOnCordonedNode: false
-      replicaZoneSoftAntiAffinity: false
+      replicaZoneSoftAntiAffinity: true
       replicaDiskSoftAntiAffinity: false
       nodeDownPodDeletionPolicy: do-nothing
       nodeDrainPolicy: block-if-contains-last-replica
