@@ -132,7 +132,7 @@ spec:
       tolerations: []
       nodeSelector: {}
     longhornUI:
-      replicas: 2
+      replicas: 1
     enablePSP: false
     namespaceOverride: ""
     annotations: {}
