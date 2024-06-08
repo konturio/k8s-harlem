@@ -5,4 +5,4 @@ resources:
   - storageclass-ha.yaml
   - storageclass-single.yaml
   - release.yaml
-  - ingress.yaml
+#  - ingress.yaml
