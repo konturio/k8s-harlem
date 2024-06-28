@@ -103,7 +103,7 @@ spec:
       snapshotterReplicaCount: 3
     defaultSettings:
       defaultDataPath: /opt/local-path-provisioner/longhorn/
-      defaultDataLocality: disabled
+      defaultDataLocality: best-effort
       replicaSoftAntiAffinity: false
       replicaAutoBalance: disabled
       storageOverProvisioningPercentage: 100
