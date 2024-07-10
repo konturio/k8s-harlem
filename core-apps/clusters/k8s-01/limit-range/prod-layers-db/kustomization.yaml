@@ -4,3 +4,13 @@ resources:
   - ../../../../base/limit-range
 
 namespace: prod-layers-db
+
+patchesJson6902:
+  - target:
+      kind: LimitRange
+      name: common-limit-range
+      version: v1
+    patch: |-
+      - op: replace
+        path: /spec/limits/0/max/storage
+        value: "1000Gi"
