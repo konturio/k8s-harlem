@@ -4,3 +4,13 @@ resources:
   - ../../../../base/resource-quota
 
 namespace: dev-layers-db
+
+patchesJson6902:
+  - target:
+      kind: ResourceQuota
+      name: common-resource-quota
+      version: v1
+    patch: |-
+      - op: replace
+        path: /spec/hard/requests.storage
+        value: "1000Gi"
