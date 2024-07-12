@@ -1,0 +1,183 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    v1.min.io/pool: pool-0
+    v1.min.io/tenant: prod-minio-tenant
+  name: prod-minio-tenant-pool-0
+  namespace: prod-minio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      v1.min.io/console: prod-minio-tenant-console
+      v1.min.io/pool: pool-0
+      v1.min.io/tenant: prod-minio-tenant
+  serviceName: prod-minio-tenant-hl
+  template:
+    metadata:
+      labels:
+        v1.min.io/console: prod-minio-tenant-console
+        v1.min.io/pool: pool-0
+        v1.min.io/tenant: prod-minio-tenant
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - hwn04.k8s-01.kontur.io
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: v1.min.io/tenant
+                    operator: In
+                    values:
+                      - prod-minio-tenant
+                  - key: v1.min.io/pool
+                    operator: In
+                    values:
+                      - pool-0
+              topologyKey: kubernetes.io/hostname
+      containers:
+        - args:
+            - server
+            - --certs-dir
+            - /tmp/certs
+            - --console-address
+            - :9443
+          env:
+            - name: MINIO_CONFIG_ENV_FILE
+              value: /tmp/minio/config.env
+            - name: MINIO_OPERATOR_VERSION
+              value: 5.0.14
+            - name: MINIO_PROMETHEUS_JOB_ID
+              value: minio-job
+            - name: MINIO_SERVER_URL
+              value: https://minio.prod-minio.svc.cluster.local:443
+            - name: MINIO_UPDATE
+              value: "on"
+          image: minio/minio:RELEASE.2024-07-10T18-41-49Z
+          imagePullPolicy: IfNotPresent
+          name: minio
+          ports:
+            - containerPort: 9000
+              protocol: TCP
+            - containerPort: 9443
+              protocol: TCP
+          resources:
+            requests:
+              cpu: "4"
+              memory: 8Gi
+          securityContext:
+            runAsGroup: 1000
+            runAsNonRoot: true
+            runAsUser: 1000
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /tmp/minio/
+              name: cfg-vol
+            - mountPath: /export
+              name: data0
+            - mountPath: /tmp/certs
+              name: prod-minio-tenant-tls
+        - args:
+            - sidecar
+            - --tenant
+            - prod-minio-tenant
+            - --config-name
+            - prod-minio-tenant-env-configuration
+          env:
+            - name: CLUSTER_DOMAIN
+              value: cluster.local
+          image: quay.io/minio/operator:v5.0.14
+          imagePullPolicy: IfNotPresent
+          name: sidecar
+          securityContext:
+            runAsGroup: 1000
+            runAsNonRoot: true
+            runAsUser: 1000
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /tmp/minio/
+              name: cfg-vol
+            - mountPath: /tmp/minio-config
+              name: configuration
+      dnsPolicy: ClusterFirst
+      initContainers:
+        - args:
+            - validate
+            - --tenant
+            - prod-minio-tenant
+          env:
+            - name: CLUSTER_DOMAIN
+              value: cluster.local
+          image: quay.io/minio/operator:v5.0.14
+          imagePullPolicy: IfNotPresent
+          name: validate-arguments
+          securityContext:
+            runAsGroup: 1000
+            runAsNonRoot: true
+            runAsUser: 1000
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /tmp/minio/
+              name: cfg-vol
+            - mountPath: /tmp/minio-config
+              name: configuration
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: Always
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+      serviceAccount: prod-minio-tenant-sa
+      serviceAccountName: prod-minio-tenant-sa
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: cfg-vol
+        - name: prod-minio-tenant-tls
+          projected:
+            defaultMode: 420
+            sources:
+              - secret:
+                  items:
+                    - key: public.crt
+                      path: public.crt
+                    - key: private.key
+                      path: private.key
+                    - key: public.crt
+                      path: CAs/public.crt
+                  name: prod-minio-tenant-tls
+        - name: configuration
+          projected:
+            defaultMode: 420
+            sources:
+              - secret:
+                  name: prod-minio-tenant-env-configuration
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: data0
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: "4398046511104"
+        storageClassName: longhorn-single
+        volumeMode: Filesystem
