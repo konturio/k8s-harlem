@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/proxy-body-size: 10000m
+    nginx.ingress.kubernetes.io/server-snippet: |
+      proxy_bind off;
+      grpc_read_timeout 120s;
+      grpc_send_timeout 120s;
+      client_body_timeout 120s;
+      client_max_body_size 10000m;
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      chunked_transfer_encoding off;
+  name: s3-kontur-io-ng
+  namespace: prod-minio
+spec:
+  ingressClassName: ingress-nginx
+  rules:
+    - host: s3.kontur.io
+      http:
+        paths:
+          - backend:
+              service:
+                name: prod-minio-tenant-hl
+                port:
+                  number: 9000
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - s3.kontur.io
+      secretName: s3-kontur-io-tls
