@@ -125,6 +125,7 @@ spec:
       replicaDiskSoftAntiAffinity: false
       nodeDownPodDeletionPolicy: do-nothing
       nodeDrainPolicy: block-if-contains-last-replica
+      guaranteedInstanceManagerCPU: 20
     longhornManager:
       log:
         format: plain
