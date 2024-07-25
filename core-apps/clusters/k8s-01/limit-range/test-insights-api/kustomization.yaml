@@ -13,4 +13,4 @@ patchesJson6902:
     patch: |-
       - op: replace
         path: /spec/limits/0/max/storage
-        value: "3000Gi"
+        value: "5000Gi"
