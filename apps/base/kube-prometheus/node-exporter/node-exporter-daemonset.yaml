@@ -80,8 +80,8 @@ spec:
           name: https
         resources:
           limits:
-            cpu: 20m
-            memory: 40Mi
+            cpu: 200m
+            memory: 256Mi
           requests:
             cpu: 10m
             memory: 20Mi
