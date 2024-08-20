@@ -13,4 +13,4 @@ patchesJson6902:
     patch: |-
       - op: replace
         path: /spec/hard/requests.storage
-        value: "1000Gi"
+        value: "2000Gi"
