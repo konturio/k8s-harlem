@@ -179,5 +179,5 @@ spec:
         resources:
           requests:
             storage: "4398046511104"
-        storageClassName: longhorn-single
+        storageClassName: local-path-fast
         volumeMode: Filesystem
