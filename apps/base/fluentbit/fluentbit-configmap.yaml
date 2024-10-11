@@ -56,8 +56,8 @@ data:
         Tag kube.*
         Mem_Buf_Limit 20MB
         Skip_Long_Lines On
-        Buffer_Chunk_Size 64KB
-        Buffer_Max_Size 128KB
+        Buffer_Chunk_Size 256KB
+        Buffer_Max_Size 512KB
 
     [INPUT]
         Name tail
