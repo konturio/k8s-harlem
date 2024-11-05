@@ -78,6 +78,7 @@ spec:
           }
 
           map "$host" $dn2021_robots_txt {
+            "~*^(?:www\.)?atlas\.kontur\.io$" "User-agent: *\nAllow: /\n";
             "~*^(?:www\.)?disaster\.ninja$"   "User-agent: *\nAllow: /\n";
             default                           "User-agent: RED\nDisallow:\n\nUser-agent: *\nDisallow: /\n";
           }
