@@ -167,7 +167,6 @@ spec:
           pcre_jit on;
         server-snippet: |
           include /etc/nginx/redirect_handling.conf;
-        enable-access-log-for-default-backend: "true"
         worker-processes: "4"
       # The Ingress Controller processes all the resources that do not have the "ingressClassName" field for all versions of kubernetes.
       podAnnotations:
