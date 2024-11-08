@@ -21,7 +21,7 @@ spec:
         kind: HelmRepository
         name: ingress-nginx
         namespace: ingress-nginx
-      version: 4.8.3
+      version: 4.8.1
   install:
     crds: Create
   interval: 10m
@@ -176,8 +176,8 @@ spec:
 
       image:
         repository: 'nexus.kontur.io:8085/konturdev/ingress-nginx'
-        tag: 1.8.3
-        digest: sha256:82fa58a7e48838f27d4acc12537e24ea191113a283e4f6347c271688cb49bc4e
+        tag: 1.8.2
+        digest: sha256:f038349eb77825ace132ba761a0f24a53e45af8126a703afed4cdccb8467b25b
       ingressClassResource:
         name: ingress-nginx
       metrics:
