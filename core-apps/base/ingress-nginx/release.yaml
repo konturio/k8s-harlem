@@ -33,7 +33,7 @@ spec:
     controller:
       config:
         use-forwarded-headers: "true" # allow X-Forwarded-Host for different hostnames
-        #allow-snippet-annotations: true
+        allow-snippet-annotations: true
         enable-underscores-in-headers: "true"
         client-body-buffer-size: "32k"
         ssl-prefer-server-ciphers: "false"
