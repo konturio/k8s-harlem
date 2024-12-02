@@ -6,8 +6,10 @@ spec:
   chart:
     spec:
       chart: metallb
-      version: v0.11.0
+      version: v0.14.8
   values:
+    speaker:
+      enabled: false
     configInline:
       address-pools:
         - name: default
