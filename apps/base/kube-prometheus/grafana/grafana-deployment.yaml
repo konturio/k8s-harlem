@@ -159,7 +159,7 @@ spec:
       volumes:
       - name: grafana-storage-vol
         persistentVolumeClaim:
-          claimName: grafana-storage-pvc
+          claimName: grafana-storage-pvc-01
       - name: grafana-datasources
         secret:
           secretName: grafana-datasources
