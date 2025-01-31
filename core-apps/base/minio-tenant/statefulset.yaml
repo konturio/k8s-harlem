@@ -29,7 +29,7 @@ spec:
                   - key: kubernetes.io/hostname
                     operator: In
                     values:
-                      - hwn04.k8s-01.kontur.io
+                      - hwn03.k8s-01.kontur.io
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
