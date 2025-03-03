@@ -1,0 +1,27 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: velero
+  namespace: velero
+spec:
+  releaseName: velero
+  valuesFrom:
+    - kind: ConfigMap
+      name: velero-configmap
+      valuesKey: configmap-values.yaml
+  chart:
+    spec:
+      chart: velero
+      reconcileStrategy: ChartVersion
+      version: 8.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: velero
+        namespace: flux-system
+  install:
+    crds: Create
+  interval: 30m
+  suspend: false
+  upgrade:
+    crds: CreateReplace

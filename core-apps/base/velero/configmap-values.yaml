@@ -1,0 +1,155 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: velero-configmap
+  namespace: velero
+data:
+  values.yaml: |-
+    image:
+      repository: velero/velero
+      tag: v1.15.2
+
+    resources:
+      requests:
+        cpu: 500m
+        memory: 128Mi
+      limits:
+        cpu: 1000m
+        memory: 1024Mi
+
+    initContainers:
+      - name: velero-plugin-for-aws
+        image: velero/velero-plugin-for-aws:v1.11.1
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: /target
+            name: plugins
+
+    uploaderType: kopia
+    deployNodeAgent: false
+    backupsEnabled: true
+    snapshotsEnabled: false
+
+    upgradeCRDs: true
+    cleanUpCRDs: false
+
+    metrics:
+      enabled: true
+      scrapeInterval: 30s
+      scrapeTimeout: 10s
+
+      podAnnotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8085"
+        prometheus.io/path: "/metrics"
+
+    kubectl:
+      image:
+        repository: docker.io/bitnami/kubectl
+        tag: 1.28
+
+    configuration:
+      backupStorageLocation:
+        - name: default
+          provider: aws
+          bucket: velero-backups
+          accessMode: ReadWrite
+          config:
+            region: eu-central-1
+            s3ForcePathStyle: "true"
+            s3Url: "https://hel1.your-objectstorage.com"
+            checksumAlgorithm: ""
+      useVolumeSnapshots: false
+      volumeSnapshotLocation: []
+
+      repositoryMaintenanceJob:
+        requests:
+          cpu: 500m
+          memory: 512Mi
+        limits:
+          cpu: 1000m
+          memory: 1024Mi
+        latestJobsCount: 3
+
+    schedules:
+      k8s-backup:
+        disabled: false
+        schedule: "0 0 * * *"
+        useOwnerReferencesInBackup: false
+        paused: false
+        template:
+          ttl: "240h"
+          storageLocation: default
+          includedNamespaces:
+            - dev-basemap
+            - dev-disaster-ninja
+            - dev-epig
+            - dev-event-api
+            - dev-gateway
+            - dev-gptcache
+            - dev-insights-api
+            - dev-isochrone-api
+            - dev-keycloak
+            - dev-layers-api
+            - dev-layers-db
+            - dev-layers-tiles-api
+            - dev-osrm
+            - dev-raster-tiler
+            - dev-rasters
+            - dev-titiler
+            - dev-user-profile-api
+            - dev-user-profile-api-exp
+            - test-basemap
+            - test-disaster-ninja
+            - test-epig
+            - test-event-api
+            - test-gateway
+            - test-insights-api
+            - test-isochrone-api
+            - test-keycloak
+            - test-layers-api
+            - test-layers-db
+            - test-layers-tiles-api
+            - test-osrm
+            - test-raster-tiler
+            - test-titiler
+            - test-user-profile-api
+            - prod-basemap
+            - prod-disaster-ninja
+            - prod-epig
+            - prod-event-api
+            - prod-gateway
+            - prod-insights-api
+            - prod-isochrone-api
+            - prod-keycloak
+            - prod-layers-api
+            - prod-layers-db
+            - prod-layers-tiles-api
+            - prod-minio
+            - prod-raster-tiler
+            - prod-rasters
+            - prod-titiler
+            - prod-user-profile-api
+            - calico-apiserver
+            - calico-system
+            - cert-manager
+            - flux-system
+            - ingress-nginx
+            - insights-api-db-svc
+            - logging
+            - longhorn-system
+            - metallb-system
+            - metrics-server
+            - minio-operator
+            - monitoring
+            - postgres-operator
+            - tigera-operator
+            - tracing
+            - valhalla-system
+          excludedNamespaceScopedResources:
+            - deployments
+            - statefulsets
+            - replicasets
+            - persistentvolumeclaims
+          excludedClusterScopedResources:
+            - persistentvolumes
