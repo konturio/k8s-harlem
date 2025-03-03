@@ -19,6 +19,7 @@ resources:
   - ../../base/minio-operator
   - ../../base/minio-tenant
   - ../../base/longhorn
+  - ../../base/velero
   - ./resource-quota
   - ./limit-range
 
