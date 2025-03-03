@@ -12,3 +12,4 @@ resources:
   - pgo-kustomize-installer.yaml
   - minio-operator.yaml
   - longhorn.yaml
+  - velero.yaml
