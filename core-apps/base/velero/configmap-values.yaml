@@ -4,7 +4,7 @@ metadata:
   name: velero-configmap
   namespace: velero
 data:
-  values.yaml: |-
+  configmap-values.yaml: |-
     image:
       repository: velero/velero
       tag: v1.15.2
