@@ -21,7 +21,7 @@ spec:
         kind: HelmRepository
         name: ingress-nginx
         namespace: ingress-nginx
-      version: 4.8.2
+      version: 4.7.0
   install:
     crds: Create
   interval: 10m
@@ -34,6 +34,7 @@ spec:
       config:
         use-forwarded-headers: "true" # allow X-Forwarded-Host for different hostnames
         allow-snippet-annotations: true
+        #annotations-risk-level: Critical # for the future releases (see https://github.com/kubernetes/ingress-nginx/issues/12656)
         enable-underscores-in-headers: "true"
         client-body-buffer-size: "32k"
         ssl-prefer-server-ciphers: "false"
@@ -55,6 +56,21 @@ spec:
           map $http_pragma:$http_cache_control $client_wants_no_cache {
             "~*\bno-cache\b" "no-cache";
             default          "";
+          }
+
+          map $host $dn_cache_control {
+          default 'max-age=0, no-cache, no-store, must-revalidate';
+          'app.kontur.io' 'max-age=3600, public';
+          }
+
+          map $host $basemap_cache_control {
+          default 'max-age=0, no-cache, no-store, must-revalidate';
+          'prod-basemap-tileserver.k8s-01.konturlabs.com' 'max-age=3600, public';
+          }
+
+          map $host $layers_tiles_cache_control {
+          default 'max-age=0, no-cache, no-store, must-revalidate';
+          'prod-layers-tiles-api.k8s-01.konturlabs.com' 'max-age=3600, public';
           }
 
           map $server_name:$server_port $new_location {
@@ -139,6 +155,9 @@ spec:
           proxy_cache_path /var/lib/nginx/tmp/proxy/api01 levels=1:2 keys_zone=api01:10m inactive=10m use_temp_path=on max_size=5g;
           proxy_cache_bypass $client_wants_no_cache;
 
+          proxy_headers_hash_max_size 1024;
+          proxy_headers_hash_bucket_size 128;
+
           proxy_set_header Origin ""; # Disable CORS processing by upstreams
           proxy_set_header Host $http_host;
           proxy_set_header X-Forwarded-Host $host;
@@ -167,17 +186,26 @@ spec:
           pcre_jit on;
         server-snippet: |
           include /etc/nginx/redirect_handling.conf;
-        worker-processes: "4"
+        worker-processes: "auto"
       # The Ingress Controller processes all the resources that do not have the "ingressClassName" field for all versions of kubernetes.
       podAnnotations:
         prometheus.io/scrape: true
         prometheus.io/port: 10254
+      #enableAnnotationValidations: false #for the future releases (see https://github.com/kubernetes/ingress-nginx/issues/12655)
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - hwn04.k8s-01.kontur.io
       ingressClass: ingress-nginx
 
       image:
-        repository: 'nexus.kontur.io:8085/konturdev/ingress-nginx'
-        tag: 1.8.2
-        digest: sha256:f038349eb77825ace132ba761a0f24a53e45af8126a703afed4cdccb8467b25b
+        repository: 'nexus.kontur.io:8085/konturdev/ingress-nginx-controller-custom'
+        tag: 1.8.0a
+        digest: sha256:3ab087c8b840a4f1188b2312ddf241b803212f2297d857a1bd3633f0153d02a4
       ingressClassResource:
         name: ingress-nginx
       metrics:
@@ -186,7 +214,7 @@ spec:
         enabled: true
 
       # The number of replicas of the Ingress controller deployment.
-      replicaCount: 2
+      replicaCount: 1
       service:
         # The annotations of the Ingress Controller service.
         annotations:
