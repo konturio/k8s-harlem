@@ -9,7 +9,7 @@ resources:
   - ../../base/victoriametrics-operator
   - ../../base/local-path-provisioner
   - ../../base/calico
-  - ../../base/nginx-ingress
+#  - ../../base/nginx-ingress
   - ../../base/cert-manager-crds
   - ../../base/metallb
   - ../../base/metrics-server
@@ -25,7 +25,7 @@ patchesStrategicMerge:
   - victoriametrics-operator/release.yaml
   - local-path-provisioner/configmap.yaml
   - local-path-provisioner/deployment.yaml
-  - nginx-ingress/release.yaml
+#  - nginx-ingress/release.yaml
   - metallb/release.yaml
   - tigera-operator/release.yaml
   - kube-prometheus-operator/prometheus-operator-deployment.yaml
