@@ -6,7 +6,7 @@ spec:
   chart:
     spec:
       chart: metallb
-      version: v0.14.8
+      version: v0.12.1
   values:
     configInline:
       address-pools:
