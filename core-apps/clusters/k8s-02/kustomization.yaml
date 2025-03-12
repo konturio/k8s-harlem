@@ -27,7 +27,6 @@ patchesStrategicMerge:
   - local-path-provisioner/deployment.yaml
 #  - nginx-ingress/release.yaml
   - metallb/release.yaml
-  - metallb/ipaddresspool.yaml
   - tigera-operator/release.yaml
   - kube-prometheus-operator/prometheus-operator-deployment.yaml
   - local-path-provisioner-regular/configmap.yaml
