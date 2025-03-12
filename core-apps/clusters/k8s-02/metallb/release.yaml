@@ -6,12 +6,4 @@ spec:
   chart:
     spec:
       chart: metallb
-      version: v0.12.1
-  values:
-    configInline:
-      address-pools:
-        - name: default
-          protocol: layer2
-          avoid-buggy-ips: true
-          addresses:
-            - 159.69.100.198/32
+      version: v0.14.9
