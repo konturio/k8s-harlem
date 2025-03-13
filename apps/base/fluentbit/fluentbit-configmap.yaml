@@ -69,15 +69,6 @@ data:
         Skip_Long_Lines On
 
     [INPUT]
-        Name tail
-        Path /var/log/containers/nginx-ingress-controller-*.log
-        multiline.parser docker, cri
-        Skip_Empty_Lines On
-        Tag kube.*
-        Mem_Buf_Limit 10MB
-        Skip_Long_Lines On
-
-    [INPUT]
         Name systemd
         Tag host.*
         Path /run/log/journal
