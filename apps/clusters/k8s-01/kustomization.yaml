@@ -12,7 +12,6 @@ resources:
   - ../../base/kube-prometheus/prometheus
   - ../../base/kube-prometheus/prometheus-adapter
   - ../../base/kube-prometheus/victoriametrics
-  - ../../base/postgres-exporter
   - ../../base/fluentbit
   - ../../base/flux
   # - ../../base/cert-manager
