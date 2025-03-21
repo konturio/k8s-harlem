@@ -20,6 +20,7 @@ resources:
   - ../../base/minio-tenant
   - ../../base/longhorn
   - ../../base/velero
+  - ../../base/tigera-operator
   - ./resource-quota
   - ./limit-range
 
