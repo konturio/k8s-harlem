@@ -4,7 +4,6 @@ metadata:
   name: pgo-kustomize-installer
   namespace: flux-system
 spec:
-  gitImplementation: go-git
   ignore: |
     /*
     !/kustomize
