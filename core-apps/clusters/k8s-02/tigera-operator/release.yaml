@@ -1,4 +1,4 @@
-# https://docs.tigera.io/calico/3.28/getting-started/kubernetes/helm
+# https://docs.tigera.io/calico/3.29/getting-started/kubernetes/helm
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: tigera-operator
-      version: 3.28.3
+      version: 3.29.2
   values:
     installation:
       calicoNetwork:
