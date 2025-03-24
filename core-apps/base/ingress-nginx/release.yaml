@@ -187,7 +187,7 @@ spec:
           ssl_session_cache shared:SSL:10m;
           ssl_stapling on;
           ssl_stapling_verify on;
-          
+
           http2_push_preload on;
           http2_idle_timeout 3m;
           http2_recv_timeout 30s;
