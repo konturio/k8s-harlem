@@ -186,12 +186,8 @@ spec:
           ssl_stapling on;
           ssl_stapling_verify on;
 
-          http2_push_preload on;
-          http2_idle_timeout 3m;
-          http2_recv_timeout 30s;
           http2_chunk_size 8k;
 
-          large_client_header_buffers 16 32k;
           keepalive_requests 10000;
 
           resolver_timeout 5s;
