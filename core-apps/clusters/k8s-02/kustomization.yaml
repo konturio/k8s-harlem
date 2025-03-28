@@ -10,6 +10,7 @@ resources:
   - ../../base/local-path-provisioner
   - ../../base/calico
 #  - ../../base/nginx-ingress
+  - ../../base/ingress-nginx-custom
   - ../../base/cert-manager-crds
   - ../../base/metallb
   - ../../base/metrics-server
@@ -26,6 +27,7 @@ patchesStrategicMerge:
   - local-path-provisioner/configmap.yaml
   - local-path-provisioner/deployment.yaml
 #  - nginx-ingress/release.yaml
+  - ingress-nginx-custom/release.yaml
   - metallb/release.yaml
   - tigera-operator/release.yaml
   - kube-prometheus-operator/prometheus-operator-deployment.yaml
