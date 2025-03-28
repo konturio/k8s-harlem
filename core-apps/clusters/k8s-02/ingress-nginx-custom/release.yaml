@@ -129,7 +129,7 @@ spec:
             "~^.*:/kcapi/"                              -1;
             "~^.*:/kcfirebrigade/"                      -1;
             "~^.*:/kcfirebrigade-fe/"                   -1;
-          
+
            # TASK 13170
            # "~^.*:/live/metrics"                        -1;
            # "~^.*:/graphql"                             off;
@@ -190,7 +190,7 @@ spec:
           http2_idle_timeout 3m;
           http2_recv_timeout 30s;
           http2_chunk_size 8k;
-          
+
           large_client_header_buffers 16 32k;
           keepalive_requests 10000;
 
