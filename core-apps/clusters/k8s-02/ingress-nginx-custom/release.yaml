@@ -53,7 +53,7 @@ spec:
         proxy-buffers-number: "8"
         proxy_headers_hash_max_size: 1024
         proxy_headers_hash_bucket_size: 128
-        #keep-alive: 180 ?
+        keep-alive: 180
         enable-brotli: "true"
         brotli-level: "6"
         brotli-min-length: "20"
@@ -187,8 +187,6 @@ spec:
           ssl_stapling_verify on;
 
           http2_chunk_size 8k;
-
-          keepalive_requests 10000;
 
           resolver_timeout 5s;
         main-snippet: |
