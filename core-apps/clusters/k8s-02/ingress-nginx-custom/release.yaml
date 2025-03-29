@@ -20,8 +20,8 @@ spec:
         name: ingress-nginx
       image:
         repository: 'nexus.kontur.io:8085/konturdev/ingress-nginx-controller-custom'
-        tag: 1.12.0
-        digest: sha256:d3cf392d39972f964570c291debaa105d363959de41afb086b88ea02cc0116e9
+        tag: 1.12.1
+        digest: sha256:5fdf4d5028bfafe1d7be4d2ade73568c626cf7e314eb67227cfe601ef9c51891
       replicaCount: 1
       metrics:
         serviceMonitor:
