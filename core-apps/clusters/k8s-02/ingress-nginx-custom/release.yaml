@@ -6,8 +6,6 @@ metadata:
 spec:
   install:
     crds: Create
-  rbac:
-    create: true
   interval: 10m
   suspend: false
   upgrade:
