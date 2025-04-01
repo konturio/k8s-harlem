@@ -18,12 +18,15 @@ spec:
     remediation:
       retries: 3
   values:
+    fullnameOverride: dev-layers-db-exporter
     service:
       port: 9187
     serviceMonitor:
       enabled: true
       namespace: dev-layers-db
       interval: 30s
+      labels:
+        role: master
     resources:
       limits:
         cpu: 200m
@@ -39,6 +42,59 @@ spec:
     config:
       datasource:
         host: db-layers-primary.dev-layers-db.svc
+        user: layers-db
+        database: layers-db
+        passwordSecret:
+          name: dev-layers-db-postgres-exporter
+          key: data_source_password
+        sslmode: require
+      logLevel: "info"
+      logFormat: "logfmt"
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: dev-layers-db-postgres-exporter-replica
+  namespace: monitoring
+spec:
+  releaseName: dev-layers-db-postgres-exporter-replica
+  chart:
+    spec:
+      chart: prometheus-postgres-exporter
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+      version: 3.0.3
+  interval: 1h
+  install:
+    remediation:
+      retries: 3
+  values:
+    fullnameOverride: dev-layers-db-exporter-replica
+    service:
+      port: 9187
+    serviceMonitor:
+      enabled: true
+      namespace: dev-layers-db
+      interval: 30s
+      labels:
+        role: replica
+    resources:
+      limits:
+        cpu: 200m
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    rbac:
+      create: true
+      pspEnabled: false
+    serviceAccount:
+      create: true
+    config:
+      datasource:
+        host: db-layers-replicas.dev-layers-db.svc
         user: layers-db
         database: layers-db
         passwordSecret:
