@@ -18,12 +18,15 @@ spec:
     remediation:
       retries: 3
   values:
+    fullnameOverride: prod-event-api-db-exporter
     service:
       port: 9187
     serviceMonitor:
       enabled: true
       namespace: prod-event-api
       interval: 30s
+      labels:
+        role: master
     resources:
       limits:
         cpu: 200m
@@ -39,6 +42,59 @@ spec:
     config:
       datasource:
         host: db-event-api-primary.prod-event-api.svc
+        user: event-api
+        database: event-api
+        passwordSecret:
+          name: prod-event-api-db-postgres-exporter
+          key: data_source_password
+        sslmode: require
+      logLevel: "info"
+      logFormat: "logfmt"
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: prod-event-api-db-postgres-exporter-replica
+  namespace: monitoring
+spec:
+  releaseName: prod-event-api-db-postgres-exporter-replica
+  chart:
+    spec:
+      chart: prometheus-postgres-exporter
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+      version: 3.0.3
+  interval: 1h
+  install:
+    remediation:
+      retries: 3
+  values:
+    fullnameOverride: prod-event-api-db-exporter-replica
+    service:
+      port: 9187
+    serviceMonitor:
+      enabled: true
+      namespace: prod-event-api
+      interval: 30s
+      labels:
+        role: replica
+    resources:
+      limits:
+        cpu: 200m
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    rbac:
+      create: true
+      pspEnabled: false
+    serviceAccount:
+      create: true
+    config:
+      datasource:
+        host: db-event-api-replicas.prod-event-api.svc
         user: event-api
         database: event-api
         passwordSecret:
