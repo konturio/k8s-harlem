@@ -57,7 +57,7 @@ metadata:
   name: test-insights-api-db-postgres-exporter-replica
   namespace: monitoring
 spec:
-  releaseName: test-insights-api-db-exporter-replica
+  releaseName: test-insights-api-db-postgres-exporter-replica
   chart:
     spec:
       chart: prometheus-postgres-exporter
