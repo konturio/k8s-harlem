@@ -54,10 +54,10 @@ spec:
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: test-insights-api-db-postgres-exporter-replica
+  name: test-insights-api-db-exporter-replica
   namespace: monitoring
 spec:
-  releaseName: test-insights-api-db-postgres-exporter-replica
+  releaseName: test-insights-api-db-exporter-replica
   chart:
     spec:
       chart: prometheus-postgres-exporter
