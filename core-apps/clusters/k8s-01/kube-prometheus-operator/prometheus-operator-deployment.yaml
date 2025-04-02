@@ -37,8 +37,8 @@ spec:
               name: http
           resources:
             limits:
-              cpu: 200m
-              memory: 200Mi
+              cpu: 500m
+              memory: 1024Mi
             requests:
               cpu: 100m
               memory: 100Mi
@@ -60,8 +60,8 @@ spec:
               name: https
           resources:
             limits:
-              cpu: 200m
-              memory: 256Mi
+              cpu: 500m
+              memory: 1024Mi
             requests:
               cpu: 10m
               memory: 20Mi
