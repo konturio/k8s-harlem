@@ -92,7 +92,7 @@ spec:
       pspEnabled: false
     serviceAccount:
       create: true
-      name: test-insights-api-db-exporter-sa-replica
+      name: test-insights-api-db-pg17-exporter-sa-replica
     config:
       datasource:
         host: db-insights-api-pg17-replicas.test-insights-api.svc
