@@ -18,3 +18,4 @@ resources:
   - test-insights-api-db/release.yaml
   - test-insights-api-db-pg17/release.yaml
   - prod-insights-api-db/release.yaml
+  - prod-insights-api-db-pg17/release.yaml
