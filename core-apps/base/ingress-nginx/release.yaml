@@ -210,7 +210,7 @@ spec:
         tag: 1.12.0
         digest: sha256:d3cf392d39972f964570c291debaa105d363959de41afb086b88ea02cc0116e9
 
-      replicaCount: 1
+      replicaCount: 3
 
       ingressClassResource:
         name: ingress-nginx
