@@ -41,6 +41,10 @@ spec:
     serviceAccount:
       create: true
     config:
+      extraArgs:
+        - --disable-settings-metrics
+        - --exclude-collector=statements
+        - --exclude-collector=locks
       datasource:
         host: db-insights-api-pg17-primary.test-insights-api.svc
         user: insights-api
@@ -106,3 +110,7 @@ spec:
         sslmode: require
       logLevel: "info"
       logFormat: "logfmt"
+      extraArgs:
+        - --disable-settings-metrics
+        - --exclude-collector=statements
+        - --exclude-collector=locks
