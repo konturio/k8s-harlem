@@ -51,6 +51,10 @@ spec:
         sslmode: require
       logLevel: "info"
       logFormat: "logfmt"
+      extraArgs:
+        - --disable-settings-metrics
+        - --exclude-collector=statements
+        - --exclude-collector=locks
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
@@ -106,3 +110,7 @@ spec:
         sslmode: require
       logLevel: "info"
       logFormat: "logfmt"
+      extraArgs:
+        - --disable-settings-metrics
+        - --exclude-collector=statements
+        - --exclude-collector=locks
