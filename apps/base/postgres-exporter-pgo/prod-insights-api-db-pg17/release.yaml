@@ -24,16 +24,17 @@ spec:
     serviceMonitor:
       enabled: true
       namespace: prod-insights-api
-      interval: 30s
+      interval: 60s
+      scrapeTimeout: 55s
       labels:
         role: master
     resources:
       limits:
-        cpu: 200m
-        memory: 256Mi
+        cpu: 500m
+        memory: 512Mi
       requests:
-        cpu: 100m
-        memory: 128Mi
+        cpu: 300m
+        memory: 256Mi
     rbac:
       create: true
       pspEnabled: false
@@ -77,16 +78,17 @@ spec:
     serviceMonitor:
       enabled: true
       namespace: prod-insights-api
-      interval: 30s
+      interval: 60s
+      scrapeTimeout: 55s
       labels:
         role: replica
     resources:
       limits:
-        cpu: 200m
-        memory: 256Mi
+        cpu: 500m
+        memory: 512Mi
       requests:
-        cpu: 100m
-        memory: 128Mi
+        cpu: 300m
+        memory: 256Mi
     rbac:
       create: true
       pspEnabled: false
