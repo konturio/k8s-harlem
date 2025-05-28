@@ -9,6 +9,7 @@ Flux GitOps repository
 - [Repository Structure](#repository-structure)
 - [Installation](#installation)
 - [Notifications](#notifications)
+- [Image automation](#image-reflector-and-automation-controllers)
 - [FAQ](#faq)
   * [How can I safely move resources from one dir to another?](#how-can-i-safely-move-resources-from-one-dir-to-another)
   * [Useful commands](#useful-commands)
@@ -115,10 +116,14 @@ The `clusters` configuration is structured into:
 ```
 
 ## Installation
-Flux itself is bootstrapped via [terraform](https://gitlab.com/kontur-private/operations/terraform/-/tree/main/kubernetes/flux).
+Flux itself is bootstrapped via [flux bootstrap for GitHub](https://fluxcd.io/flux/installation/bootstrap/github/).
 
 ## Notifications
 The Flux controllers emit Kubernetes events whenever a resource status changes. We use the `notification-controller` to forward these [events](https://fluxcd.io/docs/guides/notifications/) to Slack `#flux` channel.
+
+## Image reflector and automation controllers
+The `image-reflector-controller` and `image-automation-controller` work together to update a Git repository when new container images are available. [(description)](https://fluxcd.io/flux/components/image/)
+*not implemented yet
 
 ## FAQ
 ### How can I safely move resources from one dir to another?
@@ -146,10 +151,10 @@ helm ls -A
 
 ### How verify customization?
 ```bash
-kustomize build --load-restrictor=LoadRestrictionsNone --reorder=legacy core-apps/clusters/k8s-02/ | less
+kustomize build core-apps/clusters/k8s-02/ | less
 ```
 ```bash
-kustomize build --load-restrictor=LoadRestrictionsNone --reorder=legacy core-apps/clusters/k8s-02/ | kubectl apply --server-side --dry-run=server -f-
+kustomize build core-apps/clusters/k8s-02/ | kubectl apply --server-side --dry-run=server -f-
 ```
 
 ## Pre-commit hooks

@@ -1,0 +1,5 @@
+Metallb
+============
+In our setup, external traffic flows through a single statically assigned IP on one node (hwn01), then enters the Kubernetes cluster through a LoadBalancer service associated with the ingress controller. The ingress controller is backed by two replicas of the ingress-nginx pod, each running on a different node. When an incoming request arrives, the cluster’s networking layer directs it to one of these ingress-nginx pods. There is no native load balancing from Hetzner Robot for that, so we are using Hetzner's Failover IP (46.4.70.177), and traffic can be re-routed to another node after hwn02 goes down. In this scenario, as soon as hwn02 is offline or under maintenance, so that the public IP will point to a healthy node, when we switch inbound traffic from hwn02 to another node.
+
+MetalLB is required in a Hetzner Robot environment (where there is no built-in LoadBalancer provider) to ensure that an Nginx Ingress of type LoadBalancer can obtain an exact external IP address. MetalLB will assign this external IP to the Nginx LoadBalancer service, allowing clients to reach it from outside the cluster, so we will keep it.
