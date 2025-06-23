@@ -111,4 +111,6 @@ data:
         Include_Tag_Key true
         Tag_Key tags
         Index logstash
+        Buffer_Size 512KB
+        Buffer_Max_Size 2MB
         Workers 1
