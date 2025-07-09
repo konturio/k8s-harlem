@@ -22,6 +22,7 @@ resources:
   - ../../base/velero
   - ../../base/tigera-operator
   - ../../base/nvidia-device-plugin
+  - ../../base/volcano
   - ./resource-quota
   - ./limit-range
 
