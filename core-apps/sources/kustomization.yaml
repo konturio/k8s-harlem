@@ -13,3 +13,4 @@ resources:
   - minio-operator.yaml
   - longhorn.yaml
   - velero.yaml
+  - nvidia-device-plugin.yaml
