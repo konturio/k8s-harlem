@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: volcano-system
 resources:
   - release.yaml
-  - scheduler-patch.yaml
+#  - scheduler-patch.yaml
