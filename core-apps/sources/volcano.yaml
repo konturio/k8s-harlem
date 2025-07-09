@@ -4,4 +4,4 @@ metadata:
   name: volcano
 spec:
   interval: 1h
-  url: https://volcano.sh/charts
+  url: https://volcano-sh.github.io/helm-charts
