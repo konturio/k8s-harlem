@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - |-
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: volcano-scheduler-conf
+      namespace: volcano-system
+    data:
+      plugins: "nvidia-device-plugin,volcano-gpu-share"
+patches:
+  - target:
+      kind: ConfigMap
+      name: volcano-scheduler-conf
+    patch: |
+      data:
+        plugins: "nvidia-device-plugin,volcano-gpu-share"
