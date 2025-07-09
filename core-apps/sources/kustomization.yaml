@@ -14,3 +14,4 @@ resources:
   - longhorn.yaml
   - velero.yaml
   - nvidia-device-plugin.yaml
+  - volcano.yaml
