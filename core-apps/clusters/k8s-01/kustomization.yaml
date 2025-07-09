@@ -21,6 +21,7 @@ resources:
   - ../../base/longhorn
   - ../../base/velero
   - ../../base/tigera-operator
+  - ../../base/nvidia-device-plugin
   - ./resource-quota
   - ./limit-range
 
