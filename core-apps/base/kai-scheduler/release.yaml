@@ -14,7 +14,10 @@ spec:
     spec:
       chart: oci://ghcr.io/nvidia/kai-scheduler/kai-scheduler
       version: v0.7.7
-      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: OCIRepository
+        name: kai-scheduler
+        namespace: flux-system
   values:
     global:
       gpuSharing: true
