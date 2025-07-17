@@ -23,6 +23,8 @@ resources:
   - ../../base/tigera-operator
   - ../../base/nvidia-device-plugin
   - ../../base/volcano
+  - ../../base/gpu-operator
+  - ../../base/kai-scheduler
   - ./resource-quota
   - ./limit-range
 
