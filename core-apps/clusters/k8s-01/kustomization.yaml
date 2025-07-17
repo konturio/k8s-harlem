@@ -24,7 +24,7 @@ resources:
   - ../../base/nvidia-device-plugin
   - ../../base/volcano
   - ../../base/gpu-operator
-  - ../../base/kai-scheduler
+#  - ../../base/kai-scheduler
   - ./resource-quota
   - ./limit-range
 

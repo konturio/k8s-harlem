@@ -16,4 +16,4 @@ resources:
   - nvidia-device-plugin.yaml
   - volcano.yaml
   - gpu-operator.yaml
-  - kai-scheduler.yaml
+#  - kai-scheduler.yaml
