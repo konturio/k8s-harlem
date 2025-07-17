@@ -15,3 +15,4 @@ resources:
   - velero.yaml
   - nvidia-device-plugin.yaml
   - volcano.yaml
+  - gpu-operator.yaml
