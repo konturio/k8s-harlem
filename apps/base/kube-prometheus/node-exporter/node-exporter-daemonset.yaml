@@ -63,6 +63,9 @@ spec:
           mountPropagation: HostToContainer
           name: root
           readOnly: true
+        - mountPath: /var/lib/node_exporter/textfile_collector
+          readOnly: true
+          name: textfile
       - args:
         - --logtostderr
         - --secure-listen-address=[$(IP)]:9100
@@ -113,6 +116,10 @@ spec:
       - hostPath:
           path: /
         name: root
+      - hostPath:
+          path: /var/lib/node_exporter/textfile_collector
+          type: DirectoryOrCreate
+        name: textfile
   updateStrategy:
     rollingUpdate:
       maxUnavailable: 10%
